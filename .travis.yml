@@ -3,5 +3,12 @@ sudo: false
 jdk:
   - oraclejdk8
 
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+  - src/test/test-app/npm start lite
+  - sleep 3 # give Web server some time to bind to sockets, etc
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
