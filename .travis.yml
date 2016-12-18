@@ -5,11 +5,12 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
-  - sleep 3 # give Web server some time to bind to sockets, etc
 
 script:
   - jdk_switcher use oraclejdk8
   - mvn test
+  - cd src/test/test-app
+  - npm run lite
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
