@@ -11,6 +11,7 @@ before_script:
 
 script:
   - jdk_switcher use oraclejdk8
+  - cd ../../..
   - mvn test
   - npm run e2e
 
