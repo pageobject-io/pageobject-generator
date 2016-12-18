@@ -10,7 +10,9 @@ script:
   - jdk_switcher use oraclejdk8
   - mvn test
   - cd src/test/test-app
+  - npm install
   - npm run lite
+  - npm run e2e
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
