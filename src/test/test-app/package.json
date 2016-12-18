@@ -1,0 +1,16 @@
+{
+  "name": "test-app",
+  "version": "0.0.1",
+  "description": "test-app",
+  "scripts": {
+    "lite": "lite-server",
+    "e2e": "protractor protractor.conf.js"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chromedriver": "2.25.1",
+    "lite-server": "2.2.0",
+    "protractor": "4.0.11"
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function ($scope) {
+        $scope.idModel = 'initialValue';
+        $scope.items = [1, 2];
+        $scope.elements = ['a', 'b'];
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div>
+    Normal text: <textarea type="text" id="onlyId" ng:model="idModel"></textarea>
+    Name override: <textarea type="text" id="ignoredId" name="nameOverride" ng-disabled="true"></textarea>
+    Only model: <textarea type="text" data-ng-model="onlyModel" style="visibility: hidden"></textarea>
+
+    <div data-ng-repeat="item in items">
+        Nested {{item}}: <textarea type="text" name="repeatedTextField"></textarea>
+
+        <div ng_repeat="element in elements">
+            Nested repeater {{element}}: <textarea type="text" data-ng-model="nestedRepeaterTextField"></textarea>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

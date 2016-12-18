@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function () {
+        this.items = [1, 2];
+        this.elements = [1, 2];
+        this.singleExpression = 'a';
+        this.multiExpression = 'b';
+        this.multiExpression2 = 'c';
+        this.model = [];
+        this.model2 = [[], []];
+      });
+    </script>
+</head>
+<body ng-controller="MainController as main">
+
+<div>
+    <button id="id-button" ng-click="main.idButtonClicked=true" ng-show="!main.idButtonClicked">Button with id</button>
+    <button name="name-button" ng-click="main.nameButtonClicked=true" ng-show="!main.nameButtonClicked">Button with
+        name
+    </button>
+    <button title="title-button" ng-click="main.titleButtonClicked=true" ng-show="!main.titleButtonClicked">Button with
+        title
+    </button>
+    <button ng-click="main.singleExpressionButtonClicked=true" ng-show="!main.singleExpressionButtonClicked">Text
+        {{main.singleExpression}}
+        only
+    </button>
+    <button ng-click="main.multiExpressionButtonClicked=true" ng-show="!main.multiExpressionButtonClicked">Text
+        {{main.multiExpression}}
+        only {{main.multiExpression2}}
+    </button>
+    <button ng-click="main.textOnlyButtonClicked=true" ng-show="!main.textOnlyButtonClicked">Text only</button>
+    <input type="submit" value="Submit" ng-click="main.submitButtonClicked=true" ng-show="!main.submitButtonClicked"/>
+    <input type="button" value="InputButton" ng-click="main.inputButtonClicked=true"
+           ng-show="!main.inputButtonClicked"/>
+
+    <div data-ng-repeat="item in main.items">
+        <button title="nestedButton" ng-click="main.model[item]=true" ng-show="!main.model[item]">Nested
+            button with title {{item}}
+        </button>
+
+        <div ng_repeat="element in main.elements">
+            <button ng-click="main.model2[item][element]=true" ng-show="!main.model2[item][element]">Click here
+                {{element}}
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

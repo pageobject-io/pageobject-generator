@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function ($scope) {
+        $scope.items = [1, 2];
+        $scope.items2 = [1, 2];
+        $scope.nestedItems = [1, 2];
+        $scope.sharedItems = [1, 2];
+        $scope.model = [];
+        $scope.model2 = [[], []];
+        $scope.library = [
+          {name: 'book1', blurb: 'blurb1'},
+          {name: 'book2', blurb: 'blurb2'}
+        ];
+        $scope.titleLinkClicked = [];
+        $scope.titleLink2Clicked = [];
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div>
+    <a title="title-link" href ng-click="titleLinkClicked[$index]=true" ng-show="!titleLinkClicked[$index]"
+       ng-repeat="item in sharedItems">Link with title</a>
+
+    <div data-ng-repeat="item in items">
+        <a title="nestedLink" href ng-click="model[item]=true" ng-show="!model[item]">Nested
+            link with title {{item}}</a>
+
+        <div ng_repeat="element in nestedItems">
+            <a href ng-click="model2[item][element]=true" ng-show="!model2[item][element]">Click here {{element}}</a>
+        </div>
+    </div>
+
+    <div data-ng-click="clicked=true" name="clickableDiv{{$index}}" class="book-img" ng-repeat-start="book in library">
+        <span>{{$index}}</span>
+        <a href name="repeaterLink{{$index}}" data-ng-click="book.clicked=true" ng-show="!book.clicked">Repeater
+            link</a>
+    </div>
+    <div class="book-info" ng-repeat-end>
+        <h4>{{book.name}}</h4>
+        <p>{{book.blurb}}</p>
+    </div>
+
+    <a title="title-link2" href ng-click="titleLink2Clicked[$index]=true" ng-show="!titleLink2Clicked[$index]"
+       ng-repeat="item in items2">Link with title 2</a>
+</div>
+
+</body>
+</html>

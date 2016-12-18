@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Test page</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function ($scope) {
+        $scope.numbers = [1, 2, 3];
+        $scope.letters = ['a', 'b', 'c'];
+
+        $scope.pageSet = 1;
+        $scope.pageSet2 = 1;
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div data-ng-repeat="number in numbers">
+    {{number}}
+    <div ng-repeat="letter in letters">
+        <input type="checkbox" name="checkbox[]"/>
+    </div>
+</div>
+
+<label ng-repeat="n in [0,1]">
+    <input type="radio" name="pageSet" ng-model="$parent.pageSet" ng-value="n"/>{{n}}
+</label>
+
+{{pageSet}}
+
+<div x-ng-repeat="number in numbers">
+    a <input name="test" type="radio" ng-model="selectedItem" value="a"/>
+    b <input name="test" type="radio" ng-model="selectedItem" value="b"/>
+</div>
+
+<input ng-repeat="n in [0,1]" type="radio" name="pageSet2" ng-model="$parent.pageSet2" ng-value="n"/>
+{{pageSet2}}
+
+</body>
+</html>
