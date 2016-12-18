@@ -5,13 +5,13 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
+  - cd src/test/test-app
+  - npm install
+  - npm run lite
 
 script:
   - jdk_switcher use oraclejdk8
   - mvn test
-  - cd src/test/test-app
-  - npm install
-  - npm run lite
   - npm run e2e
 
 after_success:
