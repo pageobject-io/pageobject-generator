@@ -13,6 +13,7 @@ script:
   - jdk_switcher use oraclejdk8
   - cd ../../..
   - mvn test
+  - cd src/test/test-app
   - npm run e2e
 
 after_success:
