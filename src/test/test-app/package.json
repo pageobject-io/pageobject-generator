@@ -4,7 +4,8 @@
   "description": "test-app",
   "scripts": {
     "lite": "lite-server",
-    "e2e": "protractor protractor.conf.js"
+    "e2e": "protractor protractor.conf.js",
+    "postinstall": "webdriver-manager update"
   },
   "dependencies": {
   },
