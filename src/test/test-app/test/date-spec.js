@@ -8,8 +8,8 @@ describe('date fields', function () {
 
   it('should generate functional date field methods', function () {
     datePage.shouldHaveDateField('');
-    datePage.setDateField('06052015');
-    datePage.shouldHaveDateField('2015-05-06');
+    datePage.setDateField('05052015');
+    datePage.shouldHaveDateField('2015-05-05');
 
     datePage.setDateField('');
     datePage.shouldHaveDateField('');

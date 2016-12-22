@@ -10,7 +10,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "chromedriver": "2.25.1",
+    "chromedriver": "2.26.1",
     "lite-server": "2.2.0",
     "protractor": "4.0.11"
   }
