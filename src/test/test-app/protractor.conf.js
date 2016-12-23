@@ -5,7 +5,7 @@ var config = {
   ],
 
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 120000
+    defaultTimeoutInterval: 240000
   }
 };
 
@@ -17,9 +17,7 @@ if (process.env.TRAVIS) {
       'browserName': 'chrome',
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       'build': process.env.TRAVIS_BUILD_NUMBER,
-      'version': 'latest',
-      "recordVideo": false,
-      "recordScreenshots": false
+      'version': 'latest'
     },
     // {
     //   'browserName': 'chrome',
