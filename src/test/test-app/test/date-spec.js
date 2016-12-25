@@ -1,6 +1,6 @@
 var datePage = require('../../../../target/test-classes/datePageObject.js');
 
-describe('date fields', function () {
+fdescribe('date fields', function () {
 
   beforeEach(function () {
     browser.get('http://localhost:3000/resources/date.html');
@@ -8,7 +8,7 @@ describe('date fields', function () {
 
   it('should generate functional date field methods', function () {
     datePage.shouldHaveDateField('');
-    datePage.setDateField('05052015');
+    datePage.setDateField('05/05/2015');
     datePage.shouldHaveDateField('2015-05-05');
 
     datePage.setDateField('');
@@ -17,7 +17,7 @@ describe('date fields', function () {
     datePage.dateFieldShouldBeEnabled();
 
     datePage.shouldHaveTimeField('');
-    datePage.setTimeField('1205');
+    datePage.setTimeField('12:05AM');
     datePage.shouldHaveTimeField('12:05');
     datePage.setTimeField('');
     datePage.shouldHaveTimeField('');
@@ -25,8 +25,8 @@ describe('date fields', function () {
     datePage.timeFieldShouldBeEnabled();
 
     datePage.shouldHaveDateTimeLocalField('');
-    datePage.setDateTimeLocalField('12030020152359');
-    datePage.shouldHaveDateTimeLocalField('2015-03-12T23:59');
+    datePage.setDateTimeLocalField('12/03/2015' + protractor.Key.TAB + '01:10AM');
+    datePage.shouldHaveDateTimeLocalField('2015-03-12T01:10');
     datePage.setDateTimeLocalField('');
     datePage.shouldHaveDateTimeLocalField('');
     datePage.dateTimeLocalFieldShouldBeVisible();
