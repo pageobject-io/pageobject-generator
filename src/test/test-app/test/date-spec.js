@@ -17,16 +17,16 @@ fdescribe('date fields', function () {
     datePage.dateFieldShouldBeEnabled();
 
     datePage.shouldHaveTimeField('');
-    datePage.setTimeField('12:05AM');
-    datePage.shouldHaveTimeField('12:05');
+    datePage.setTimeField('01:05AM');
+    datePage.shouldHaveTimeField('01:05');
     datePage.setTimeField('');
     datePage.shouldHaveTimeField('');
     datePage.timeFieldShouldBeVisible();
     datePage.timeFieldShouldBeEnabled();
 
     datePage.shouldHaveDateTimeLocalField('');
-    datePage.setDateTimeLocalField('12/03/2015' + protractor.Key.TAB + '01:10AM');
-    datePage.shouldHaveDateTimeLocalField('2015-03-12T01:10');
+    datePage.setDateTimeLocalField('03/03/2015' + protractor.Key.TAB + '01:10AM');
+    datePage.shouldHaveDateTimeLocalField('2015-03-03T01:10');
     datePage.setDateTimeLocalField('');
     datePage.shouldHaveDateTimeLocalField('');
     datePage.dateTimeLocalFieldShouldBeVisible();
