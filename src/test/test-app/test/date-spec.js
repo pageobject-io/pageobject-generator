@@ -1,6 +1,6 @@
 var datePage = require('../../../../target/test-classes/datePageObject.js');
 
-fdescribe('date fields', function () {
+describe('date fields', function () {
 
   beforeEach(function () {
     browser.get('http://localhost:3000/resources/date.html');

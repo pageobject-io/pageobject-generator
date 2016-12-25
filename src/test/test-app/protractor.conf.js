@@ -5,7 +5,7 @@ var config = {
   ],
 
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 240000
+    defaultTimeoutInterval: 480000
   }
 };
 
@@ -14,6 +14,7 @@ if (process.env.TRAVIS) {
   config.sauceKey = process.env.SAUCE_ACCESS_KEY;
   config.multiCapabilities = [
     {
+      'name': 'pageobject chrome latest',
       'browserName': 'chrome',
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       'build': process.env.TRAVIS_BUILD_NUMBER,
