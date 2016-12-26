@@ -5,7 +5,7 @@ var config = {
   ],
 
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 480000
+    defaultTimeoutInterval: 600000
   }
 };
 
@@ -20,14 +20,13 @@ if (process.env.TRAVIS) {
       'build': process.env.TRAVIS_BUILD_NUMBER,
       'version': 'latest'
     },
-    // {
-    //   'browserName': 'chrome',
-    //   'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-    //   'build': process.env.TRAVIS_BUILD_NUMBER,
-    //   'version': 'latest-1',
-    //   "recordVideo": false,
-    //   "recordScreenshots": false
-    // }
+    {
+      'name': 'pageobject chrome latest - 1',
+      'browserName': 'chrome',
+      'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+      'build': process.env.TRAVIS_BUILD_NUMBER,
+      'version': 'latest-1'
+    }
   ];
 }
 
