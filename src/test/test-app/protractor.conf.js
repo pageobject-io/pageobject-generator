@@ -21,11 +21,11 @@ if (process.env.TRAVIS) {
       'version': 'latest'
     },
     {
-      'name': 'pageobject chrome latest - 1',
-      'browserName': 'chrome',
+      'name': 'pageobject firefox latest',
+      'browserName': 'firefox',
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       'build': process.env.TRAVIS_BUILD_NUMBER,
-      'version': 'latest-1'
+      'version': 'latest'
     }
   ];
 }
