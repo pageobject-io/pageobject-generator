@@ -5,7 +5,7 @@ var config = {
   ],
 
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 600000
+    defaultTimeoutInterval: 720000
   }
 };
 
@@ -21,11 +21,11 @@ if (process.env.TRAVIS) {
       'version': 'latest'
     },
     {
-      'name': 'pageobject firefox latest',
+      'name': 'pageobject firefox 47',
       'browserName': 'firefox',
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       'build': process.env.TRAVIS_BUILD_NUMBER,
-      'version': 'latest'
+      'version': '47'
     }
   ];
 }
