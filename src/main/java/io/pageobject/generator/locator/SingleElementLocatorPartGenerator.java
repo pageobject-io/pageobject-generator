@@ -5,7 +5,7 @@ import org.jsoup.nodes.Element;
 
 public class SingleElementLocatorPartGenerator extends AbstractLocatorPartGenerator {
 
-    public SingleElementLocatorPartGenerator(Element element, LocatorSources... locatorCandidates) {
+    public SingleElementLocatorPartGenerator(Element element, LocatorSource... locatorCandidates) {
         super(element, locatorCandidates);
     }
 

@@ -9,7 +9,7 @@ import static io.pageobject.generator.locator.LocatorPart.prefixPart;
 
 public abstract class RepeaterLocatorPartGenerator extends AbstractLocatorPartGenerator {
 
-    public RepeaterLocatorPartGenerator(Element element, LocatorSources... locatorSources) {
+    public RepeaterLocatorPartGenerator(Element element, LocatorSource... locatorSources) {
         super(element, locatorSources);
     }
 

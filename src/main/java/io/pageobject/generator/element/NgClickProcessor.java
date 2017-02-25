@@ -1,7 +1,8 @@
 package io.pageobject.generator.element;
 
 import io.pageobject.generator.GeneratorContext;
-import io.pageobject.generator.locator.LocatorSources;
+import io.pageobject.generator.locator.LocatorSource;
+import io.pageobject.generator.locator.protractor.*;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
@@ -34,18 +35,18 @@ public class NgClickProcessor extends AbstractElementProcessor {
     }
 
     @Override
-    protected LocatorSources[] getElementLocatorCandidates(GeneratorContext context) {
-        ArrayList<LocatorSources> sources = newArrayList(LocatorSources.ID,
-                                                         LocatorSources.NAME,
-                                                         LocatorSources.NG_MODEL,
-                                                         LocatorSources.NG_OPTIONS,
-                                                         LocatorSources.CSS);
+    protected LocatorSource[] getElementLocatorCandidates(GeneratorContext context) {
+        ArrayList<LocatorSource> sources = newArrayList(new IdLocatorSource(),
+                                                        new NameLocatorSource(),
+                                                        new NgModelLocatorSource(),
+                                                        new NgOptionsLocatorSource(),
+                                                        new CssLocatorSource());
 
         if (context.getElement().text().length() < 30) {
-            sources.add(LocatorSources.EXPRESSION_TEXT);
+            sources.add(new ExpressionTextLocatorSource());
         }
 
-        return sources.toArray(new LocatorSources[sources.size()]);
+        return sources.toArray(new LocatorSource[sources.size()]);
     }
 
     @Override

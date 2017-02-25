@@ -3,16 +3,18 @@ package io.pageobject.generator;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Ordering;
 import com.google.common.io.CharStreams;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import io.pageobject.generator.element.*;
 import io.pageobject.generator.locator.Locator;
-import io.pageobject.generator.locator.LocatorSources;
+import io.pageobject.generator.locator.LocatorSource;
 import io.pageobject.generator.name.NameExtractor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -101,7 +103,8 @@ public class PageObjectGenerator {
     private String run(Document document, String source, String page) throws Exception {
         logger.info("Generating [{}] PO with page name [{}] and source [{}]", this.applicationType, page, source);
 
-        GeneratorContext context = new GeneratorContext(document, source, this.applicationType);
+        GeneratorContext context =
+            new GeneratorContext(document, source, this.applicationType, FrameworkType.PROTRACTOR, Language.ES5);
         traverse(context);
 
         Template template = configuration.getTemplate("page-object.js.tpl");
@@ -132,7 +135,7 @@ public class PageObjectGenerator {
         Optional<Locator> locator = generateLocator(context, matchingProcessors);
 
         if (locator.isPresent()) {
-            LocatorSources locatorSource = locator.get().getSource();
+            LocatorSource locatorSource = locator.get().getSource();
             context.markLocatorAsUsed(locatorSource, locatorSource.extractLocatorValue(element, context));
             context.setLocator(locator.get());
 
@@ -227,10 +230,25 @@ public class PageObjectGenerator {
     }
 
     private Optional<Locator> generateLocator(GeneratorContext context, List<ElementProcessor> matchingProcessors) {
+        List<LocatorSource> locatorOrder = context.getLocatorOrder();
+        Ordering<Locator> byPriorityOrdering = Ordering.natural().onResultOf(sortKeyForLocator(locatorOrder));
+
         return matchingProcessors.stream()
                                  .map(processor -> processor.generateElementLocator(context))
                                  .filter(Objects::nonNull)
-                                 .min(Locator.BY_PRIORITY_ORDERING);
+                                 .min(byPriorityOrdering);
+    }
+
+    private Function<Locator, Comparable> sortKeyForLocator(List<LocatorSource> locatorOrder) {
+        return locator -> {
+            for (int i = 0; i < locatorOrder.size(); i++) {
+                LocatorSource locatorSource = locatorOrder.get(i);
+                if (locatorSource.getClass().equals(locator.getSource().getClass())) {
+                    return i;
+                }
+            }
+            return Integer.MAX_VALUE;
+        };
     }
 
     private Map<String, String> invokeTemplatesForProcessor(List<String> templates,

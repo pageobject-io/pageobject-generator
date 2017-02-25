@@ -1,6 +1,8 @@
 package io.pageobject.generator.locator;
 
 import io.pageobject.generator.GeneratorContext;
+import io.pageobject.generator.locator.protractor.CssLocatorSource;
+import io.pageobject.generator.locator.protractor.NameLocatorSource;
 import org.jsoup.nodes.Element;
 
 import static io.pageobject.generator.locator.LocatorPart.prefixPart;
@@ -10,7 +12,7 @@ public class NgForLocatorPartGenerator extends RepeaterLocatorPartGenerator {
     private LocatorPart locatorPart;
 
     public NgForLocatorPartGenerator(Element element) {
-        super(element, LocatorSources.NAME, LocatorSources.CSS);
+        super(element, new NameLocatorSource(), new CssLocatorSource());
     }
 
     @Override

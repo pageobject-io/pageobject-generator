@@ -3,8 +3,11 @@ package io.pageobject.generator.element;
 import io.pageobject.generator.GeneratorContext;
 import io.pageobject.generator.locator.Locator;
 import io.pageobject.generator.locator.LocatorPartGenerator;
-import io.pageobject.generator.locator.LocatorSources;
+import io.pageobject.generator.locator.LocatorSource;
 import io.pageobject.generator.locator.MultiElementLocatorPartGenerator;
+import io.pageobject.generator.locator.protractor.CssLocatorSource;
+import io.pageobject.generator.locator.protractor.NameLocatorSource;
+import io.pageobject.generator.locator.protractor.NgModelLocatorSource;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -73,8 +76,8 @@ public class RadioButtonProcessor extends AbstractElementProcessor {
     }
 
     @Override
-    protected LocatorSources[] getElementLocatorCandidates(GeneratorContext context) {
-        return new LocatorSources[] {LocatorSources.NG_MODEL, LocatorSources.NAME, LocatorSources.CSS};
+    protected LocatorSource[] getElementLocatorCandidates(GeneratorContext context) {
+        return new LocatorSource[] {new NgModelLocatorSource(), new NameLocatorSource(), new CssLocatorSource()};
     }
 
     @Override

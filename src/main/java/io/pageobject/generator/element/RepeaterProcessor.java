@@ -2,7 +2,8 @@ package io.pageobject.generator.element;
 
 import io.pageobject.generator.GeneratorContext;
 import io.pageobject.generator.locator.LocatorPartGenerator;
-import io.pageobject.generator.locator.LocatorSources;
+import io.pageobject.generator.locator.LocatorSource;
+import io.pageobject.generator.locator.protractor.NgRepeatLocatorSource;
 import org.jsoup.nodes.Element;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public class RepeaterProcessor extends AbstractElementProcessor {
     }
 
     @Override
-    protected LocatorSources[] getElementLocatorCandidates(GeneratorContext context) {
-        return new LocatorSources[] {LocatorSources.NG_REPEAT};
+    protected LocatorSource[] getElementLocatorCandidates(GeneratorContext context) {
+        return new LocatorSource[] {new NgRepeatLocatorSource()};
     }
 
     @Override

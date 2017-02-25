@@ -53,4 +53,10 @@ public class Expressions {
         return asSplit.length == 1 ? "" : asSplit[1].trim();
     }
 
+    public static String allowIndexExpressionOrNoExpressions(String attributeValue) {
+        int expressionCount = getExpressionCount(attributeValue);
+        return expressionCount == 0 ||
+               (expressionCount == 1 && getFirstExpression(attributeValue).equals("$index")) ? attributeValue : null;
+    }
+
 }

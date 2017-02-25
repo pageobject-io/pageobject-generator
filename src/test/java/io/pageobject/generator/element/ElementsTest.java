@@ -1,9 +1,11 @@
 package io.pageobject.generator.element;
 
 import io.pageobject.generator.ApplicationType;
+import io.pageobject.generator.FrameworkType;
 import io.pageobject.generator.GeneratorContext;
-import io.pageobject.generator.locator.LocatorSources;
+import io.pageobject.generator.Language;
 import io.pageobject.generator.locator.SingleElementLocatorPartGenerator;
+import io.pageobject.generator.locator.protractor.IdLocatorSource;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -95,7 +97,7 @@ public class ElementsTest {
         Element divD = document.select("div").get(3);
 
         context.pushNgRepeat(divB, "item in items");
-        context.pushLocatorPartGenerator(new SingleElementLocatorPartGenerator(divC, LocatorSources.ID));
+        context.pushLocatorPartGenerator(new SingleElementLocatorPartGenerator(divC, new IdLocatorSource()));
 
         assertThat(generateCssSelector(divC, context)).isEqualTo("div.a");
         assertThat(generateCssSelector(divD, context)).isEqualTo("div.a > div");
@@ -113,13 +115,13 @@ public class ElementsTest {
         Element divD = document.select("div").get(3);
 
         context.pushNgRepeat(divA, "item in items");
-        context.pushLocatorPartGenerator(new SingleElementLocatorPartGenerator(divC, LocatorSources.ID));
+        context.pushLocatorPartGenerator(new SingleElementLocatorPartGenerator(divC, new IdLocatorSource()));
 
         assertThat(generateCssSelector(divB, context)).isNull();
 
         context.popLocatorPartGenerator();
         context.pushNgRepeat(divC, "element in elements");
-        context.pushLocatorPartGenerator(new SingleElementLocatorPartGenerator(divC, LocatorSources.ID));
+        context.pushLocatorPartGenerator(new SingleElementLocatorPartGenerator(divC, new IdLocatorSource()));
 
         assertThat(generateCssSelector(divD, context)).isEqualTo("div.a");
     }
@@ -148,6 +150,6 @@ public class ElementsTest {
 
     private GeneratorContext getContext(String source) throws Exception {
         Document document = Jsoup.parse(source);
-        return new GeneratorContext(document, source, ApplicationType.ANGULAR1);
+        return new GeneratorContext(document, source, ApplicationType.ANGULAR1, FrameworkType.PROTRACTOR, Language.ES5);
     }
 }

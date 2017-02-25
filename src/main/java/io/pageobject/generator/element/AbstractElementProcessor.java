@@ -4,6 +4,10 @@ import com.google.common.base.Joiner;
 import io.pageobject.generator.GeneratorContext;
 import io.pageobject.generator.ProcessingResult;
 import io.pageobject.generator.locator.*;
+import io.pageobject.generator.locator.protractor.CssLocatorSource;
+import io.pageobject.generator.locator.protractor.IdLocatorSource;
+import io.pageobject.generator.locator.protractor.NameLocatorSource;
+import io.pageobject.generator.locator.protractor.NgModelLocatorSource;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 
@@ -83,11 +87,11 @@ public abstract class AbstractElementProcessor implements ElementProcessor {
         return new SingleElementLocatorPartGenerator(element, getElementLocatorCandidates(context));
     }
 
-    protected LocatorSources[] getElementLocatorCandidates(GeneratorContext context) {
-        return new LocatorSources[] {LocatorSources.ID,
-                                     LocatorSources.NAME,
-                                     LocatorSources.NG_MODEL,
-                                     LocatorSources.CSS};
+    protected LocatorSource[] getElementLocatorCandidates(GeneratorContext context) {
+        return new LocatorSource[] {new IdLocatorSource(),
+                                    new NameLocatorSource(),
+                                    new NgModelLocatorSource(),
+                                    new CssLocatorSource()};
     }
 
     public Locator generateElementLocator(GeneratorContext context) {

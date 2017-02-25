@@ -1,7 +1,9 @@
 package io.pageobject.generator.attribute;
 
 import io.pageobject.generator.ApplicationType;
+import io.pageobject.generator.FrameworkType;
 import io.pageobject.generator.GeneratorContext;
+import io.pageobject.generator.Language;
 import io.pageobject.generator.name.NameExtractor;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -98,7 +100,11 @@ public class NameExtractorTest {
 
     @Test
     public void removesControllerPrefixes() throws Exception {
-        GeneratorContext context = new GeneratorContext(new Document(""), "", ApplicationType.ANGULAR1);
+        GeneratorContext context = new GeneratorContext(new Document(""),
+                                                        "",
+                                                        ApplicationType.ANGULAR1,
+                                                        FrameworkType.PROTRACTOR,
+                                                        Language.ES5);
         context.pushController("myController");
         context.pushController("todoList");
 
@@ -130,6 +136,10 @@ public class NameExtractorTest {
         }
 
         return nameExtractor.extractValue(element,
-                                          new GeneratorContext(new Document(""), "", ApplicationType.ANGULAR1));
+                                          new GeneratorContext(new Document(""),
+                                                               "",
+                                                               ApplicationType.ANGULAR1,
+                                                               FrameworkType.PROTRACTOR,
+                                                               Language.ES5));
     }
 }

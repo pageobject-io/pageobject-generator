@@ -1,7 +1,10 @@
 package io.pageobject.generator.element;
 
 import io.pageobject.generator.GeneratorContext;
-import io.pageobject.generator.locator.LocatorSources;
+import io.pageobject.generator.locator.LocatorSource;
+import io.pageobject.generator.locator.protractor.CssLocatorSource;
+import io.pageobject.generator.locator.protractor.IdLocatorSource;
+import io.pageobject.generator.locator.protractor.NameLocatorSource;
 import org.jsoup.nodes.Element;
 
 import java.util.List;
@@ -18,8 +21,8 @@ public class Ng2BindingProcessor extends AbstractElementProcessor {
     }
 
     @Override
-    protected LocatorSources[] getElementLocatorCandidates(GeneratorContext context) {
-        return new LocatorSources[] {LocatorSources.ID, LocatorSources.NAME, LocatorSources.CSS};
+    protected LocatorSource[] getElementLocatorCandidates(GeneratorContext context) {
+        return new LocatorSource[] {new IdLocatorSource(), new NameLocatorSource(), new CssLocatorSource()};
     }
 
     @Override

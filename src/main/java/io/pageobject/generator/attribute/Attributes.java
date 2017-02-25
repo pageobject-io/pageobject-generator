@@ -3,6 +3,8 @@ package io.pageobject.generator.attribute;
 import org.jsoup.nodes.Element;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static io.pageobject.generator.Expressions.allowIndexExpressionOrNoExpressions;
+import static io.pageobject.generator.Expressions.hasExpression;
 
 public class Attributes {
 
@@ -82,6 +84,16 @@ public class Attributes {
         }
 
         return value;
+    }
+
+    public static String extractAttributeValue(Element element, HtmlAttributes htmlAttribute) {
+        String attributeValue = getNormalizedAttributeValue(element, htmlAttribute.attributeName());
+        return hasExpression(attributeValue) ? null : attributeValue;
+    }
+
+    public static String extractAttributeValueAllowingIndexExpression(Element element, HtmlAttributes htmlAttribute) {
+        String attributeValue = getNormalizedAttributeValue(element, htmlAttribute.attributeName());
+        return allowIndexExpressionOrNoExpressions(attributeValue);
     }
 
     private static class Attribute {

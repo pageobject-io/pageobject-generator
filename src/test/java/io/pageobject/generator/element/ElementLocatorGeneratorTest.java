@@ -1,8 +1,14 @@
 package io.pageobject.generator.element;
 
 import io.pageobject.generator.ApplicationType;
+import io.pageobject.generator.FrameworkType;
 import io.pageobject.generator.GeneratorContext;
+import io.pageobject.generator.Language;
 import io.pageobject.generator.locator.*;
+import io.pageobject.generator.locator.protractor.IdLocatorSource;
+import io.pageobject.generator.locator.protractor.NameLocatorSource;
+import io.pageobject.generator.locator.protractor.NgModelLocatorSource;
+import io.pageobject.generator.locator.protractor.NgOptionsLocatorSource;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -18,7 +24,11 @@ public class ElementLocatorGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        context = new GeneratorContext(new Document(""), "", ApplicationType.ANGULAR1);
+        context = new GeneratorContext(new Document(""),
+                                       "",
+                                       ApplicationType.ANGULAR1,
+                                       FrameworkType.PROTRACTOR,
+                                       Language.ES5);
     }
 
     @Test
@@ -52,7 +62,7 @@ public class ElementLocatorGeneratorTest {
     @Test
     public void sameLocatorIsOnlyUsedOnce() throws Exception {
         assertThat(getSingleElementLocator("id", "name", "name", "ignored")).isEqualTo("element(by.id('name'))");
-        context.markLocatorAsUsed(LocatorSources.ID, "name");
+        context.markLocatorAsUsed(new IdLocatorSource(), "name");
         assertThat(getSingleElementLocator("id", "name", "name", "fallback")).isEqualTo("element(by.name('fallback'))");
     }
 
@@ -61,7 +71,7 @@ public class ElementLocatorGeneratorTest {
         assertThat(getSingleElementLocator("id1", "name")).isNull();
 
         getSingleElementLocator("id", "name");
-        context.markLocatorAsUsed(LocatorSources.ID, "name");
+        context.markLocatorAsUsed(new IdLocatorSource(), "name");
         Element repeaterElement = createElement();
         repeaterElement.attr("ng-repeat", "item in items track by something");
         context.pushNgRepeat(repeaterElement, "item in items");
@@ -190,10 +200,10 @@ public class ElementLocatorGeneratorTest {
 
     private String getSingleElementLocator(Element element, String... attributes) {
         Locator locator = getLocator(new SingleElementLocatorPartGenerator(element,
-                                                                           LocatorSources.ID,
-                                                                           LocatorSources.NAME,
-                                                                           LocatorSources.NG_MODEL,
-                                                                           LocatorSources.NG_OPTIONS),
+                                                                           new IdLocatorSource(),
+                                                                           new NameLocatorSource(),
+                                                                           new NgModelLocatorSource(),
+                                                                           new NgOptionsLocatorSource()),
                                      element,
                                      attributes);
         return locator == null ? null : locator.getLocator();
@@ -202,10 +212,10 @@ public class ElementLocatorGeneratorTest {
     private String getMultiElementLocator(String... attributes) {
         Element element = createElement();
         return getLocator(new MultiElementLocatorPartGenerator(element,
-                                                               LocatorSources.ID,
-                                                               LocatorSources.NAME,
-                                                               LocatorSources.NG_MODEL,
-                                                               LocatorSources.NG_OPTIONS),
+                                                               new IdLocatorSource(),
+                                                               new NameLocatorSource(),
+                                                               new NgModelLocatorSource(),
+                                                               new NgOptionsLocatorSource()),
                           element,
                           attributes).getLocator();
     }

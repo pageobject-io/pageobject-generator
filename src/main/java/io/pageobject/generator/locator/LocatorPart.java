@@ -7,14 +7,14 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 public class LocatorPart {
 
     private final String part;
-    private final LocatorSources source;
+    private final LocatorSource source;
 
-    private LocatorPart(String part, LocatorSources source) {
+    private LocatorPart(String part, LocatorSource source) {
         this.part = part;
         this.source = source;
     }
 
-    public static LocatorPart part(String part, LocatorSources source) {
+    public static LocatorPart part(String part, LocatorSource source) {
         checkArgument(!isNullOrEmpty(part), "Part string cannot be empty or null");
         checkNotNull(source, "LocatorSource must be specified");
         return new LocatorPart(part, source);
@@ -45,7 +45,7 @@ public class LocatorPart {
         return part;
     }
 
-    public LocatorSources getSource() {
+    public LocatorSource getSource() {
         return source;
     }
 

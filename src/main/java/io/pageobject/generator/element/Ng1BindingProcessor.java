@@ -1,7 +1,8 @@
 package io.pageobject.generator.element;
 
 import io.pageobject.generator.GeneratorContext;
-import io.pageobject.generator.locator.LocatorSources;
+import io.pageobject.generator.locator.LocatorSource;
+import io.pageobject.generator.locator.protractor.*;
 import org.jsoup.nodes.Element;
 
 import java.util.List;
@@ -23,14 +24,14 @@ public class Ng1BindingProcessor extends AbstractElementProcessor {
     }
 
     @Override
-    protected LocatorSources[] getElementLocatorCandidates(GeneratorContext context) {
-        return new LocatorSources[] {LocatorSources.ID,
-                                     LocatorSources.NAME,
-                                     LocatorSources.NG_MODEL,
-                                     LocatorSources.EXPRESSION_TEXT,
-                                     LocatorSources.NG_BIND,
-                                     LocatorSources.NG_BIND_HTML,
-                                     LocatorSources.NG_BIND_TEMPLATE};
+    protected LocatorSource[] getElementLocatorCandidates(GeneratorContext context) {
+        return new LocatorSource[] {new IdLocatorSource(),
+                                    new NameLocatorSource(),
+                                    new NgModelLocatorSource(),
+                                    new ExpressionTextLocatorSource(),
+                                    new NgBindLocatorSource(),
+                                    new NgBindHtmlLocatorSource(),
+                                    new NgBindTemplateLocatorSource()};
     }
 
     @Override

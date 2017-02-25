@@ -1,7 +1,6 @@
 package io.pageobject.generator.locator;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Ordering;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +13,9 @@ public class Locator {
 
     private final String locator;
     private final String locatorWhenElementIsRepeated;
-    private final LocatorSources source;
+    private final LocatorSource source;
 
-    public static final Ordering<Locator> BY_PRIORITY_ORDERING =
-        Ordering.natural().onResultOf(Locator::sortKeyFunction);
-
-    private Locator(String locator, String locatorWhenElementIsRepeated, LocatorSources source) {
+    private Locator(String locator, String locatorWhenElementIsRepeated, LocatorSource source) {
         this.locator = locator;
         this.locatorWhenElementIsRepeated = locatorWhenElementIsRepeated;
         this.source = source;
@@ -71,12 +67,8 @@ public class Locator {
         return locatorWhenElementIsRepeated;
     }
 
-    public LocatorSources getSource() {
+    public LocatorSource getSource() {
         return source;
-    }
-
-    private int sortKeyFunction() {
-        return source.priority();
     }
 
     @Override

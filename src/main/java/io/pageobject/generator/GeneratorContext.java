@@ -20,6 +20,9 @@ public class GeneratorContext {
     protected Element element;
     protected final String source;
     protected final ApplicationType applicationType;
+    protected final FrameworkType frameworkType;
+    protected final Language language;
+    protected final List<LocatorSource> locatorOrder;
     protected Element firstElementInGroup;
     protected Stack<LocatorPartGenerator> locatorPartGenerators = new Stack<>();
     protected LocatorPartGenerator stashedLocatorPartGenerator;
@@ -31,13 +34,20 @@ public class GeneratorContext {
     protected boolean repeaterElement;
     protected Stack<String> controllers = new Stack<>();
 
-    protected Multimap<LocatorSources, String> usedLocators = HashMultimap.create();
+    protected Multimap<String, String> usedLocators = HashMultimap.create();
 
-    public GeneratorContext(Document document, String source, ApplicationType applicationType) {
+    public GeneratorContext(Document document,
+                            String source,
+                            ApplicationType applicationType,
+                            FrameworkType frameworkType,
+                            Language language) {
         this.document = document;
         this.element = document;
         this.source = source;
         this.applicationType = applicationType;
+        this.frameworkType = frameworkType;
+        this.language = language;
+        this.locatorOrder = frameworkType.locatorSources(applicationType);
     }
 
     public Document getDocument() {
@@ -113,12 +123,12 @@ public class GeneratorContext {
         return controlIndex;
     }
 
-    public boolean isLocatorAvailable(LocatorSources locatorSource, String value) {
-        return !usedLocators.containsEntry(locatorSource, value);
+    public boolean isLocatorAvailable(LocatorSource locatorSource, String value) {
+        return !usedLocators.containsEntry(locatorSource.getClass().getSimpleName(), value);
     }
 
-    public void markLocatorAsUsed(LocatorSources locatorSources, String value) {
-        usedLocators.put(locatorSources, value);
+    public void markLocatorAsUsed(LocatorSource locatorSource, String value) {
+        usedLocators.put(locatorSource.getClass().getSimpleName(), value);
     }
 
     public String getName() {
@@ -166,5 +176,9 @@ public class GeneratorContext {
 
     public List<String> getControllerNames() {
         return controllers;
+    }
+
+    public List<LocatorSource> getLocatorOrder() {
+        return locatorOrder;
     }
 }
