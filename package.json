@@ -1,0 +1,38 @@
+{
+  "name": "pageobject-generator",
+  "version": "1.0.0",
+  "description": "Simple library for generating Protractor page objects.",
+  "author": "pageobject.io",
+  "homepage": "https://github.com/pageobject-io/pageobject-generator",
+  "license": "MIT",
+  "main": "lib/pageobject.js",
+  "keywords": [
+    "page object",
+    "generator",
+    "protractor",
+    "angular",
+    "e2e",
+    "testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:pageobject-io/pageobject-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pageobject-io/pageobject-generator/issues"
+  },
+  "scripts": {
+    "test": "mocha --recursive",
+    "coverage": "istanbul cover _mocha -- --recursive"
+  },
+  "dependencies": {
+    "parse5": "3.0.2",
+    "lodash": "4.17.4"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "codecov": "1.0.1",
+    "istanbul": "0.4.5",
+    "mocha": "3.2.0"
+  }
+}

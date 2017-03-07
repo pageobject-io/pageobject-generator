@@ -1,7 +1,7 @@
 # IntelliJ project files
 .idea
 *.iml
-out
-gen
+coverage/
+node_modules/
 
 npm-debug.log
