@@ -2,7 +2,7 @@
 
 const expect = require('chai').expect;
 const extractName = require('../name-source-spec-helper');
-const ExpressionTextNameSource = require('../../../lib/name/protractor/expression-text-name-source');
+const ExpressionTextNameSource = require('../../../lib/angular/name/expression-text-name-source');
 
 describe('ExpressionTextNameSource', () => {
   let source = new ExpressionTextNameSource();

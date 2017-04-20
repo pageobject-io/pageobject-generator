@@ -2,7 +2,7 @@
 
 const expect = require('chai').expect;
 const extractName = require('../name-source-spec-helper');
-const NgBindNameSource = require('../../../lib/name/protractor/ng-bind-name-source');
+const NgBindNameSource = require('../../../lib/angular/angular-js/name/ng-bind-name-source');
 
 describe('NgBindNameSource', () => {
   let source = new NgBindNameSource();

@@ -3,9 +3,8 @@
 const expect = require('chai').expect;
 const parse5 = require('parse5');
 const NameExtractor = require('../../lib/name/name-extractor');
+const ConfigurationFactory = require('../../lib/configuration-factory');
 const GeneratorContext = require('../../lib/generator-context');
-const angularJs = require('../../lib/application-types').angularJs;
-const ProtractorConfig = require('../../lib/protractor-config');
 
 describe('NameExtractor', () => {
 
@@ -80,7 +79,7 @@ describe('NameExtractor', () => {
   });
 
   it('should remove controller prefixes', () => {
-    let context = new GeneratorContext(null, '', angularJs, new ProtractorConfig());
+    let context = new GeneratorContext(null, '', ConfigurationFactory.create({}));
 
     context.pushController('myController');
     context.pushController('todoList');
@@ -88,7 +87,7 @@ describe('NameExtractor', () => {
     let documentFragment = parse5.parseFragment('<div></div>', {treeAdapter: parse5.treeAdapters.htmlparser2});
 
     let element = documentFragment.childNodes[0];
-    context.element = element;
+    context.domElement = element;
 
     element.attribs['title'] = 'todoList.name';
     expect(nameExtractor.extractName(context)).to.equal('name');
@@ -113,8 +112,8 @@ describe('NameExtractor', () => {
       element.attribs[attributes[i]] = attributes[i + 1];
     }
 
-    let context = new GeneratorContext(null, '', angularJs, new ProtractorConfig());
-    context.element = element;
+    let context = new GeneratorContext(null, '', ConfigurationFactory.create({}));
+    context.domElement = element;
     return nameExtractor.extractName(context);
   }
 });

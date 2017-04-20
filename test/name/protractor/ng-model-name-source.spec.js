@@ -2,7 +2,7 @@
 
 const expect = require('chai').expect;
 const extractName = require('../name-source-spec-helper');
-const NgModelNameSource = require('../../../lib/name/protractor/ng-model-name-source');
+const NgModelNameSource = require('../../../lib/angular/angular-js/name/ng-model-name-source');
 
 describe('NgModelNameSource', () => {
   let source = new NgModelNameSource();
