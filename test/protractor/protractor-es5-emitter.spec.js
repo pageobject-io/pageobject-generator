@@ -20,7 +20,7 @@ describe('ProtractorEs5Emitter', () => {
   let config = {
     pageObject: {
       keepElementAndMethodsTogether: false,
-      order: ['elements', 'actions', 'assertions'],
+      order: ['elements', 'navigator', 'actions', 'assertions'],
       elementsOrder: 'alphabetical',
       actionsOrder: 'alphabetical',
       assertionsOrder: 'alphabetical',
@@ -96,44 +96,48 @@ describe('ProtractorEs5Emitter', () => {
 
     let traverser = new EmitTraverser(page, config);
     expect(traverser.emitPageObject()).to.equal(`var PageObject = function () {
-   
+
    this.cancelButton = element(by.id('cancelButton'));
    this.elements = element.all(by.exactRepeater('element in elements');
    this.items = element.all(by.exactRepeater('item in items');
    this.saveButton = element(by.id('saveButton'));
-   
+
+   this.get = function () {
+      browser.get('');
+   };
+
    this.clickCancelButton = function () {
       this.cancelButton.click();
    };
-   
+
    this.clickDeepSaveButton = function (rowIndex1, rowIndex2) {
       this.items.get(rowIndex1).all(by.exactRepeater('piece in pieces').get(rowIndex2).element(by.buttonText('Deep save').click();
    };
-   
+
    this.clickElements = function (rowIndex1) {
       this.elements.get(rowIndex1).click();
    };
-   
+
    this.clickSaveButton = function () {
       this.saveButton.click();
    };
-   
+
    this.clickSaveMeButton = function (rowIndex1) {
       this.items.get(rowIndex1).element(by.buttonText('Save Me').click();
    };
-   
+
    this.elementsCountShouldBe = function (count) {
       expect(this.elements.count()).toBe(count);
    };
-   
+
    this.itemsCountShouldBe = function (count) {
       expect(this.items.count()).toBe(count);
    };
-   
+
    this.piecesCountShouldBe = function (rowIndex1, count) {
       expect(his.items.get(rowIndex1).all(by.exactRepeater('piece in pieces').count()).toBe(count);
    };
-   
+
 };
 
 module.exports = PageObject;

@@ -3,8 +3,6 @@
 const expect = require('chai').expect;
 
 const Page = require('../lib/page/page');
-const Element = require('../lib/page/element');
-const Section = require('../lib/page/section');
 const EmitTraverser = require('../lib/emit-traverser');
 const Locator = require('../lib/locator/locator');
 const _ = require('lodash');
@@ -17,7 +15,7 @@ describe('EmitTraverser', () => {
     config = {
       emitter: emitter, pageObject: {
         keepElementAndMethodsTogether: false,
-        order: ['elements', 'actions', 'assertions'],
+        order: ['elements', 'navigator', 'actions', 'assertions'],
         elementsOrder: 'alphabetical',
         actionsOrder: 'alphabetical',
         assertionsOrder: 'alphabetical',
@@ -40,6 +38,7 @@ elementsStart
 E1
 E2
 elementsEnd
+navigator
 actionsStart
 E1Click
 E1Drag
@@ -68,6 +67,7 @@ E1
 E2
 Sec1
 elementsEnd
+navigator
 actionsStart
 E1Click
 E1Drag
@@ -88,6 +88,7 @@ footer
     let traverser = new EmitTraverser(page, config);
 
     expect(traverser.emitPageObject()).to.equal(`header-TestPage
+navigator
 elementsStart
 E1
 elementsEnd
@@ -149,6 +150,7 @@ footer
     expect(traverser.emitPageObject())
       .to
       .equal(`header-TestPage
+   navigator
    elementsStart
       E1
    elementsEnd
@@ -202,6 +204,7 @@ footer
     expect(traverser.emitPageObject())
       .to
       .equal(`header-TestPage
+\tnavigator
 \telementsStart
 \t\tE1
 \telementsEnd
@@ -277,6 +280,7 @@ header
 
     let skipEmitter = _.clone(emitter);
     skipEmitter.skipHeaderSeparator = true;
+    skipEmitter.skipNavigatorSeparator = true;
     skipEmitter.skipElementsStartSeparator = true;
     skipEmitter.skipActionsStartSeparator = true;
     skipEmitter.skipAssertionsStartSeparator = true;
@@ -300,9 +304,10 @@ header
 
     expect(traverser.emitPageObject())
       .to
-      .equal('header-TestPageelementsStartE1elementsEndactionsStartE1ClickE1DragactionsEndassertionsStartE1Enabled' +
-             'E1VisibilityassertionsEndelementsStartSec1elementsEndsectionsStartSec1StartelementsStartE2elementsEnd' +
-             'actionsStartE2DragactionsEndSec1EndsectionsEndfooter');
+      .equal(
+        'header-TestPagenavigatorelementsStartE1elementsEndactionsStartE1ClickE1DragactionsEndassertionsStartE1Enabled' +
+        'E1VisibilityassertionsEndelementsStartSec1elementsEndsectionsStartSec1StartelementsStartE2elementsEnd' +
+        'actionsStartE2DragactionsEndSec1EndsectionsEndfooter');
   });
 
   it('should emit deeply nested page per section', () => {
@@ -334,6 +339,7 @@ header
       Sec1
       Sec2
    elementsEnd
+   navigator
    actionsStart
       E1Click
       E1Drag
@@ -398,6 +404,7 @@ elementsStart
 E1
 E2
 elementsEnd
+navigator
 actionsStart
 E1Drag
 E1Click
@@ -417,6 +424,7 @@ footer
     let traverser = new EmitTraverser(page, config);
 
     expect(traverser.emitPageObject()).to.equal(`header-TestPage
+navigator
 footer
 `);
   });
@@ -439,6 +447,8 @@ E1
 E2
 
 elementsEnd
+
+navigator
 
 actionsStart
 
@@ -467,6 +477,10 @@ footer
 
     emitHeader: function (traverser) {
       return 'header-' + traverser.page.name;
+    },
+
+    emitNavigator: function (traverser) {
+      return 'navigator';
     },
 
     emitElementsStart: function () {
@@ -538,6 +552,10 @@ footer
     separator: '\n',
 
     emitHeader: function () {
+      return null;
+    },
+
+    emitNavigator: function () {
       return null;
     },
 
