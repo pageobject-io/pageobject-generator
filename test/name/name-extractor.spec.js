@@ -2,16 +2,20 @@
 
 const expect = require('chai').expect;
 const parse5 = require('parse5');
+const select = require('css-select');
 const NameExtractor = require('../../lib/name/name-extractor');
 const ConfigurationFactory = require('../../lib/configuration-factory');
-const GeneratorContext = require('../../lib/generator-context');
+const Element = require('../../lib/page/element');
+const Page = require('../../lib/page/page');
+const NG_CONTROLLER = require('../../lib/types').NG_CONTROLLER;
 
 describe('NameExtractor', () => {
 
   let nameExtractor;
 
   beforeEach(() => {
-    nameExtractor = new NameExtractor();
+    let config = ConfigurationFactory.create({});
+    nameExtractor = new NameExtractor(config.nameSources);
   });
 
   it('should leave valid name unchanged', () => {
@@ -79,41 +83,48 @@ describe('NameExtractor', () => {
   });
 
   it('should remove controller prefixes', () => {
-    let context = new GeneratorContext(null, '', ConfigurationFactory.create({}));
+    let documentFragment = parse5.parseFragment(
+      '<div ng-controller="Controller1 as myController"><div ng-controller="TodoListController as todoList"><div></div></div></div>',
+      {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-    context.pushController('myController');
-    context.pushController('todoList');
+    let divs = select('div', documentFragment);
 
-    let documentFragment = parse5.parseFragment('<div></div>', {treeAdapter: parse5.treeAdapters.htmlparser2});
+    let page = new Page();
 
-    let element = documentFragment.childNodes[0];
-    context.domElement = element;
+    let section1 = page.addSection(divs[0]);
+    section1.name = 'myController';
+    section1.addTypes(NG_CONTROLLER);
 
-    element.attribs['title'] = 'todoList.name';
-    expect(nameExtractor.extractName(context)).to.equal('name');
+    let section2 = section1.addSection(divs[1]);
+    section2.name = 'todoList';
+    section2.addTypes(NG_CONTROLLER);
 
-    element.attribs['title'] = 'myController.item';
-    expect(nameExtractor.extractName(context)).to.equal('item');
+    let element = section2.addElement(divs[2]);
 
-    element.attribs['title'] = 'myControllerItem2';
-    expect(nameExtractor.extractName(context)).to.equal('myControllerItem2');
+    element.domElement.attribs['title'] = 'todoList.name';
+    expect(nameExtractor.extractName(element)).to.equal('name');
 
-    element.attribs['title'] = 'todoListName2';
-    expect(nameExtractor.extractName(context)).to.equal('todoListName2');
+    element.domElement.attribs['title'] = 'myController.item';
+    expect(nameExtractor.extractName(element)).to.equal('item');
+
+    element.domElement.attribs['title'] = 'myControllerItem2';
+    expect(nameExtractor.extractName(element)).to.equal('myControllerItem2');
+
+    element.domElement.attribs['title'] = 'todoListName2';
+    expect(nameExtractor.extractName(element)).to.equal('todoListName2');
   });
 
   function getName(tagName, ...attributes) {
     let documentFragment = parse5.parseFragment(`<${tagName}></${tagName}>`,
                                                 {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-    let element = documentFragment.childNodes[0];
+    let domElement = documentFragment.childNodes[0];
 
     for (var i = 0; i < attributes.length; i = i + 2) {
-      element.attribs[attributes[i]] = attributes[i + 1];
+      domElement.attribs[attributes[i]] = attributes[i + 1];
     }
 
-    let context = new GeneratorContext(null, '', ConfigurationFactory.create({}));
-    context.domElement = element;
-    return nameExtractor.extractName(context);
+    let pageElement = new Element(domElement, null);
+    return nameExtractor.extractName(pageElement);
   }
 });

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', ['ngSanitize']);
+
+      app.controller('MainController', function ($scope) {
+        $scope.items = [1, 2];
+        $scope.elements = [1, 2];
+        $scope.singleExpression = 'a';
+        $scope.singleExpression2 = 'b';
+        $scope.singleExpression3 = 'c';
+        $scope.singleExpression4 = 'd';
+        $scope.ngBindP = 'e';
+        $scope.ngBindHtmlP = 'f';
+        $scope.ngBindTemplateP = 'g';
+        $scope.multiExpression = 'h';
+        $scope.multiExpression2 = 'i';
+        $scope.model = [];
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div>
+    <a name="name-link" href>{{singleExpression}}</a>
+    <ul>
+        <li id="id-li">Not just {{singleExpression2}}</li>
+        <li>Only expression {{singleExpression3}}</li>
+    </ul>
+    <p title="P With Title">{{singleExpression4}}</p>
+    <div data-ng-model="model">{{multiExpression}} and {{multiExpression2}}</div>
+    <p ng-bind="ngBindP"></p>
+    <p ng-bind-html="ngBindHtmlP"></p>
+    <p ng-bind-template="{{ngBindTemplateP}} {{singleExpression}}!"></p>
+
+    <div data-ng-repeat="item in items">
+        <span>{{item}}</span>
+
+        <div ng_repeat="element in elements">
+            <span>{{element}}</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

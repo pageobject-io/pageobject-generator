@@ -12,7 +12,9 @@ describe('Elements', () => {
   it('should recognise buttons', () => {
     expect(Elements.isButton(element('<button id="name1"></button>'))).to.be.true;
     expect(Elements.isButton(element('<input type="button" />'))).to.be.true;
+    expect(Elements.isButton(element('<input type="Button" />'))).to.be.true;
     expect(Elements.isButton(element('<input type="submit" />'))).to.be.true;
+    expect(Elements.isButton(element('<input type="Submit" />'))).to.be.true;
     expect(Elements.isButton(element('<a id="name1"></a>'))).to.be.false;
   });
 
