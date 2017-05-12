@@ -1,6 +1,5 @@
 'use strict';
 
-const parse5 = require('parse5');
 const expect = require('chai').expect;
 const Attributes = require('../../lib/dom/attributes');
 const HtmlAttribute = require('../../lib/dom/html-attribute');
