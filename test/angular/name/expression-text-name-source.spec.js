@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const extractName = require('../name-source-spec-helper');
+const extractName = require('../../name/name-source-spec-helper');
 const ExpressionTextNameSource = require('../../../lib/angular/name/expression-text-name-source');
 
 describe('ExpressionTextNameSource', () => {

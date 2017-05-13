@@ -1,8 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect;
-const extractName = require('../name-source-spec-helper');
-const NgForNameSource = require('../../../lib/angular/angular/name/ng-for-name-source');
+const extractName = require('../../../name/name-source-spec-helper');
+const NgForNameSource = require('../../../../lib/angular/angular/name/ng-for-name-source');
 
 describe('NgForNameSource', () => {
   let source = new NgForNameSource();

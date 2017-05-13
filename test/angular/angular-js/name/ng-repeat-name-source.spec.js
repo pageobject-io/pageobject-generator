@@ -1,8 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect;
-const extractName = require('../name-source-spec-helper');
-const NgRepeatNameSource = require('../../../lib/angular/angular-js/name/ng-repeat-name-source');
+const extractName = require('../../../name/name-source-spec-helper');
+const NgRepeatNameSource = require('../../../../lib/angular/angular-js/name/ng-repeat-name-source');
 
 describe('NgRepeatNameSource', () => {
   let source = new NgRepeatNameSource();
