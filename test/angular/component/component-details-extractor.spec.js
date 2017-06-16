@@ -3,7 +3,7 @@
 const expect = require('chai').expect;
 const fs = require('fs');
 const path = require('path');
-const ComponentDetailsExtractor = require('../../lib/component/component-details-extractor');
+const ComponentDetailsExtractor = require('../../../lib/angular/component/component-details-extractor');
 
 describe('ComponentDetailsExtractor', () => {
 
@@ -89,7 +89,7 @@ describe('ComponentDetailsExtractor', () => {
   });
 
   function loadFixture(sourceFile) {
-    return fs.readFileSync('./test/component/' + sourceFile + '.fixture', 'utf8');
+    return fs.readFileSync('./test/angular/component/' + sourceFile + '.fixture', 'utf8');
   }
 
 });
