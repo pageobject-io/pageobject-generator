@@ -307,45 +307,43 @@ public colorByIndexShouldNotBeSelected(rowIndex1, index): void  {
 
   describe('selected by value assertion', () => {
     it('should emit for simple element', () => {
-//       expect(emitter.emitSelectedByValueAssertion(simpleElement(true))).to.equal(`this.colorByValueShouldBeSelected = function (value) {
-//    this.color.filter(function (elem) {
-//       return elem.isSelected();
-//    }).then(function (filteredElements) {
-//       expect(filteredElements[0].getAttribute('value')).toEqual(value);
-//    });
-// };
-//
-// this.colorByValueShouldNotBeSelected = function (value) {
-//    this.color.filter(function (elem) {
-//       return elem.isSelected();
-//    }).then(function (filteredElements) {
-//       if (filteredElements.length > 0) {
-//          expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
-//       }
-//    });
-// };
-// `);
+       expect(emitter.emitSelectedByValueAssertion(simpleElement(true))).to.equal(`public colorByValueShouldBeSelected(value): void  {
+   if (this.color.selected) {
+       expect(this.color.value).toEqual(value);
+   }
+   throw new Error('Element is not selected');
+}
+
+public colorByValueShouldNotBeSelected(value): void  {
+   if (this.color.selected) {
+       expect(this.color.value).not.toEqual(value);
+   }
+   throw new Error('Element is not selected');
+}
+`);
     });
 
     it('should emit for nested element', () => {
-//       expect(emitter.emitSelectedByValueAssertion(nestedElement(true))).to.equal(`this.colorByValueShouldBeSelected = function (rowIndex1, value) {
-//    this.items.get(rowIndex1).all(by.model('color')).filter(function (elem) {
-//       return elem.isSelected();
-//    }).then(function (filteredElements) {
-//       expect(filteredElements[0].getAttribute('value')).toEqual(value);
-//    });
-// };
-//
-// this.colorByValueShouldNotBeSelected = function (rowIndex1, value) {
-//    this.items.get(rowIndex1).all(by.model('color')).filter(function (elem) {
-//       return elem.isSelected();
-//    }).then(function (filteredElements) {
-//       if (filteredElements.length > 0) {
-//          expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
-//       }
-//    });
-// };
-// `);
+       expect(emitter.emitSelectedByValueAssertion(nestedElement(true))).to.equal(`public colorByValueShouldBeSelected(rowIndex1, value): void  {
+   this.items[rowIndex1].querySelectorAll('.color').forEach((elem) => {
+       if (elem.selected) {
+          expect(elem.value).toEqual(value);
+          return;
+      }
+       throw new Error('Could not find selected elements.');
+   });
+}
+
+public colorByValueShouldNotBeSelected(rowIndex1, value): void  {
+   this.items[rowIndex1].querySelectorAll('.color').forEach((elem) => {
+       if (elem.selected) {
+          expect(elem.value).not.toEqual(value);
+          return;
+      }
+       throw new Error('Could not find selected elements.');
+   });
+}
+`);
     });
   });
 
