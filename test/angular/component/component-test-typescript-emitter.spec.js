@@ -668,10 +668,12 @@ public colorByValueShouldNotBeSelected(): void  {
     });
 
     it('should emit for nested element', () => {
-//       expect(emitter.emitSelectOptionByPartialTextAction(nestedElement())).to.equal(`this.selectColorByPartialText = function (rowIndex1, text) {
-//    this.items.get(rowIndex1).element(by.model('color')).all(by.cssContainingText('option', text)).click();
-// };
-// `);
+      expect(emitter.emitSelectOptionByPartialTextAction(nestedElement())).to.equal(`public selectColorByPartialText(rowIndex1, text): void  {
+   const options: any[] = this.getElementsByContainingText('.color option', text)
+   expect(options.length).toBeGreaterThan(rowIndex1);
+   options[rowIndex1].click();
+}
+`);
     });
   });
 
@@ -690,56 +692,66 @@ public colorByValueShouldNotBeSelected(): void  {
 // `);
     });
   });
-//
-//   describe('select option by value action', () => {
-//     it('should emit for simple element', () => {
-//       expect(emitter.emitSelectOptionByValueAction(simpleElement())).to.equal(`this.selectColorByValue = function (value) {
-//    this.color.all(by.css('option[value="' + value + '"]')).click();
-// };
-// `);
-//     });
-//
-//     it('should emit for nested element', () => {
-//       expect(emitter.emitSelectOptionByValueAction(nestedElement())).to.equal(`this.selectColorByValue = function (rowIndex1, value) {
-//    this.items.get(rowIndex1).element(by.model('color')).all(by.css('option[value="' + value + '"]')).click();
-// };
-// `);
-//     });
-//   });
-//
-//   describe('value assertion', () => {
-//     it('should emit for simple element', () => {
-//       expect(emitter.emitValueAssertion(simpleElement())).to.equal(`this.shouldHaveColor = function (value) {
-//    expect(this.color.getAttribute('value')).toEqual(value);
-// };
-// `);
-//     });
-//
-//     it('should emit for nested element', () => {
-//       expect(emitter.emitValueAssertion(nestedElement())).to.equal(`this.shouldHaveColor = function (rowIndex1, value) {
-//    expect(this.items.get(rowIndex1).element(by.model('color')).getAttribute('value')).toEqual(value);
-// };
-// `);
-//     });
-//   });
-//
-//   describe('text mutator action', () => {
-//     it('should emit for simple element', () => {
-//       expect(emitter.emitTextMutatorAction(simpleElement())).to.equal(`this.setColor = function (value) {
-//    this.color.clear();
-//    this.color.sendKeys(value);
-// };
-// `);
-//     });
-//
-//     it('should emit for nested element', () => {
-//       expect(emitter.emitTextMutatorAction(nestedElement())).to.equal(`this.setColor = function (rowIndex1, value) {
-//    this.items.get(rowIndex1).element(by.model('color')).clear();
-//    this.items.get(rowIndex1).element(by.model('color')).sendKeys(value);
-// };
-// `);
-//     });
-//   });
+
+  describe('select option by value action', () => {
+    it('should emit for simple element', () => {
+      expect(emitter.emitSelectOptionByValueAction(simpleElement())).to.equal(`public selectColorByValue(value): void  {
+   const items: any = this.color;
+   for (let i = 0; i < items.length; i++) {
+      if (items[i].value === value) {
+         items[i].click();
+      }
+   }
+}
+`);
+    });
+
+    it('should emit for nested element', () => {
+      expect(emitter.emitSelectOptionByValueAction(nestedElement())).to.equal(`public selectColorByValue(rowIndex1, value): void  {
+   const items: any = this.items[rowIndex1].querySelector('.color');
+   for (let i = 0; i < items.length; i++) {
+      if (items[i].value === value) {
+         items[i].click();
+      }
+   }
+}
+`);
+    });
+  });
+
+  describe('value assertion', () => {
+    it('should emit for simple element', () => {
+      expect(emitter.emitValueAssertion(simpleElement())).to.equal(`public shouldHaveColor(value): void  {
+   expect(this.color.value).toEqual(value);
+}
+`);
+    });
+
+    it('should emit for nested element', () => {
+      expect(emitter.emitValueAssertion(nestedElement())).to.equal(`public shouldHaveColor(rowIndex1, value): void  {
+   expect(this.items[rowIndex1].querySelector('.color').value).toEqual(value);
+}
+`);
+    });
+  });
+
+  describe('text mutator action', () => {
+    it('should emit for simple element', () => {
+      expect(emitter.emitTextMutatorAction(simpleElement())).to.equal(`public setColor(value): void  {
+   this.color.value = value;
+   this.color.dispatchEvent(new Event('input'));
+}
+`);
+    });
+
+    it('should emit for nested element', () => {
+      expect(emitter.emitTextMutatorAction(nestedElement())).to.equal(`public setColor(rowIndex1, value): void  {
+   this.items[rowIndex1].querySelector('.color').value = value;
+   this.items[rowIndex1].querySelector('.color').dispatchEvent(new Event('input'));
+}
+`);
+    });
+  });
 
   function getDocument(source) {
     return parse5.parse(source, {treeAdapter: parse5.treeAdapters.htmlparser2});
