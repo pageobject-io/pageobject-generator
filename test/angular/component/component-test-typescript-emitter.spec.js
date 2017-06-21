@@ -93,8 +93,7 @@ describe('ComponentTestTypescriptEmitter', () => {
     repeatedButtonSection.addActions(CLICK);
 
     let traverser = new EmitTraverser(page, config, new ParseResult(document, 'TestComponent'));
-    expect(traverser.emitPageObject()).to.equal(`import {tick} from '@angular/core/testing';
-import {ComponentPageBase} from 'angular-component-test-support/dist';
+    expect(traverser.emitPageObject()).to.equal(`import {ComponentPageBase} from 'angular-component-test-support/dist';
 // We assume you put page object files to the same folder where your component is placed. Change it if it's not true in your case.
 import {TestComponent} from './test-component.component';
 
@@ -438,7 +437,10 @@ public colorByIndexShouldNotBeVisible(rowIndex1, index): void  {
    }
    
    for (const i = 0; i < expectedOptions.length; i++) {
-      const options = this.getElementsByContainingText('.color option', expectedOptions[i]);
+      let options = this.color.querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return RegExp(expectedOptions[i]).test(element.textContent);
+      })
    
       options.forEach(option => {
          expect(option.selected).toBeTrue();
@@ -455,7 +457,10 @@ public colorByPartialTextShouldNotBeSelected(): void  {
    }
    
    for (const i = 0; i < expectedOptions.length; i++) {
-      const options = this.getElementsByContainingText('.color option', expectedOptions[i]);
+      let options = this.color.querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return RegExp(expectedOptions[i]).test(element.textContent);
+      })
    
       options.forEach(option => {
          expect(option.selected).toBeFalse();
@@ -468,40 +473,46 @@ public colorByPartialTextShouldNotBeSelected(): void  {
     });
 
     it('should emit for nested element', () => {
-//       expect(emitter.emitOptionSelectedByPartialTextAssertion(nestedElement())).to.equal(`public colorByPartialTextShouldBeSelected(rowIndex1): void  {
-//    let expectedOptions: string[] = [];
-//    for (const i = 1; i < arguments.length; i++) {
-//       expectedOptions = expectedOptions.concat(arguments[i]);
-//    }
-//
-//    for (const i = 0; i < expectedOptions.length; i++) {
-//       const options = this.getElementsByContainingText('.color option', expectedOptions[i]);
-//
-//       options.forEach(option => {
-//          expect(option.selected).toBeTrue();
-//       });
-//
-//       expect(options.length).toBeGreaterThan(0);
-//    }
-// }
-//
-// public colorByPartialTextShouldNotBeSelected(rowIndex1): void  {
-//    let expectedOptions: string[] = [];
-//    for (const i = 1; i < arguments.length; i++) {
-//       expectedOptions = expectedOptions.concat(arguments[i]);
-//    }
-//
-//    for (const i = 0; i < expectedOptions.length; i++) {
-//       const options = this.getElementsByContainingText('.color option', expectedOptions[i]);
-//
-//       options.forEach(option => {
-//          expect(option.selected).toBeFalse();
-//       });
-//
-//       expect(options.length).toBeGreaterThan(0);
-//    }
-// }
-// `);
+      expect(emitter.emitOptionSelectedByPartialTextAssertion(nestedElement())).to.equal(`public colorByPartialTextShouldBeSelected(rowIndex1): void  {
+   let expectedOptions: string[] = [];
+   for (const i = 1; i < arguments.length; i++) {
+      expectedOptions = expectedOptions.concat(arguments[i]);
+   }
+   
+   for (const i = 0; i < expectedOptions.length; i++) {
+      let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return RegExp(expectedOptions[i]).test(element.textContent);
+      })
+   
+      options.forEach(option => {
+         expect(option.selected).toBeTrue();
+      });
+   
+      expect(options.length).toBeGreaterThan(0);
+   }
+}
+
+public colorByPartialTextShouldNotBeSelected(rowIndex1): void  {
+   let expectedOptions: string[] = [];
+   for (const i = 1; i < arguments.length; i++) {
+      expectedOptions = expectedOptions.concat(arguments[i]);
+   }
+   
+   for (const i = 0; i < expectedOptions.length; i++) {
+      let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return RegExp(expectedOptions[i]).test(element.textContent);
+      })
+   
+      options.forEach(option => {
+         expect(option.selected).toBeFalse();
+      });
+   
+      expect(options.length).toBeGreaterThan(0);
+   }
+}
+`);
     });
   });
 
@@ -514,7 +525,10 @@ public colorByPartialTextShouldNotBeSelected(): void  {
    }
    
    for (const i = 0; i < expectedOptions.length; i++) {
-      const options = this.getElementsByText('.color option', expectedOptions[i]);
+      let options = this.color.querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.textContent;
+      })
    
       options.forEach(option => {
          expect(option.selected).toBeTrue();
@@ -531,7 +545,10 @@ public colorByTextShouldNotBeSelected(): void  {
    }
    
    for (const i = 0; i < expectedOptions.length; i++) {
-      const options = this.getElementsByText('.color option', expectedOptions[i]);
+      let options = this.color.querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.textContent;
+      })
    
       options.forEach(option => {
          expect(option.selected).toBeFalse();
@@ -544,40 +561,46 @@ public colorByTextShouldNotBeSelected(): void  {
     });
 
     it('should emit for nested element', () => {
-//       expect(emitter.emitOptionSelectedByTextAssertion(nestedElement())).to.equal(`public colorByTextShouldBeSelected(rowIndex1): void  {
-//    let expectedOptions: string[] = [];
-//    for (const i = 1; i < arguments.length; i++) {
-//       expectedOptions = expectedOptions.concat(arguments[i]);
-//    }
-//
-//    for (const i = 0; i < expectedOptions.length; i++) {
-//       const options = this.getElementsByText('.color option', expectedOptions[i]);
-//
-//       options.forEach(option => {
-//          expect(option.selected).toBeTrue();
-//       });
-//
-//       expect(options.length).toBeGreaterThan(0);
-//    }
-// }
-//
-// public colorByTextShouldNotBeSelected(rowIndex1): void  {
-//    let expectedOptions: string[] = [];
-//    for (const i = 1; i < arguments.length; i++) {
-//       expectedOptions = expectedOptions.concat(arguments[i]);
-//    }
-//
-//    for (const i = 0; i < expectedOptions.length; i++) {
-//       const options = this.getElementsByText('.color option', expectedOptions[i]);
-//
-//       options.forEach(option => {
-//          expect(option.selected).toBeFalse();
-//       });
-//
-//       expect(options.length).toBeGreaterThan(0);
-//    }
-// }
-// `);
+      expect(emitter.emitOptionSelectedByTextAssertion(nestedElement())).to.equal(`public colorByTextShouldBeSelected(rowIndex1): void  {
+   let expectedOptions: string[] = [];
+   for (const i = 1; i < arguments.length; i++) {
+      expectedOptions = expectedOptions.concat(arguments[i]);
+   }
+   
+   for (const i = 0; i < expectedOptions.length; i++) {
+      let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.textContent;
+      })
+   
+      options.forEach(option => {
+         expect(option.selected).toBeTrue();
+      });
+   
+      expect(options.length).toBeGreaterThan(0);
+   }
+}
+
+public colorByTextShouldNotBeSelected(rowIndex1): void  {
+   let expectedOptions: string[] = [];
+   for (const i = 1; i < arguments.length; i++) {
+      expectedOptions = expectedOptions.concat(arguments[i]);
+   }
+   
+   for (const i = 0; i < expectedOptions.length; i++) {
+      let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.textContent;
+      })
+   
+      options.forEach(option => {
+         expect(option.selected).toBeFalse();
+      });
+   
+      expect(options.length).toBeGreaterThan(0);
+   }
+}
+`);
     });
   });
 
@@ -590,7 +613,10 @@ public colorByTextShouldNotBeSelected(): void  {
    }
    
    for (const i = 0; i < expectedOptions.length; i++) {
-      const options = this.getElementsByValue('.color option', expectedOptions[i]);
+      let options = this.color.querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.value;
+      })
    
       options.forEach(option => {
          expect(option.selected).toBeTrue();
@@ -607,7 +633,10 @@ public colorByValueShouldNotBeSelected(): void  {
    }
    
    for (const i = 0; i < expectedOptions.length; i++) {
-      const options = this.getElementsByValue('.color option', expectedOptions[i]);
+      let options = this.color.querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.value;
+      })
    
       options.forEach(option => {
          expect(option.selected).toBeFalse();
@@ -620,47 +649,57 @@ public colorByValueShouldNotBeSelected(): void  {
     });
 
     it('should emit for nested element', () => {
-//       expect(emitter.emitOptionSelectedByValueAssertion(nestedElement())).to.equal(`public colorByValueShouldBeSelected(rowIndex1): void  {
-//    let expectedOptions: string[] = [];
-//    for (const i = 1; i < arguments.length; i++) {
-//       expectedOptions = expectedOptions.concat(arguments[i]);
-//    }
-//
-//    for (const i = 0; i < expectedOptions.length; i++) {
-//       const options = this.getElementsByValue('.color option', expectedOptions[i]);
-//
-//       options.forEach(option => {
-//          expect(option.selected).toBeTrue();
-//       });
-//
-//       expect(options.length).toBeGreaterThan(0);
-//    }
-// }
-//
-// public colorByValueShouldNotBeSelected(rowIndex1): void  {
-//    let expectedOptions: string[] = [];
-//    for (const i = 1; i < arguments.length; i++) {
-//       expectedOptions = expectedOptions.concat(arguments[i]);
-//    }
-//
-//    for (const i = 0; i < expectedOptions.length; i++) {
-//       const options = this.getElementsByValue('.color option', expectedOptions[i]);
-//
-//       options.forEach(option => {
-//          expect(option.selected).toBeFalse();
-//       });
-//
-//       expect(options.length).toBeGreaterThan(0);
-//    }
-// }
-// `);
+      expect(emitter.emitOptionSelectedByValueAssertion(nestedElement())).to.equal(`public colorByValueShouldBeSelected(rowIndex1): void  {
+   let expectedOptions: string[] = [];
+   for (const i = 1; i < arguments.length; i++) {
+      expectedOptions = expectedOptions.concat(arguments[i]);
+   }
+   
+   for (const i = 0; i < expectedOptions.length; i++) {
+      let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.value;
+      })
+   
+      options.forEach(option => {
+         expect(option.selected).toBeTrue();
+      });
+   
+      expect(options.length).toBeGreaterThan(0);
+   }
+}
+
+public colorByValueShouldNotBeSelected(rowIndex1): void  {
+   let expectedOptions: string[] = [];
+   for (const i = 1; i < arguments.length; i++) {
+      expectedOptions = expectedOptions.concat(arguments[i]);
+   }
+   
+   for (const i = 0; i < expectedOptions.length; i++) {
+      let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option')
+      options = [].filter.call(elements, (element: Element) => {
+         return expectedOptions[i] === element.value;
+      })
+   
+      options.forEach(option => {
+         expect(option.selected).toBeFalse();
+      });
+   
+      expect(options.length).toBeGreaterThan(0);
+   }
+}
+`);
     });
   });
 
   describe('select option by partial text action', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitSelectOptionByPartialTextAction(simpleElement())).to.equal(`public selectColorByPartialText(text): void  {
-   const options: any[] = this.getElementsByContainingText('.color option', text)
+   let options = this.color.querySelectorAll('option');
+   options = [].filter.call(elements, (element: Element) => {
+      return RegExp(expectedOptions[i]).test(element.textContent);
+   })
+   
    expect(options.length).toBeGreaterThan(0);
    options[0].click();
 }
@@ -669,9 +708,13 @@ public colorByValueShouldNotBeSelected(): void  {
 
     it('should emit for nested element', () => {
       expect(emitter.emitSelectOptionByPartialTextAction(nestedElement())).to.equal(`public selectColorByPartialText(rowIndex1, text): void  {
-   const options: any[] = this.getElementsByContainingText('.color option', text)
-   expect(options.length).toBeGreaterThan(rowIndex1);
-   options[rowIndex1].click();
+   let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option');
+   options = [].filter.call(elements, (element: Element) => {
+      return RegExp(expectedOptions[i]).test(element.textContent);
+   })
+   
+   expect(options.length).toBeGreaterThan(0);
+   options[0].click();
 }
 `);
     });
@@ -679,17 +722,29 @@ public colorByValueShouldNotBeSelected(): void  {
 
   describe('select option by text action', () => {
     it('should emit for simple element', () => {
-//       expect(emitter.emitSelectOptionByTextAction(simpleElement())).to.equal(`this.selectColorByText = function (text) {
-//    this.color.all(by.xpath('option[.="' + text + '"]')).click();
-// };
-// `);
+      expect(emitter.emitSelectOptionByTextAction(simpleElement())).to.equal(`public selectColorByText(text): void  {
+   let options = this.color.querySelectorAll('option');
+   options = [].filter.call(elements, (element: Element) => {
+      return expectedOptions[i] === element.textContent;
+   })
+   
+   expect(options.length).toBeGreaterThan(0);
+   options[0].click();
+}
+`);
     });
 
     it('should emit for nested element', () => {
-//       expect(emitter.emitSelectOptionByTextAction(nestedElement())).to.equal(`this.selectColorByText = function (rowIndex1, text) {
-//    this.items.get(rowIndex1).element(by.model('color')).all(by.xpath('option[.="' + text + '"]')).click();
-// };
-// `);
+      expect(emitter.emitSelectOptionByTextAction(nestedElement())).to.equal(`public selectColorByText(rowIndex1, text): void  {
+   let options = this.items[rowIndex1].querySelector('.color').querySelectorAll('option');
+   options = [].filter.call(elements, (element: Element) => {
+      return expectedOptions[i] === element.textContent;
+   })
+   
+   expect(options.length).toBeGreaterThan(0);
+   options[0].click();
+}
+`);
     });
   });
 
