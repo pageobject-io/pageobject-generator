@@ -1,0 +1,258 @@
+var PageObject = function () {
+
+   this.idLink = element(by.id('id-link'));
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.multiExpressionLink = element(by.exactBinding('multiExpression'));
+   this.nameLink = element(by.name('name-link'));
+   this.singleExpressionLink = element(by.exactBinding('singleExpression'));
+   this.textOnlyLink = element(by.linkText('Text only'));
+   this.titleLink = element(by.linkText('Link with title'));
+   this.whatIsAPageObjectLink = element(by.linkText('What is a Page Object?'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.clickElementLink = function (rowIndex1, rowIndex2) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).click();
+   };
+
+   this.clickIdLink = function () {
+      this.idLink.click();
+   };
+
+   this.clickItemLink = function (rowIndex1) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).click();
+   };
+
+   this.clickMultiExpressionLink = function () {
+      this.multiExpressionLink.click();
+   };
+
+   this.clickNameLink = function () {
+      this.nameLink.click();
+   };
+
+   this.clickSingleExpressionLink = function () {
+      this.singleExpressionLink.click();
+   };
+
+   this.clickTextOnlyLink = function () {
+      this.textOnlyLink.click();
+   };
+
+   this.clickTitleLink = function () {
+      this.titleLink.click();
+   };
+
+   this.clickWhatIsAPageObjectLink = function () {
+      this.whatIsAPageObjectLink.click();
+   };
+
+   this.elementLinkShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeTrue();
+   };
+
+   this.elementLinkShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeFalse();
+   };
+
+   this.elementLinkShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.elementLinkShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.elementLinkShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getText()).toBe(value);
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).count()).toBe(count);
+   };
+
+   this.idLinkShouldBeVisible = function () {
+      expect(this.idLink.isDisplayed()).toBeTrue();
+   };
+
+   this.idLinkShouldNotBeVisible = function () {
+      expect(this.idLink.isDisplayed()).toBeFalse();
+   };
+
+   this.idLinkShouldHaveClass = function (className) {
+      this.idLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.idLinkShouldNotHaveClass = function (className) {
+      this.idLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemLinkShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeTrue();
+   };
+
+   this.itemLinkShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeFalse();
+   };
+
+   this.itemLinkShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.itemLinkShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemLinkShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).getText()).toBe(value);
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.multiExpressionLinkShouldBeVisible = function () {
+      expect(this.multiExpressionLink.isDisplayed()).toBeTrue();
+   };
+
+   this.multiExpressionLinkShouldNotBeVisible = function () {
+      expect(this.multiExpressionLink.isDisplayed()).toBeFalse();
+   };
+
+   this.multiExpressionLinkShouldHaveClass = function (className) {
+      this.multiExpressionLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.multiExpressionLinkShouldNotHaveClass = function (className) {
+      this.multiExpressionLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.multiExpressionLinkShouldHaveText = function (value) {
+      expect(this.multiExpressionLink.getText()).toBe(value);
+   };
+
+   this.nameLinkShouldBeVisible = function () {
+      expect(this.nameLink.isDisplayed()).toBeTrue();
+   };
+
+   this.nameLinkShouldNotBeVisible = function () {
+      expect(this.nameLink.isDisplayed()).toBeFalse();
+   };
+
+   this.nameLinkShouldHaveClass = function (className) {
+      this.nameLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.nameLinkShouldNotHaveClass = function (className) {
+      this.nameLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionLinkShouldBeVisible = function () {
+      expect(this.singleExpressionLink.isDisplayed()).toBeTrue();
+   };
+
+   this.singleExpressionLinkShouldNotBeVisible = function () {
+      expect(this.singleExpressionLink.isDisplayed()).toBeFalse();
+   };
+
+   this.singleExpressionLinkShouldHaveClass = function (className) {
+      this.singleExpressionLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionLinkShouldNotHaveClass = function (className) {
+      this.singleExpressionLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionLinkShouldHaveText = function (value) {
+      expect(this.singleExpressionLink.getText()).toBe(value);
+   };
+
+   this.textOnlyLinkShouldBeVisible = function () {
+      expect(this.textOnlyLink.isDisplayed()).toBeTrue();
+   };
+
+   this.textOnlyLinkShouldNotBeVisible = function () {
+      expect(this.textOnlyLink.isDisplayed()).toBeFalse();
+   };
+
+   this.textOnlyLinkShouldHaveClass = function (className) {
+      this.textOnlyLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.textOnlyLinkShouldNotHaveClass = function (className) {
+      this.textOnlyLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.titleLinkShouldBeVisible = function () {
+      expect(this.titleLink.isDisplayed()).toBeTrue();
+   };
+
+   this.titleLinkShouldNotBeVisible = function () {
+      expect(this.titleLink.isDisplayed()).toBeFalse();
+   };
+
+   this.titleLinkShouldHaveClass = function (className) {
+      this.titleLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.titleLinkShouldNotHaveClass = function (className) {
+      this.titleLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.whatIsAPageObjectLinkShouldBeVisible = function () {
+      expect(this.whatIsAPageObjectLink.isDisplayed()).toBeTrue();
+   };
+
+   this.whatIsAPageObjectLinkShouldNotBeVisible = function () {
+      expect(this.whatIsAPageObjectLink.isDisplayed()).toBeFalse();
+   };
+
+   this.whatIsAPageObjectLinkShouldHaveClass = function (className) {
+      this.whatIsAPageObjectLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.whatIsAPageObjectLinkShouldNotHaveClass = function (className) {
+      this.whatIsAPageObjectLink.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+};
+
+module.exports = PageObject;

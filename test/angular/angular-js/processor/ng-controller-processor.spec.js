@@ -27,7 +27,7 @@ describe('NgControllerProcessor', () => {
     let fragment = parse5.parseFragment('<p ng-controller="Ctrl as ctrl"></p>',
                                         {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-    let context = new GeneratorContext(fragment);
+    let context = new GeneratorContext(fragment, '');
     context.domElement = select('p', fragment)[0];
 
     processor.process(context);
@@ -36,6 +36,7 @@ describe('NgControllerProcessor', () => {
 
     assertElement(element, Section, [Types.NG_CONTROLLER], [], []);
     expect(element.name).to.equal('ctrl');
+    expect(element.notGenerated).to.be.true;
     expect(context.traversePageTreeDownBeforeChildren).to.be.true;
     expect(context.traversePageTreeUpAfterChildren).to.be.true;
   });
@@ -44,7 +45,7 @@ describe('NgControllerProcessor', () => {
     let fragment = parse5.parseFragment('<p ng-controller="Ctrl"></p>',
                                         {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-    let context = new GeneratorContext(fragment);
+    let context = new GeneratorContext(fragment, '');
     context.domElement = select('p', fragment)[0];
 
     processor.process(context);

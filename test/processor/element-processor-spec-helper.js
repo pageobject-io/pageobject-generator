@@ -11,7 +11,7 @@ module.exports = {
   },
 
   registersElement(processor, kind, types, actions, assertions) {
-    let context = new GeneratorContext();
+    let context = new GeneratorContext(null, '');
     processor.process(context);
 
     let element = context.page.elements[0];

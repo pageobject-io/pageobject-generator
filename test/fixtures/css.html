@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function ($scope) {
+        $scope.items = [1, 2];
+        $scope.items2 = [1, 2];
+        $scope.elements = [1, 2];
+        $scope.model = [];
+        $scope.model2 = [];
+        $scope.model3 = [];
+        $scope.model6 = [];
+        $scope.model7 = [];
+        $scope.model4 = [[], []];
+        $scope.model5 = [[], []];
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div>
+    <div data-ng-click="firstDivClicked=true" data-ng-show="!firstDivClicked">div 1</div>
+    <div data-ng-click="secondDivClicked=true" data-ng-show="!secondDivClicked">div 2</div>
+
+    <div data-ng-repeat="item in items">
+        <div ng-click="model[item]=true" ng-show="!model[item]">Nested div 1</div>
+        <div ng-click="model2[item]=true" ng-show="!model2[item]">Nested div 2</div>
+
+        <div ng_repeat="element in elements">
+            <div ng-click="model4[item][element]=true" ng-show="!model4[item][element]">Double nested div 1</div>
+            <div ng-click="model5[item][element]=true" ng-show="!model5[item][element]">Double nested div 2</div>
+        </div>
+
+        <div ng-click="model3[item]=true" ng-show="!model3[item]">Nested div 2</div>
+    </div>
+
+    <div data-ng-repeat="item in items2">
+        <div ng-click="model6[item]=true" ng-show="!model6[item]">One level nested div 1</div>
+        <div ng-click="model7[item]=true" ng-show="!model7[item]">One level nested div 2</div>
+    </div>
+
+    <div data-ng-click="fourthDivClicked=true" data-ng-show="!fourthDivClicked">div 4</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+var PageObject = function () {
+
+   this.emailField = element(by.name('emailField'));
+   this.idModel = element(by.id('onlyId'));
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.nameOverride = element(by.id('ignoredId'));
+   this.numberField = element(by.name('numberField'));
+   this.onlyModel = element(by.model('onlyModel'));
+   this.passwordField = element(by.name('passwordField'));
+   this.searchField = element(by.name('searchField'));
+   this.telField = element(by.name('telField'));
+   this.urlField = element(by.name('urlField'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.setEmailField = function (value) {
+      this.emailField.clear();
+      this.emailField.sendKeys(value);
+   };
+
+   this.setIdModel = function (value) {
+      this.idModel.clear();
+      this.idModel.sendKeys(value);
+   };
+
+   this.setNameOverride = function (value) {
+      this.nameOverride.clear();
+      this.nameOverride.sendKeys(value);
+   };
+
+   this.setNestedRepeaterTextField = function (rowIndex1, rowIndex2, value) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).clear();
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).sendKeys(value);
+   };
+
+   this.setNumberField = function (value) {
+      this.numberField.clear();
+      this.numberField.sendKeys(value);
+   };
+
+   this.setOnlyModel = function (value) {
+      this.onlyModel.clear();
+      this.onlyModel.sendKeys(value);
+   };
+
+   this.setPasswordField = function (value) {
+      this.passwordField.clear();
+      this.passwordField.sendKeys(value);
+   };
+
+   this.setRepeatedTextField = function (rowIndex1, value) {
+      this.items.get(rowIndex1).element(by.name('repeatedTextField')).clear();
+      this.items.get(rowIndex1).element(by.name('repeatedTextField')).sendKeys(value);
+   };
+
+   this.setSearchField = function (value) {
+      this.searchField.clear();
+      this.searchField.sendKeys(value);
+   };
+
+   this.setTelField = function (value) {
+      this.telField.clear();
+      this.telField.sendKeys(value);
+   };
+
+   this.setUrlField = function (value) {
+      this.urlField.clear();
+      this.urlField.sendKeys(value);
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).count()).toBe(count);
+   };
+
+   this.elementsShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.elementsShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.elementsShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getText()).toBe(value);
+   };
+
+   this.emailFieldShouldBeEnabled = function () {
+      expect(this.emailField.isEnabled()).toBeTrue();
+   };
+
+   this.emailFieldShouldNotBeEnabled = function () {
+      expect(this.emailField.isEnabled()).toBeFalse();
+   };
+
+   this.emailFieldShouldBeVisible = function () {
+      expect(this.emailField.isDisplayed()).toBeTrue();
+   };
+
+   this.emailFieldShouldNotBeVisible = function () {
+      expect(this.emailField.isDisplayed()).toBeFalse();
+   };
+
+   this.idModelShouldBeEnabled = function () {
+      expect(this.idModel.isEnabled()).toBeTrue();
+   };
+
+   this.idModelShouldNotBeEnabled = function () {
+      expect(this.idModel.isEnabled()).toBeFalse();
+   };
+
+   this.idModelShouldBeVisible = function () {
+      expect(this.idModel.isDisplayed()).toBeTrue();
+   };
+
+   this.idModelShouldNotBeVisible = function () {
+      expect(this.idModel.isDisplayed()).toBeFalse();
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.itemsShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.itemsShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemsShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.nameOverrideShouldBeEnabled = function () {
+      expect(this.nameOverride.isEnabled()).toBeTrue();
+   };
+
+   this.nameOverrideShouldNotBeEnabled = function () {
+      expect(this.nameOverride.isEnabled()).toBeFalse();
+   };
+
+   this.nameOverrideShouldBeVisible = function () {
+      expect(this.nameOverride.isDisplayed()).toBeTrue();
+   };
+
+   this.nameOverrideShouldNotBeVisible = function () {
+      expect(this.nameOverride.isDisplayed()).toBeFalse();
+   };
+
+   this.nestedRepeaterTextFieldShouldBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isEnabled()).toBeTrue();
+   };
+
+   this.nestedRepeaterTextFieldShouldNotBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isEnabled()).toBeFalse();
+   };
+
+   this.nestedRepeaterTextFieldShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isDisplayed()).toBeTrue();
+   };
+
+   this.nestedRepeaterTextFieldShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isDisplayed()).toBeFalse();
+   };
+
+   this.numberFieldShouldBeEnabled = function () {
+      expect(this.numberField.isEnabled()).toBeTrue();
+   };
+
+   this.numberFieldShouldNotBeEnabled = function () {
+      expect(this.numberField.isEnabled()).toBeFalse();
+   };
+
+   this.numberFieldShouldBeVisible = function () {
+      expect(this.numberField.isDisplayed()).toBeTrue();
+   };
+
+   this.numberFieldShouldNotBeVisible = function () {
+      expect(this.numberField.isDisplayed()).toBeFalse();
+   };
+
+   this.onlyModelShouldBeEnabled = function () {
+      expect(this.onlyModel.isEnabled()).toBeTrue();
+   };
+
+   this.onlyModelShouldNotBeEnabled = function () {
+      expect(this.onlyModel.isEnabled()).toBeFalse();
+   };
+
+   this.onlyModelShouldBeVisible = function () {
+      expect(this.onlyModel.isDisplayed()).toBeTrue();
+   };
+
+   this.onlyModelShouldNotBeVisible = function () {
+      expect(this.onlyModel.isDisplayed()).toBeFalse();
+   };
+
+   this.passwordFieldShouldBeEnabled = function () {
+      expect(this.passwordField.isEnabled()).toBeTrue();
+   };
+
+   this.passwordFieldShouldNotBeEnabled = function () {
+      expect(this.passwordField.isEnabled()).toBeFalse();
+   };
+
+   this.passwordFieldShouldBeVisible = function () {
+      expect(this.passwordField.isDisplayed()).toBeTrue();
+   };
+
+   this.passwordFieldShouldNotBeVisible = function () {
+      expect(this.passwordField.isDisplayed()).toBeFalse();
+   };
+
+   this.repeatedTextFieldShouldBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isEnabled()).toBeTrue();
+   };
+
+   this.repeatedTextFieldShouldNotBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isEnabled()).toBeFalse();
+   };
+
+   this.repeatedTextFieldShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isDisplayed()).toBeTrue();
+   };
+
+   this.repeatedTextFieldShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isDisplayed()).toBeFalse();
+   };
+
+   this.searchFieldShouldBeEnabled = function () {
+      expect(this.searchField.isEnabled()).toBeTrue();
+   };
+
+   this.searchFieldShouldNotBeEnabled = function () {
+      expect(this.searchField.isEnabled()).toBeFalse();
+   };
+
+   this.searchFieldShouldBeVisible = function () {
+      expect(this.searchField.isDisplayed()).toBeTrue();
+   };
+
+   this.searchFieldShouldNotBeVisible = function () {
+      expect(this.searchField.isDisplayed()).toBeFalse();
+   };
+
+   this.shouldHaveEmailField = function (value) {
+      expect(this.emailField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveIdModel = function (value) {
+      expect(this.idModel.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveNameOverride = function (value) {
+      expect(this.nameOverride.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveNestedRepeaterTextField = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveNumberField = function (value) {
+      expect(this.numberField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveOnlyModel = function (value) {
+      expect(this.onlyModel.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHavePasswordField = function (value) {
+      expect(this.passwordField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveRepeatedTextField = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveSearchField = function (value) {
+      expect(this.searchField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveTelField = function (value) {
+      expect(this.telField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveUrlField = function (value) {
+      expect(this.urlField.getAttribute('value')).toEqual(value);
+   };
+
+   this.telFieldShouldBeEnabled = function () {
+      expect(this.telField.isEnabled()).toBeTrue();
+   };
+
+   this.telFieldShouldNotBeEnabled = function () {
+      expect(this.telField.isEnabled()).toBeFalse();
+   };
+
+   this.telFieldShouldBeVisible = function () {
+      expect(this.telField.isDisplayed()).toBeTrue();
+   };
+
+   this.telFieldShouldNotBeVisible = function () {
+      expect(this.telField.isDisplayed()).toBeFalse();
+   };
+
+   this.urlFieldShouldBeEnabled = function () {
+      expect(this.urlField.isEnabled()).toBeTrue();
+   };
+
+   this.urlFieldShouldNotBeEnabled = function () {
+      expect(this.urlField.isEnabled()).toBeFalse();
+   };
+
+   this.urlFieldShouldBeVisible = function () {
+      expect(this.urlField.isDisplayed()).toBeTrue();
+   };
+
+   this.urlFieldShouldNotBeVisible = function () {
+      expect(this.urlField.isDisplayed()).toBeFalse();
+   };
+
+};
+
+module.exports = PageObject;

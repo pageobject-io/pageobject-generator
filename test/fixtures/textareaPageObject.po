@@ -1,0 +1,179 @@
+var PageObject = function () {
+
+   this.idModel = element(by.id('onlyId'));
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.nameOverride = element(by.id('ignoredId'));
+   this.onlyModel = element(by.model('onlyModel'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.setIdModel = function (value) {
+      this.idModel.clear();
+      this.idModel.sendKeys(value);
+   };
+
+   this.setNameOverride = function (value) {
+      this.nameOverride.clear();
+      this.nameOverride.sendKeys(value);
+   };
+
+   this.setNestedRepeaterTextField = function (rowIndex1, rowIndex2, value) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).clear();
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).sendKeys(value);
+   };
+
+   this.setOnlyModel = function (value) {
+      this.onlyModel.clear();
+      this.onlyModel.sendKeys(value);
+   };
+
+   this.setRepeatedTextField = function (rowIndex1, value) {
+      this.items.get(rowIndex1).element(by.name('repeatedTextField')).clear();
+      this.items.get(rowIndex1).element(by.name('repeatedTextField')).sendKeys(value);
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).count()).toBe(count);
+   };
+
+   this.elementsShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.elementsShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.elementsShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getText()).toBe(value);
+   };
+
+   this.idModelShouldBeEnabled = function () {
+      expect(this.idModel.isEnabled()).toBeTrue();
+   };
+
+   this.idModelShouldNotBeEnabled = function () {
+      expect(this.idModel.isEnabled()).toBeFalse();
+   };
+
+   this.idModelShouldBeVisible = function () {
+      expect(this.idModel.isDisplayed()).toBeTrue();
+   };
+
+   this.idModelShouldNotBeVisible = function () {
+      expect(this.idModel.isDisplayed()).toBeFalse();
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.itemsShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.itemsShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemsShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.nameOverrideShouldBeEnabled = function () {
+      expect(this.nameOverride.isEnabled()).toBeTrue();
+   };
+
+   this.nameOverrideShouldNotBeEnabled = function () {
+      expect(this.nameOverride.isEnabled()).toBeFalse();
+   };
+
+   this.nameOverrideShouldBeVisible = function () {
+      expect(this.nameOverride.isDisplayed()).toBeTrue();
+   };
+
+   this.nameOverrideShouldNotBeVisible = function () {
+      expect(this.nameOverride.isDisplayed()).toBeFalse();
+   };
+
+   this.nestedRepeaterTextFieldShouldBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isEnabled()).toBeTrue();
+   };
+
+   this.nestedRepeaterTextFieldShouldNotBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isEnabled()).toBeFalse();
+   };
+
+   this.nestedRepeaterTextFieldShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isDisplayed()).toBeTrue();
+   };
+
+   this.nestedRepeaterTextFieldShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).isDisplayed()).toBeFalse();
+   };
+
+   this.onlyModelShouldBeEnabled = function () {
+      expect(this.onlyModel.isEnabled()).toBeTrue();
+   };
+
+   this.onlyModelShouldNotBeEnabled = function () {
+      expect(this.onlyModel.isEnabled()).toBeFalse();
+   };
+
+   this.onlyModelShouldBeVisible = function () {
+      expect(this.onlyModel.isDisplayed()).toBeTrue();
+   };
+
+   this.onlyModelShouldNotBeVisible = function () {
+      expect(this.onlyModel.isDisplayed()).toBeFalse();
+   };
+
+   this.repeatedTextFieldShouldBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isEnabled()).toBeTrue();
+   };
+
+   this.repeatedTextFieldShouldNotBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isEnabled()).toBeFalse();
+   };
+
+   this.repeatedTextFieldShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isDisplayed()).toBeTrue();
+   };
+
+   this.repeatedTextFieldShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).isDisplayed()).toBeFalse();
+   };
+
+   this.shouldHaveIdModel = function (value) {
+      expect(this.idModel.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveNameOverride = function (value) {
+      expect(this.nameOverride.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveNestedRepeaterTextField = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterTextField')).getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveOnlyModel = function (value) {
+      expect(this.onlyModel.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveRepeatedTextField = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedTextField')).getAttribute('value')).toEqual(value);
+   };
+
+};
+
+module.exports = PageObject;

@@ -1,0 +1,254 @@
+var PageObject = function () {
+
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.nameOverride = element(by.id('ignoredId'));
+   this.onlyId = element(by.id('onlyId'));
+   this.onlyModel = element(by.model('onlyModel'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.clickNameOverride = function () {
+      this.nameOverride.click();
+   };
+
+   this.clickNestedRepeaterCheckbox = function (rowIndex1, rowIndex2) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).click();
+   };
+
+   this.clickOnlyId = function () {
+      this.onlyId.click();
+   };
+
+   this.clickOnlyModel = function () {
+      this.onlyModel.click();
+   };
+
+   this.clickRepeatedCheckbox = function (rowIndex1) {
+      this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).click();
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).count()).toBe(count);
+   };
+
+   this.elementsShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.elementsShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.elementsShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getText()).toBe(value);
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.itemsShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.itemsShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemsShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.nameOverrideShouldBeEnabled = function () {
+      expect(this.nameOverride.isEnabled()).toBeTrue();
+   };
+
+   this.nameOverrideShouldNotBeEnabled = function () {
+      expect(this.nameOverride.isEnabled()).toBeFalse();
+   };
+
+   this.nameOverrideShouldBeSelected = function () {
+      expect(this.nameOverride.isSelected()).toBeTrue();
+   };
+
+   this.nameOverrideShouldNotBeSelected = function () {
+      expect(this.nameOverride.isSelected()).toBeFalse();
+   };
+
+   this.nameOverrideShouldBeVisible = function () {
+      expect(this.nameOverride.isDisplayed()).toBeTrue();
+   };
+
+   this.nameOverrideShouldNotBeVisible = function () {
+      expect(this.nameOverride.isDisplayed()).toBeFalse();
+   };
+
+   this.nameOverrideShouldHaveClass = function (className) {
+      this.nameOverride.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.nameOverrideShouldNotHaveClass = function (className) {
+      this.nameOverride.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.nestedRepeaterCheckboxShouldBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).isEnabled()).toBeTrue();
+   };
+
+   this.nestedRepeaterCheckboxShouldNotBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).isEnabled()).toBeFalse();
+   };
+
+   this.nestedRepeaterCheckboxShouldBeSelected = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).isSelected()).toBeTrue();
+   };
+
+   this.nestedRepeaterCheckboxShouldNotBeSelected = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).isSelected()).toBeFalse();
+   };
+
+   this.nestedRepeaterCheckboxShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).isDisplayed()).toBeTrue();
+   };
+
+   this.nestedRepeaterCheckboxShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).isDisplayed()).toBeFalse();
+   };
+
+   this.nestedRepeaterCheckboxShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.nestedRepeaterCheckboxShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterCheckbox')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.onlyIdShouldBeEnabled = function () {
+      expect(this.onlyId.isEnabled()).toBeTrue();
+   };
+
+   this.onlyIdShouldNotBeEnabled = function () {
+      expect(this.onlyId.isEnabled()).toBeFalse();
+   };
+
+   this.onlyIdShouldBeSelected = function () {
+      expect(this.onlyId.isSelected()).toBeTrue();
+   };
+
+   this.onlyIdShouldNotBeSelected = function () {
+      expect(this.onlyId.isSelected()).toBeFalse();
+   };
+
+   this.onlyIdShouldBeVisible = function () {
+      expect(this.onlyId.isDisplayed()).toBeTrue();
+   };
+
+   this.onlyIdShouldNotBeVisible = function () {
+      expect(this.onlyId.isDisplayed()).toBeFalse();
+   };
+
+   this.onlyIdShouldHaveClass = function (className) {
+      this.onlyId.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.onlyIdShouldNotHaveClass = function (className) {
+      this.onlyId.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.onlyModelShouldBeEnabled = function () {
+      expect(this.onlyModel.isEnabled()).toBeTrue();
+   };
+
+   this.onlyModelShouldNotBeEnabled = function () {
+      expect(this.onlyModel.isEnabled()).toBeFalse();
+   };
+
+   this.onlyModelShouldBeSelected = function () {
+      expect(this.onlyModel.isSelected()).toBeTrue();
+   };
+
+   this.onlyModelShouldNotBeSelected = function () {
+      expect(this.onlyModel.isSelected()).toBeFalse();
+   };
+
+   this.onlyModelShouldBeVisible = function () {
+      expect(this.onlyModel.isDisplayed()).toBeTrue();
+   };
+
+   this.onlyModelShouldNotBeVisible = function () {
+      expect(this.onlyModel.isDisplayed()).toBeFalse();
+   };
+
+   this.onlyModelShouldHaveClass = function (className) {
+      this.onlyModel.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.onlyModelShouldNotHaveClass = function (className) {
+      this.onlyModel.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.repeatedCheckboxShouldBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).isEnabled()).toBeTrue();
+   };
+
+   this.repeatedCheckboxShouldNotBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).isEnabled()).toBeFalse();
+   };
+
+   this.repeatedCheckboxShouldBeSelected = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).isSelected()).toBeTrue();
+   };
+
+   this.repeatedCheckboxShouldNotBeSelected = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).isSelected()).toBeFalse();
+   };
+
+   this.repeatedCheckboxShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).isDisplayed()).toBeTrue();
+   };
+
+   this.repeatedCheckboxShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).isDisplayed()).toBeFalse();
+   };
+
+   this.repeatedCheckboxShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.repeatedCheckboxShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.name('repeatedCheckbox')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+};
+
+module.exports = PageObject;

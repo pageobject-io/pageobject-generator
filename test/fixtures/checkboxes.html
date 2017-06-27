@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function ($scope) {
+        $scope.items = [1, 2, 3];
+        $scope.elements = ['a', 'b', 'c'];
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div>
+    Only ID: <input type="checkbox" id="onlyId" class="test"/>
+    Name override: <input type="checkbox" id="ignoredId" name="nameOverride" ng-disabled="true"/>
+    Only Model: <input type="checkbox" data-ng-model="onlyModel" style="visibility: hidden"/>
+
+    <div data-ng-repeat="item in items">
+        Nested {{item}}: <input type="checkbox" name="repeatedCheckbox" class="test"/>
+
+        <div ng_repeat="element in elements">
+            Nested repeater {{element}}: <input type="checkbox" data-ng-model="nestedRepeaterCheckbox" class="test"/>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

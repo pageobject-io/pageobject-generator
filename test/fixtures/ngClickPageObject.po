@@ -1,0 +1,373 @@
+var PageObject = function () {
+
+   this.idDiv = element(by.id('id-div'));
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.modelInput = element(by.model('model-input'));
+   this.nameInput = element(by.name('name-input'));
+   this.ngOptionsSelect = element(by.id('ngOptionsSelect'));
+   this.singleExpression = element(by.exactBinding('singleExpression'));
+   this.titleLabel = element(by.id('title-label'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.clickElement = function (rowIndex1, rowIndex2) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).click();
+   };
+
+   this.clickIdDiv = function () {
+      this.idDiv.click();
+   };
+
+   this.clickItem = function (rowIndex1) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).click();
+   };
+
+   this.clickModelInput = function () {
+      this.modelInput.click();
+   };
+
+   this.clickNameInput = function () {
+      this.nameInput.click();
+   };
+
+   this.clickNgOptionsSelect = function () {
+      this.ngOptionsSelect.click();
+   };
+
+   this.clickSingleExpression = function () {
+      this.singleExpression.click();
+   };
+
+   this.clickTitleLabel = function () {
+      this.titleLabel.click();
+   };
+
+   this.selectNgOptionsSelectByPartialText = function (text) {
+      this.ngOptionsSelect.all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectNgOptionsSelectByText = function (text) {
+      this.ngOptionsSelect.all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectNgOptionsSelectByValue = function (value) {
+      this.ngOptionsSelect.all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.setModelInput = function (value) {
+      this.modelInput.clear();
+      this.modelInput.sendKeys(value);
+   };
+
+   this.setNameInput = function (value) {
+      this.nameInput.clear();
+      this.nameInput.sendKeys(value);
+   };
+
+   this.elementShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeTrue();
+   };
+
+   this.elementShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeFalse();
+   };
+
+   this.elementShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.elementShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.elementShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getText()).toBe(value);
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).count()).toBe(count);
+   };
+
+   this.idDivShouldBeVisible = function () {
+      expect(this.idDiv.isDisplayed()).toBeTrue();
+   };
+
+   this.idDivShouldNotBeVisible = function () {
+      expect(this.idDiv.isDisplayed()).toBeFalse();
+   };
+
+   this.idDivShouldHaveClass = function (className) {
+      this.idDiv.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.idDivShouldNotHaveClass = function (className) {
+      this.idDiv.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeTrue();
+   };
+
+   this.itemShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeFalse();
+   };
+
+   this.itemShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.itemShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).getText()).toBe(value);
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.modelInputShouldBeEnabled = function () {
+      expect(this.modelInput.isEnabled()).toBeTrue();
+   };
+
+   this.modelInputShouldNotBeEnabled = function () {
+      expect(this.modelInput.isEnabled()).toBeFalse();
+   };
+
+   this.modelInputShouldBeVisible = function () {
+      expect(this.modelInput.isDisplayed()).toBeTrue();
+   };
+
+   this.modelInputShouldNotBeVisible = function () {
+      expect(this.modelInput.isDisplayed()).toBeFalse();
+   };
+
+   this.modelInputShouldHaveClass = function (className) {
+      this.modelInput.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.modelInputShouldNotHaveClass = function (className) {
+      this.modelInput.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.nameInputShouldBeEnabled = function () {
+      expect(this.nameInput.isEnabled()).toBeTrue();
+   };
+
+   this.nameInputShouldNotBeEnabled = function () {
+      expect(this.nameInput.isEnabled()).toBeFalse();
+   };
+
+   this.nameInputShouldBeVisible = function () {
+      expect(this.nameInput.isDisplayed()).toBeTrue();
+   };
+
+   this.nameInputShouldNotBeVisible = function () {
+      expect(this.nameInput.isDisplayed()).toBeFalse();
+   };
+
+   this.nameInputShouldHaveClass = function (className) {
+      this.nameInput.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.nameInputShouldNotHaveClass = function (className) {
+      this.nameInput.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.ngOptionsSelectByPartialTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngOptionsSelect.all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBeTrue();
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngOptionsSelectByPartialTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngOptionsSelect.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBeFalse();
+         });
+      }
+   };
+
+   this.ngOptionsSelectByTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngOptionsSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBeTrue();
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngOptionsSelectByTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngOptionsSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBeFalse();
+         });
+      }
+   };
+
+   this.ngOptionsSelectByValueShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngOptionsSelect.all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBeTrue();
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngOptionsSelectByValueShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngOptionsSelect.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBeFalse();
+         });
+      }
+   };
+
+   this.ngOptionsSelectShouldBeEnabled = function () {
+      expect(this.ngOptionsSelect.isEnabled()).toBeTrue();
+   };
+
+   this.ngOptionsSelectShouldNotBeEnabled = function () {
+      expect(this.ngOptionsSelect.isEnabled()).toBeFalse();
+   };
+
+   this.ngOptionsSelectShouldBeVisible = function () {
+      expect(this.ngOptionsSelect.isDisplayed()).toBeTrue();
+   };
+
+   this.ngOptionsSelectShouldNotBeVisible = function () {
+      expect(this.ngOptionsSelect.isDisplayed()).toBeFalse();
+   };
+
+   this.ngOptionsSelectShouldHaveClass = function (className) {
+      this.ngOptionsSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.ngOptionsSelectShouldNotHaveClass = function (className) {
+      this.ngOptionsSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.shouldHaveModelInput = function (value) {
+      expect(this.modelInput.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveNameInput = function (value) {
+      expect(this.nameInput.getAttribute('value')).toEqual(value);
+   };
+
+   this.singleExpressionShouldBeVisible = function () {
+      expect(this.singleExpression.isDisplayed()).toBeTrue();
+   };
+
+   this.singleExpressionShouldNotBeVisible = function () {
+      expect(this.singleExpression.isDisplayed()).toBeFalse();
+   };
+
+   this.singleExpressionShouldHaveClass = function (className) {
+      this.singleExpression.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionShouldNotHaveClass = function (className) {
+      this.singleExpression.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionShouldHaveText = function (value) {
+      expect(this.singleExpression.getText()).toBe(value);
+   };
+
+   this.titleLabelShouldBeVisible = function () {
+      expect(this.titleLabel.isDisplayed()).toBeTrue();
+   };
+
+   this.titleLabelShouldNotBeVisible = function () {
+      expect(this.titleLabel.isDisplayed()).toBeFalse();
+   };
+
+   this.titleLabelShouldHaveClass = function (className) {
+      this.titleLabel.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.titleLabelShouldNotHaveClass = function (className) {
+      this.titleLabel.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+};
+
+module.exports = PageObject;

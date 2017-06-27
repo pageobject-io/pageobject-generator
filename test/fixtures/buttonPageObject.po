@@ -1,0 +1,283 @@
+var PageObject = function () {
+
+   this.idButton = element(by.id('id-button'));
+   this.inputButton = element(by.buttonText('InputButton'));
+   this.items = element.all(by.exactRepeater('item in main.items'));
+   this.multiExpressionButton = element(by.exactBinding('main.multiExpression'));
+   this.nameButton = element(by.name('name-button'));
+   this.singleExpressionButton = element(by.exactBinding('main.singleExpression'));
+   this.submitButton = element(by.buttonText('Submit'));
+   this.textOnlyButton = element(by.buttonText('Text only'));
+   this.titleButton = element(by.buttonText('Button with title'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.clickElementButton = function (rowIndex1, rowIndex2) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).click();
+   };
+
+   this.clickIdButton = function () {
+      this.idButton.click();
+   };
+
+   this.clickInputButton = function () {
+      this.inputButton.click();
+   };
+
+   this.clickItemButton = function (rowIndex1) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).click();
+   };
+
+   this.clickMultiExpressionButton = function () {
+      this.multiExpressionButton.click();
+   };
+
+   this.clickNameButton = function () {
+      this.nameButton.click();
+   };
+
+   this.clickSingleExpressionButton = function () {
+      this.singleExpressionButton.click();
+   };
+
+   this.clickSubmitButton = function () {
+      this.submitButton.click();
+   };
+
+   this.clickTextOnlyButton = function () {
+      this.textOnlyButton.click();
+   };
+
+   this.clickTitleButton = function () {
+      this.titleButton.click();
+   };
+
+   this.elementButtonShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeTrue();
+   };
+
+   this.elementButtonShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeFalse();
+   };
+
+   this.elementButtonShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.elementButtonShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.elementButtonShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).getText()).toBe(value);
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in main.elements')).count()).toBe(count);
+   };
+
+   this.idButtonShouldBeVisible = function () {
+      expect(this.idButton.isDisplayed()).toBeTrue();
+   };
+
+   this.idButtonShouldNotBeVisible = function () {
+      expect(this.idButton.isDisplayed()).toBeFalse();
+   };
+
+   this.idButtonShouldHaveClass = function (className) {
+      this.idButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.idButtonShouldNotHaveClass = function (className) {
+      this.idButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.inputButtonShouldBeVisible = function () {
+      expect(this.inputButton.isDisplayed()).toBeTrue();
+   };
+
+   this.inputButtonShouldNotBeVisible = function () {
+      expect(this.inputButton.isDisplayed()).toBeFalse();
+   };
+
+   this.inputButtonShouldHaveClass = function (className) {
+      this.inputButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.inputButtonShouldNotHaveClass = function (className) {
+      this.inputButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemButtonShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeTrue();
+   };
+
+   this.itemButtonShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeFalse();
+   };
+
+   this.itemButtonShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.itemButtonShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.itemButtonShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).getText()).toBe(value);
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.multiExpressionButtonShouldBeVisible = function () {
+      expect(this.multiExpressionButton.isDisplayed()).toBeTrue();
+   };
+
+   this.multiExpressionButtonShouldNotBeVisible = function () {
+      expect(this.multiExpressionButton.isDisplayed()).toBeFalse();
+   };
+
+   this.multiExpressionButtonShouldHaveClass = function (className) {
+      this.multiExpressionButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.multiExpressionButtonShouldNotHaveClass = function (className) {
+      this.multiExpressionButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.multiExpressionButtonShouldHaveText = function (value) {
+      expect(this.multiExpressionButton.getText()).toBe(value);
+   };
+
+   this.nameButtonShouldBeVisible = function () {
+      expect(this.nameButton.isDisplayed()).toBeTrue();
+   };
+
+   this.nameButtonShouldNotBeVisible = function () {
+      expect(this.nameButton.isDisplayed()).toBeFalse();
+   };
+
+   this.nameButtonShouldHaveClass = function (className) {
+      this.nameButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.nameButtonShouldNotHaveClass = function (className) {
+      this.nameButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionButtonShouldBeVisible = function () {
+      expect(this.singleExpressionButton.isDisplayed()).toBeTrue();
+   };
+
+   this.singleExpressionButtonShouldNotBeVisible = function () {
+      expect(this.singleExpressionButton.isDisplayed()).toBeFalse();
+   };
+
+   this.singleExpressionButtonShouldHaveClass = function (className) {
+      this.singleExpressionButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionButtonShouldNotHaveClass = function (className) {
+      this.singleExpressionButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.singleExpressionButtonShouldHaveText = function (value) {
+      expect(this.singleExpressionButton.getText()).toBe(value);
+   };
+
+   this.submitButtonShouldBeVisible = function () {
+      expect(this.submitButton.isDisplayed()).toBeTrue();
+   };
+
+   this.submitButtonShouldNotBeVisible = function () {
+      expect(this.submitButton.isDisplayed()).toBeFalse();
+   };
+
+   this.submitButtonShouldHaveClass = function (className) {
+      this.submitButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.submitButtonShouldNotHaveClass = function (className) {
+      this.submitButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.textOnlyButtonShouldBeVisible = function () {
+      expect(this.textOnlyButton.isDisplayed()).toBeTrue();
+   };
+
+   this.textOnlyButtonShouldNotBeVisible = function () {
+      expect(this.textOnlyButton.isDisplayed()).toBeFalse();
+   };
+
+   this.textOnlyButtonShouldHaveClass = function (className) {
+      this.textOnlyButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.textOnlyButtonShouldNotHaveClass = function (className) {
+      this.textOnlyButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+   this.titleButtonShouldBeVisible = function () {
+      expect(this.titleButton.isDisplayed()).toBeTrue();
+   };
+
+   this.titleButtonShouldNotBeVisible = function () {
+      expect(this.titleButton.isDisplayed()).toBeFalse();
+   };
+
+   this.titleButtonShouldHaveClass = function (className) {
+      this.titleButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      });
+   };
+
+   this.titleButtonShouldNotHaveClass = function (className) {
+      this.titleButton.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      });
+   };
+
+};
+
+module.exports = PageObject;

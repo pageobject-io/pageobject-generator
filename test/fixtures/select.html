@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function ($scope) {
+        $scope.expressionOption = '3';
+
+        $scope.data = {
+          model: null,
+          availableOptions: [
+            {id: '1', name: 'Option A'},
+            {id: '2', name: 'Option B'},
+            {id: '3', name: 'Option C'}
+          ]
+        };
+
+        $scope.data1 = {
+          model: null,
+          availableOptions: [
+            {value: 'myString', name: 'string'},
+            {value: 1, name: 'integer'},
+            {value: true, name: 'boolean'},
+            {value: null, name: 'null'},
+            {value: {prop: 'value'}, name: 'object'},
+            {value: ['a'], name: 'array'}
+          ]
+        };
+
+        $scope.data3 = {
+          availableOptions: [
+            {id: '1', name: 'Option A'},
+            {id: '2', name: 'Option B'},
+            {id: '3', name: 'Option C'}
+          ],
+          selectedOption: {id: '3', name: 'Option C'}
+        };
+
+        $scope.items = [1, 2];
+        $scope.elements = ['a', 'b'];
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div>
+
+    <div>
+        <select data-ng-model="unitType">
+            <option value="">---Please select---</option>
+            <option value="1">Miner</option>
+            <option value="2">Puffer</option>
+            <option value="{{expressionOption}}">Snipey</option>
+            <option value="4">Max</option>
+            <option value="5">Firebot</option>
+        </select>
+
+        <select data-ng-model="multipleUnitType" multiple>
+            <option value="1">Miner</option>
+            <option value="2">Puffer</option>
+            <option value="3">Snipey</option>
+            <option value="4">Max</option>
+            <option value="5">Firebot</option>
+        </select>
+
+        <select name="repeatSelect" id="repeatSelect" ng-model="data.model">
+            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+        </select>
+
+        <select size="6" name="ngValueSelect" ng-model="data1.model" multiple>
+            <option ng-repeat="option in data1.availableOptions" ng-value="option.value">{{option.name}}</option>
+        </select>
+
+        <select name="ngOptionsSelect" id="ngOptionsSelect"
+                ng-options="option.name for option in data3.availableOptions track by option.id"
+                ng-model="data3.selectedOption"></select>
+    </div>
+
+    <div data-ng-repeat="item in items">
+        Nested {{item}}:
+        <select data-ng-model="repeaterUnitType">
+            <option value="">---Please select---</option>
+            <option value="1">Miner</option>
+            <option value="2">Puffer</option>
+            <option value="3">Snipey</option>
+            <option value="4">Max</option>
+            <option value="5">Firebot</option>
+        </select>
+
+        <div ng_repeat="element in elements">
+            Nested repeater {{element}}:
+            <select data-ng-model="nestedRepeaterUnitType">
+                <option value="">---Please select---</option>
+                <option value="1">Miner</option>
+                <option value="2">Puffer</option>
+                <option value="3">Snipey</option>
+                <option value="4">Max</option>
+                <option value="5">Firebot</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
