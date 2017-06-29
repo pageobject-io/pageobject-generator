@@ -1,12 +1,14 @@
-var textAreaPage = require('../../../../target/test-classes/textareaPageObject.js');
+var TextAreaPage = require('../../test/fixtures/textareaPageObject.po');
 
 describe('text areas', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/textarea.html');
+    browser.get('http://localhost:3000/textarea.html');
   });
 
   it('should generate functional text area methods', function () {
+    var textAreaPage = new TextAreaPage();
+
     textAreaPage.idModelShouldBeVisible();
     textAreaPage.idModelShouldBeEnabled();
     textAreaPage.shouldHaveIdModel('initialValue');

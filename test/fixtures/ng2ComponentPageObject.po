@@ -38,34 +38,34 @@ var PageObject = function () {
    };
 
    this.addButtonShouldBeVisible = function () {
-      expect(this.addButton.isDisplayed()).toBeTrue();
+      expect(this.addButton.isDisplayed()).toBe(true);
    };
 
    this.addButtonShouldNotBeVisible = function () {
-      expect(this.addButton.isDisplayed()).toBeFalse();
+      expect(this.addButton.isDisplayed()).toBe(false);
    };
 
    this.addButtonShouldHaveClass = function (className) {
       this.addButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.addButtonShouldNotHaveClass = function (className) {
       this.addButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.addPartShouldHaveClass = function (className) {
       this.addPart.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.addPartShouldNotHaveClass = function (className) {
       this.addPart.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -74,42 +74,42 @@ var PageObject = function () {
    };
 
    this.editPartButtonShouldBeVisible = function (rowIndex1) {
-      expect(this.parts.get(rowIndex1).element(by.buttonText('Edit')).isDisplayed()).toBeTrue();
+      expect(this.parts.get(rowIndex1).element(by.buttonText('Edit')).isDisplayed()).toBe(true);
    };
 
    this.editPartButtonShouldNotBeVisible = function (rowIndex1) {
-      expect(this.parts.get(rowIndex1).element(by.buttonText('Edit')).isDisplayed()).toBeFalse();
+      expect(this.parts.get(rowIndex1).element(by.buttonText('Edit')).isDisplayed()).toBe(false);
    };
 
    this.editPartButtonShouldHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.buttonText('Edit')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.editPartButtonShouldNotHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.buttonText('Edit')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.itemLinkShouldBeVisible = function (rowIndex1, rowIndex2) {
-      expect(this.pages.get(rowIndex1).all(by.css('ul > li')).get(rowIndex2).element(by.css('a')).isDisplayed()).toBeTrue();
+      expect(this.pages.get(rowIndex1).all(by.css('ul > li')).get(rowIndex2).element(by.css('a')).isDisplayed()).toBe(true);
    };
 
    this.itemLinkShouldNotBeVisible = function (rowIndex1, rowIndex2) {
-      expect(this.pages.get(rowIndex1).all(by.css('ul > li')).get(rowIndex2).element(by.css('a')).isDisplayed()).toBeFalse();
+      expect(this.pages.get(rowIndex1).all(by.css('ul > li')).get(rowIndex2).element(by.css('a')).isDisplayed()).toBe(false);
    };
 
    this.itemLinkShouldHaveClass = function (rowIndex1, rowIndex2, className) {
       this.pages.get(rowIndex1).all(by.css('ul > li')).get(rowIndex2).element(by.css('a')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.itemLinkShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
       this.pages.get(rowIndex1).all(by.css('ul > li')).get(rowIndex2).element(by.css('a')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -122,22 +122,22 @@ var PageObject = function () {
    };
 
    this.linkText2LinkShouldBeVisible = function () {
-      expect(this.linkText2Link.isDisplayed()).toBeTrue();
+      expect(this.linkText2Link.isDisplayed()).toBe(true);
    };
 
    this.linkText2LinkShouldNotBeVisible = function () {
-      expect(this.linkText2Link.isDisplayed()).toBeFalse();
+      expect(this.linkText2Link.isDisplayed()).toBe(false);
    };
 
    this.linkText2LinkShouldHaveClass = function (className) {
       this.linkText2Link.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.linkText2LinkShouldNotHaveClass = function (className) {
       this.linkText2Link.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -147,13 +147,13 @@ var PageObject = function () {
 
    this.modelShouldHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.css('td:nth-of-type(4)')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.modelShouldNotHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.css('td:nth-of-type(4)')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -162,22 +162,22 @@ var PageObject = function () {
    };
 
    this.namedLinkShouldBeVisible = function () {
-      expect(this.namedLink.isDisplayed()).toBeTrue();
+      expect(this.namedLink.isDisplayed()).toBe(true);
    };
 
    this.namedLinkShouldNotBeVisible = function () {
-      expect(this.namedLink.isDisplayed()).toBeFalse();
+      expect(this.namedLink.isDisplayed()).toBe(false);
    };
 
    this.namedLinkShouldHaveClass = function (className) {
       this.namedLink.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.namedLinkShouldNotHaveClass = function (className) {
       this.namedLink.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -187,13 +187,13 @@ var PageObject = function () {
 
    this.nestedClickShouldHaveClass = function (className) {
       this.nestedClick.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.nestedClickShouldNotHaveClass = function (className) {
       this.nestedClick.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -203,13 +203,13 @@ var PageObject = function () {
 
    this.pageShouldHaveClass = function (rowIndex1, className) {
       this.pages.get(rowIndex1).element(by.css('span')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.pageShouldNotHaveClass = function (rowIndex1, className) {
       this.pages.get(rowIndex1).element(by.css('span')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -223,13 +223,13 @@ var PageObject = function () {
 
    this.pagesShouldHaveClass = function (rowIndex1, className) {
       this.pages.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.pagesShouldNotHaveClass = function (rowIndex1, className) {
       this.pages.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -239,13 +239,13 @@ var PageObject = function () {
 
    this.partHaveItYesNoShouldHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.css('td.vert-align.text-center:nth-of-type(2)')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.partHaveItYesNoShouldNotHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.css('td.vert-align.text-center:nth-of-type(2)')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -255,13 +255,13 @@ var PageObject = function () {
 
    this.partIdShouldHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.css('td.vert-align.text-center:nth-of-type(1)')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.partIdShouldNotHaveClass = function (rowIndex1, className) {
       this.parts.get(rowIndex1).element(by.css('td.vert-align.text-center:nth-of-type(1)')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -274,22 +274,22 @@ var PageObject = function () {
    };
 
    this.totalCountLabelShouldBeVisible = function () {
-      expect(this.totalCountLabel.isDisplayed()).toBeTrue();
+      expect(this.totalCountLabel.isDisplayed()).toBe(true);
    };
 
    this.totalCountLabelShouldNotBeVisible = function () {
-      expect(this.totalCountLabel.isDisplayed()).toBeFalse();
+      expect(this.totalCountLabel.isDisplayed()).toBe(false);
    };
 
    this.totalCountLabelShouldHaveClass = function (className) {
       this.totalCountLabel.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.totalCountLabelShouldNotHaveClass = function (className) {
       this.totalCountLabel.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 

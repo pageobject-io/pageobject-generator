@@ -103,13 +103,13 @@ var PageObject = function () {
 
    this.data1AvailableOptionsShouldHaveClass = function (rowIndex1, className) {
       this.data1AvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.data1AvailableOptionsShouldNotHaveClass = function (rowIndex1, className) {
       this.data1AvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -123,13 +123,13 @@ var PageObject = function () {
 
    this.dataAvailableOptionsShouldHaveClass = function (rowIndex1, className) {
       this.dataAvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.dataAvailableOptionsShouldNotHaveClass = function (rowIndex1, className) {
       this.dataAvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -143,13 +143,13 @@ var PageObject = function () {
 
    this.elementsShouldHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.elementsShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -163,13 +163,13 @@ var PageObject = function () {
 
    this.itemsShouldHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.itemsShouldNotHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -187,7 +187,7 @@ var PageObject = function () {
          var options = this.multipleUnitType.all(by.cssContainingText('option', expectedOptions[i]));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -202,7 +202,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.multipleUnitType.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -217,7 +217,7 @@ var PageObject = function () {
          var options = this.multipleUnitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -232,7 +232,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.multipleUnitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -247,7 +247,7 @@ var PageObject = function () {
          var options = this.multipleUnitType.all(by.css('option[value="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -262,36 +262,36 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.multipleUnitType.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
 
    this.multipleUnitTypeShouldBeEnabled = function () {
-      expect(this.multipleUnitType.isEnabled()).toBeTrue();
+      expect(this.multipleUnitType.isEnabled()).toBe(true);
    };
 
    this.multipleUnitTypeShouldNotBeEnabled = function () {
-      expect(this.multipleUnitType.isEnabled()).toBeFalse();
+      expect(this.multipleUnitType.isEnabled()).toBe(false);
    };
 
    this.multipleUnitTypeShouldBeVisible = function () {
-      expect(this.multipleUnitType.isDisplayed()).toBeTrue();
+      expect(this.multipleUnitType.isDisplayed()).toBe(true);
    };
 
    this.multipleUnitTypeShouldNotBeVisible = function () {
-      expect(this.multipleUnitType.isDisplayed()).toBeFalse();
+      expect(this.multipleUnitType.isDisplayed()).toBe(false);
    };
 
    this.multipleUnitTypeShouldHaveClass = function (className) {
       this.multipleUnitType.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.multipleUnitTypeShouldNotHaveClass = function (className) {
       this.multipleUnitType.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -305,7 +305,7 @@ var PageObject = function () {
          var options = this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i]));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -320,7 +320,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -335,7 +335,7 @@ var PageObject = function () {
          var options = this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -350,7 +350,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -365,7 +365,7 @@ var PageObject = function () {
          var options = this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -380,36 +380,36 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
 
    this.nestedRepeaterUnitTypeShouldBeEnabled = function (rowIndex1, rowIndex2) {
-      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isEnabled()).toBeTrue();
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isEnabled()).toBe(true);
    };
 
    this.nestedRepeaterUnitTypeShouldNotBeEnabled = function (rowIndex1, rowIndex2) {
-      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isEnabled()).toBeFalse();
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isEnabled()).toBe(false);
    };
 
    this.nestedRepeaterUnitTypeShouldBeVisible = function (rowIndex1, rowIndex2) {
-      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isDisplayed()).toBeTrue();
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isDisplayed()).toBe(true);
    };
 
    this.nestedRepeaterUnitTypeShouldNotBeVisible = function (rowIndex1, rowIndex2) {
-      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isDisplayed()).toBeFalse();
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isDisplayed()).toBe(false);
    };
 
    this.nestedRepeaterUnitTypeShouldHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.nestedRepeaterUnitTypeShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -423,7 +423,7 @@ var PageObject = function () {
          var options = this.ngOptionsSelect.all(by.cssContainingText('option', expectedOptions[i]));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -438,7 +438,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.ngOptionsSelect.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -453,7 +453,7 @@ var PageObject = function () {
          var options = this.ngOptionsSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -468,7 +468,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.ngOptionsSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -483,7 +483,7 @@ var PageObject = function () {
          var options = this.ngOptionsSelect.all(by.css('option[value="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -498,36 +498,36 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.ngOptionsSelect.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
 
    this.ngOptionsSelectShouldBeEnabled = function () {
-      expect(this.ngOptionsSelect.isEnabled()).toBeTrue();
+      expect(this.ngOptionsSelect.isEnabled()).toBe(true);
    };
 
    this.ngOptionsSelectShouldNotBeEnabled = function () {
-      expect(this.ngOptionsSelect.isEnabled()).toBeFalse();
+      expect(this.ngOptionsSelect.isEnabled()).toBe(false);
    };
 
    this.ngOptionsSelectShouldBeVisible = function () {
-      expect(this.ngOptionsSelect.isDisplayed()).toBeTrue();
+      expect(this.ngOptionsSelect.isDisplayed()).toBe(true);
    };
 
    this.ngOptionsSelectShouldNotBeVisible = function () {
-      expect(this.ngOptionsSelect.isDisplayed()).toBeFalse();
+      expect(this.ngOptionsSelect.isDisplayed()).toBe(false);
    };
 
    this.ngOptionsSelectShouldHaveClass = function (className) {
       this.ngOptionsSelect.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.ngOptionsSelectShouldNotHaveClass = function (className) {
       this.ngOptionsSelect.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -541,7 +541,7 @@ var PageObject = function () {
          var options = this.ngValueSelect.all(by.cssContainingText('option', expectedOptions[i]));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -556,7 +556,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.ngValueSelect.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -571,7 +571,7 @@ var PageObject = function () {
          var options = this.ngValueSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -586,7 +586,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.ngValueSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -601,7 +601,7 @@ var PageObject = function () {
          var options = this.ngValueSelect.all(by.css('option[value="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -616,36 +616,36 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.ngValueSelect.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
 
    this.ngValueSelectShouldBeEnabled = function () {
-      expect(this.ngValueSelect.isEnabled()).toBeTrue();
+      expect(this.ngValueSelect.isEnabled()).toBe(true);
    };
 
    this.ngValueSelectShouldNotBeEnabled = function () {
-      expect(this.ngValueSelect.isEnabled()).toBeFalse();
+      expect(this.ngValueSelect.isEnabled()).toBe(false);
    };
 
    this.ngValueSelectShouldBeVisible = function () {
-      expect(this.ngValueSelect.isDisplayed()).toBeTrue();
+      expect(this.ngValueSelect.isDisplayed()).toBe(true);
    };
 
    this.ngValueSelectShouldNotBeVisible = function () {
-      expect(this.ngValueSelect.isDisplayed()).toBeFalse();
+      expect(this.ngValueSelect.isDisplayed()).toBe(false);
    };
 
    this.ngValueSelectShouldHaveClass = function (className) {
       this.ngValueSelect.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.ngValueSelectShouldNotHaveClass = function (className) {
       this.ngValueSelect.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -659,7 +659,7 @@ var PageObject = function () {
          var options = this.repeatSelect.all(by.cssContainingText('option', expectedOptions[i]));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -674,7 +674,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.repeatSelect.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -689,7 +689,7 @@ var PageObject = function () {
          var options = this.repeatSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -704,7 +704,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.repeatSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -719,7 +719,7 @@ var PageObject = function () {
          var options = this.repeatSelect.all(by.css('option[value="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -734,36 +734,36 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.repeatSelect.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
 
    this.repeatSelectShouldBeEnabled = function () {
-      expect(this.repeatSelect.isEnabled()).toBeTrue();
+      expect(this.repeatSelect.isEnabled()).toBe(true);
    };
 
    this.repeatSelectShouldNotBeEnabled = function () {
-      expect(this.repeatSelect.isEnabled()).toBeFalse();
+      expect(this.repeatSelect.isEnabled()).toBe(false);
    };
 
    this.repeatSelectShouldBeVisible = function () {
-      expect(this.repeatSelect.isDisplayed()).toBeTrue();
+      expect(this.repeatSelect.isDisplayed()).toBe(true);
    };
 
    this.repeatSelectShouldNotBeVisible = function () {
-      expect(this.repeatSelect.isDisplayed()).toBeFalse();
+      expect(this.repeatSelect.isDisplayed()).toBe(false);
    };
 
    this.repeatSelectShouldHaveClass = function (className) {
       this.repeatSelect.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.repeatSelectShouldNotHaveClass = function (className) {
       this.repeatSelect.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -777,7 +777,7 @@ var PageObject = function () {
          var options = this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i]));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -792,7 +792,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -807,7 +807,7 @@ var PageObject = function () {
          var options = this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -822,7 +822,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -837,7 +837,7 @@ var PageObject = function () {
          var options = this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -852,36 +852,36 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
 
    this.repeaterUnitTypeShouldBeEnabled = function (rowIndex1) {
-      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isEnabled()).toBeTrue();
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isEnabled()).toBe(true);
    };
 
    this.repeaterUnitTypeShouldNotBeEnabled = function (rowIndex1) {
-      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isEnabled()).toBeFalse();
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isEnabled()).toBe(false);
    };
 
    this.repeaterUnitTypeShouldBeVisible = function (rowIndex1) {
-      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isDisplayed()).toBeTrue();
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isDisplayed()).toBe(true);
    };
 
    this.repeaterUnitTypeShouldNotBeVisible = function (rowIndex1) {
-      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isDisplayed()).toBeFalse();
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isDisplayed()).toBe(false);
    };
 
    this.repeaterUnitTypeShouldHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).element(by.model('repeaterUnitType')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.repeaterUnitTypeShouldNotHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).element(by.model('repeaterUnitType')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -895,7 +895,7 @@ var PageObject = function () {
          var options = this.unitType.all(by.cssContainingText('option', expectedOptions[i]));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -910,7 +910,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.unitType.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -925,7 +925,7 @@ var PageObject = function () {
          var options = this.unitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -940,7 +940,7 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.unitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
@@ -955,7 +955,7 @@ var PageObject = function () {
          var options = this.unitType.all(by.css('option[value="' + expectedOptions[i] + '"]'));
 
          options.each(function (option) {
-            expect(option.isSelected()).toBeTrue();
+            expect(option.isSelected()).toBe(true);
          });
 
          expect(options.count()).toBeGreaterThan(0);
@@ -970,36 +970,36 @@ var PageObject = function () {
 
       for (i = 0; i < expectedOptions.length; i++) {
          this.unitType.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-            expect(option.isSelected()).toBeFalse();
+            expect(option.isSelected()).toBe(false);
          });
       }
    };
 
    this.unitTypeShouldBeEnabled = function () {
-      expect(this.unitType.isEnabled()).toBeTrue();
+      expect(this.unitType.isEnabled()).toBe(true);
    };
 
    this.unitTypeShouldNotBeEnabled = function () {
-      expect(this.unitType.isEnabled()).toBeFalse();
+      expect(this.unitType.isEnabled()).toBe(false);
    };
 
    this.unitTypeShouldBeVisible = function () {
-      expect(this.unitType.isDisplayed()).toBeTrue();
+      expect(this.unitType.isDisplayed()).toBe(true);
    };
 
    this.unitTypeShouldNotBeVisible = function () {
-      expect(this.unitType.isDisplayed()).toBeFalse();
+      expect(this.unitType.isDisplayed()).toBe(false);
    };
 
    this.unitTypeShouldHaveClass = function (className) {
       this.unitType.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.unitTypeShouldNotHaveClass = function (className) {
       this.unitType.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 

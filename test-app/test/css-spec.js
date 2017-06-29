@@ -1,12 +1,14 @@
-var cssPage = require('../../../../target/test-classes/cssPageObject.js');
+var CssPage = require('../../test/fixtures/cssPageObject.po');
 
 describe('css selectors', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/css.html');
+    browser.get('http://localhost:3000/css.html');
   });
 
   it('should generate functional link methods', function () {
+    var cssPage = new CssPage();
+
     cssPage.div1ShouldBeVisible();
     cssPage.clickDiv1();
     cssPage.div1ShouldNotBeVisible();

@@ -20,13 +20,13 @@ var PageObject = function () {
 
    this.elementShouldHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.elementShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -40,13 +40,13 @@ var PageObject = function () {
 
    this.idLiShouldHaveClass = function (className) {
       this.idLi.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.idLiShouldNotHaveClass = function (className) {
       this.idLi.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -56,13 +56,13 @@ var PageObject = function () {
 
    this.itemShouldHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.itemShouldNotHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -76,13 +76,13 @@ var PageObject = function () {
 
    this.modelShouldHaveClass = function (className) {
       this.model.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.modelShouldNotHaveClass = function (className) {
       this.model.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -91,22 +91,22 @@ var PageObject = function () {
    };
 
    this.nameLinkShouldBeVisible = function () {
-      expect(this.nameLink.isDisplayed()).toBeTrue();
+      expect(this.nameLink.isDisplayed()).toBe(true);
    };
 
    this.nameLinkShouldNotBeVisible = function () {
-      expect(this.nameLink.isDisplayed()).toBeFalse();
+      expect(this.nameLink.isDisplayed()).toBe(false);
    };
 
    this.nameLinkShouldHaveClass = function (className) {
       this.nameLink.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.nameLinkShouldNotHaveClass = function (className) {
       this.nameLink.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -116,13 +116,13 @@ var PageObject = function () {
 
    this.ngBindHtmlPShouldHaveClass = function (className) {
       this.ngBindHtmlP.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.ngBindHtmlPShouldNotHaveClass = function (className) {
       this.ngBindHtmlP.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -132,13 +132,13 @@ var PageObject = function () {
 
    this.ngBindPShouldHaveClass = function (className) {
       this.ngBindP.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.ngBindPShouldNotHaveClass = function (className) {
       this.ngBindP.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -148,13 +148,13 @@ var PageObject = function () {
 
    this.ngBindTemplatePShouldHaveClass = function (className) {
       this.ngBindTemplateP.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.ngBindTemplatePShouldNotHaveClass = function (className) {
       this.ngBindTemplateP.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -164,13 +164,13 @@ var PageObject = function () {
 
    this.singleExpression3ShouldHaveClass = function (className) {
       this.singleExpression3.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.singleExpression3ShouldNotHaveClass = function (className) {
       this.singleExpression3.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -180,13 +180,13 @@ var PageObject = function () {
 
    this.singleExpression4ShouldHaveClass = function (className) {
       this.singleExpression4.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.singleExpression4ShouldNotHaveClass = function (className) {
       this.singleExpression4.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 

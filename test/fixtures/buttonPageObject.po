@@ -55,22 +55,22 @@ var PageObject = function () {
    };
 
    this.elementButtonShouldBeVisible = function (rowIndex1, rowIndex2) {
-      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeTrue();
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBe(true);
    };
 
    this.elementButtonShouldNotBeVisible = function (rowIndex1, rowIndex2) {
-      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBeFalse();
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBe(false);
    };
 
    this.elementButtonShouldHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.elementButtonShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
       this.items.get(rowIndex1).element(by.exactRepeater('element in main.elements').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -83,62 +83,62 @@ var PageObject = function () {
    };
 
    this.idButtonShouldBeVisible = function () {
-      expect(this.idButton.isDisplayed()).toBeTrue();
+      expect(this.idButton.isDisplayed()).toBe(true);
    };
 
    this.idButtonShouldNotBeVisible = function () {
-      expect(this.idButton.isDisplayed()).toBeFalse();
+      expect(this.idButton.isDisplayed()).toBe(false);
    };
 
    this.idButtonShouldHaveClass = function (className) {
       this.idButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.idButtonShouldNotHaveClass = function (className) {
       this.idButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.inputButtonShouldBeVisible = function () {
-      expect(this.inputButton.isDisplayed()).toBeTrue();
+      expect(this.inputButton.isDisplayed()).toBe(true);
    };
 
    this.inputButtonShouldNotBeVisible = function () {
-      expect(this.inputButton.isDisplayed()).toBeFalse();
+      expect(this.inputButton.isDisplayed()).toBe(false);
    };
 
    this.inputButtonShouldHaveClass = function (className) {
       this.inputButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.inputButtonShouldNotHaveClass = function (className) {
       this.inputButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.itemButtonShouldBeVisible = function (rowIndex1) {
-      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeTrue();
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBe(true);
    };
 
    this.itemButtonShouldNotBeVisible = function (rowIndex1) {
-      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBeFalse();
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBe(false);
    };
 
    this.itemButtonShouldHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.itemButtonShouldNotHaveClass = function (rowIndex1, className) {
       this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -151,22 +151,22 @@ var PageObject = function () {
    };
 
    this.multiExpressionButtonShouldBeVisible = function () {
-      expect(this.multiExpressionButton.isDisplayed()).toBeTrue();
+      expect(this.multiExpressionButton.isDisplayed()).toBe(true);
    };
 
    this.multiExpressionButtonShouldNotBeVisible = function () {
-      expect(this.multiExpressionButton.isDisplayed()).toBeFalse();
+      expect(this.multiExpressionButton.isDisplayed()).toBe(false);
    };
 
    this.multiExpressionButtonShouldHaveClass = function (className) {
       this.multiExpressionButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.multiExpressionButtonShouldNotHaveClass = function (className) {
       this.multiExpressionButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -175,42 +175,42 @@ var PageObject = function () {
    };
 
    this.nameButtonShouldBeVisible = function () {
-      expect(this.nameButton.isDisplayed()).toBeTrue();
+      expect(this.nameButton.isDisplayed()).toBe(true);
    };
 
    this.nameButtonShouldNotBeVisible = function () {
-      expect(this.nameButton.isDisplayed()).toBeFalse();
+      expect(this.nameButton.isDisplayed()).toBe(false);
    };
 
    this.nameButtonShouldHaveClass = function (className) {
       this.nameButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.nameButtonShouldNotHaveClass = function (className) {
       this.nameButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.singleExpressionButtonShouldBeVisible = function () {
-      expect(this.singleExpressionButton.isDisplayed()).toBeTrue();
+      expect(this.singleExpressionButton.isDisplayed()).toBe(true);
    };
 
    this.singleExpressionButtonShouldNotBeVisible = function () {
-      expect(this.singleExpressionButton.isDisplayed()).toBeFalse();
+      expect(this.singleExpressionButton.isDisplayed()).toBe(false);
    };
 
    this.singleExpressionButtonShouldHaveClass = function (className) {
       this.singleExpressionButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.singleExpressionButtonShouldNotHaveClass = function (className) {
       this.singleExpressionButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -219,62 +219,62 @@ var PageObject = function () {
    };
 
    this.submitButtonShouldBeVisible = function () {
-      expect(this.submitButton.isDisplayed()).toBeTrue();
+      expect(this.submitButton.isDisplayed()).toBe(true);
    };
 
    this.submitButtonShouldNotBeVisible = function () {
-      expect(this.submitButton.isDisplayed()).toBeFalse();
+      expect(this.submitButton.isDisplayed()).toBe(false);
    };
 
    this.submitButtonShouldHaveClass = function (className) {
       this.submitButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.submitButtonShouldNotHaveClass = function (className) {
       this.submitButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.textOnlyButtonShouldBeVisible = function () {
-      expect(this.textOnlyButton.isDisplayed()).toBeTrue();
+      expect(this.textOnlyButton.isDisplayed()).toBe(true);
    };
 
    this.textOnlyButtonShouldNotBeVisible = function () {
-      expect(this.textOnlyButton.isDisplayed()).toBeFalse();
+      expect(this.textOnlyButton.isDisplayed()).toBe(false);
    };
 
    this.textOnlyButtonShouldHaveClass = function (className) {
       this.textOnlyButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.textOnlyButtonShouldNotHaveClass = function (className) {
       this.textOnlyButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.titleButtonShouldBeVisible = function () {
-      expect(this.titleButton.isDisplayed()).toBeTrue();
+      expect(this.titleButton.isDisplayed()).toBe(true);
    };
 
    this.titleButtonShouldNotBeVisible = function () {
-      expect(this.titleButton.isDisplayed()).toBeFalse();
+      expect(this.titleButton.isDisplayed()).toBe(false);
    };
 
    this.titleButtonShouldHaveClass = function (className) {
       this.titleButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.titleButtonShouldNotHaveClass = function (className) {
       this.titleButton.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 

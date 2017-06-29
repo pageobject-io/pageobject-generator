@@ -1,12 +1,14 @@
-var radioPage = require('../../../../target/test-classes/radioPageObject.js');
+var RadioPage = require('../../test/fixtures/radioPageObject.po');
 
 describe('radios', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/radio.html');
+    browser.get('http://localhost:3000/radio.html');
   });
 
   it('should generate functional radio methods', function () {
+    var radioPage = new RadioPage();
+
     radioPage.colorByIndexShouldBeVisible(0);
     radioPage.colorByIndexShouldBeVisible(1);
     radioPage.colorByIndexShouldBeVisible(2);

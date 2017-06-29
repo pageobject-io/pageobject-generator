@@ -1,12 +1,14 @@
-var selectPage = require('../../../../target/test-classes/selectPageObject.js');
+var SelectPage = require('../../test/fixtures/selectPageObject.po');
 
 describe('select fields', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/select.html');
+    browser.get('http://localhost:3000/select.html');
   });
 
   it('should generate functional select field methods', function () {
+    var selectPage = new SelectPage();
+
     selectPage.unitTypeShouldBeVisible();
     selectPage.unitTypeShouldBeEnabled();
     selectPage.unitTypeByPartialTextShouldNotBeSelected('Miner');

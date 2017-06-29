@@ -1,12 +1,14 @@
-var textPage = require('../../../../target/test-classes/textPageObject.js');
+var TextPage = require('../../test/fixtures/textPageObject.po');
 
 describe('text fields', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/text.html');
+    browser.get('http://localhost:3000/text.html');
   });
 
   it('should generate functional text field methods', function () {
+    var textPage = new TextPage();
+
     textPage.idModelShouldBeVisible();
     textPage.idModelShouldBeEnabled();
     textPage.shouldHaveIdModel('initialValue');

@@ -9,6 +9,6 @@ describe('NgOptionsLocatorStrategy', () => {
 
   it('should extract locator', () => {
     expect(locator('<input ng-options="a"/>', source)).to.equal('by.options(\'a\')');
-    expect(locator('<input x-ng-options="a{{$index}}"/>', source)).to.equal('by.options(\'a{{$index}}\')');
+    expect(locator('<input x-ng-options="a{{$index}}"/>', source, 1)).to.equal('by.options(`a${rowIndex1}`)');
   });
 });

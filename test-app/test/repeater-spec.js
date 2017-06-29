@@ -1,12 +1,14 @@
-var repeaterPage = require('../../../../target/test-classes/repeaterPageObject.js');
+var RepeaterPage = require('../../test/fixtures/repeaterPageObject.po');
 
 describe('repeaters', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/repeater.html');
+    browser.get('http://localhost:3000/repeater.html');
   });
 
   it('should generate functional repeater methods', function () {
+    var repeaterPage = new RepeaterPage();
+
     repeaterPage.sharedItemsLinkCountShouldBe(2);
     repeaterPage.sharedItemsLinkShouldBeVisible(0);
     repeaterPage.sharedItemsLinkShouldBeVisible(1);

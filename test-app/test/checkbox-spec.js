@@ -1,12 +1,14 @@
-var checkboxesPage = require('../../../../target/test-classes/checkboxPageObject.js');
+var CheckboxesPage = require('../../test/fixtures/checkboxPageObject.po');
 
 describe('checkboxes', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/checkboxes.html');
+    browser.get('http://localhost:3000/checkboxes.html');
   });
 
   it('should generate functional checkbox methods', function () {
+    var checkboxesPage = new CheckboxesPage();
+
     checkboxesPage.onlyIdShouldNotBeSelected();
     checkboxesPage.onlyIdShouldBeVisible();
     checkboxesPage.onlyIdShouldBeEnabled();

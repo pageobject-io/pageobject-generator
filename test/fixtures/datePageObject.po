@@ -72,114 +72,114 @@ var PageObject = function () {
    };
 
    this.dateFieldShouldBeEnabled = function () {
-      expect(this.dateField.isEnabled()).toBeTrue();
+      expect(this.dateField.isEnabled()).toBe(true);
    };
 
    this.dateFieldShouldNotBeEnabled = function () {
-      expect(this.dateField.isEnabled()).toBeFalse();
+      expect(this.dateField.isEnabled()).toBe(false);
    };
 
    this.dateFieldShouldBeVisible = function () {
-      expect(this.dateField.isDisplayed()).toBeTrue();
+      expect(this.dateField.isDisplayed()).toBe(true);
    };
 
    this.dateFieldShouldNotBeVisible = function () {
-      expect(this.dateField.isDisplayed()).toBeFalse();
+      expect(this.dateField.isDisplayed()).toBe(false);
    };
 
    this.dateFieldShouldHaveClass = function (className) {
       this.dateField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.dateFieldShouldNotHaveClass = function (className) {
       this.dateField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.dateTimeFieldShouldBeEnabled = function () {
-      expect(this.dateTimeField.isEnabled()).toBeTrue();
+      expect(this.dateTimeField.isEnabled()).toBe(true);
    };
 
    this.dateTimeFieldShouldNotBeEnabled = function () {
-      expect(this.dateTimeField.isEnabled()).toBeFalse();
+      expect(this.dateTimeField.isEnabled()).toBe(false);
    };
 
    this.dateTimeFieldShouldBeVisible = function () {
-      expect(this.dateTimeField.isDisplayed()).toBeTrue();
+      expect(this.dateTimeField.isDisplayed()).toBe(true);
    };
 
    this.dateTimeFieldShouldNotBeVisible = function () {
-      expect(this.dateTimeField.isDisplayed()).toBeFalse();
+      expect(this.dateTimeField.isDisplayed()).toBe(false);
    };
 
    this.dateTimeFieldShouldHaveClass = function (className) {
       this.dateTimeField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.dateTimeFieldShouldNotHaveClass = function (className) {
       this.dateTimeField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.dateTimeLocalFieldShouldBeEnabled = function () {
-      expect(this.dateTimeLocalField.isEnabled()).toBeTrue();
+      expect(this.dateTimeLocalField.isEnabled()).toBe(true);
    };
 
    this.dateTimeLocalFieldShouldNotBeEnabled = function () {
-      expect(this.dateTimeLocalField.isEnabled()).toBeFalse();
+      expect(this.dateTimeLocalField.isEnabled()).toBe(false);
    };
 
    this.dateTimeLocalFieldShouldBeVisible = function () {
-      expect(this.dateTimeLocalField.isDisplayed()).toBeTrue();
+      expect(this.dateTimeLocalField.isDisplayed()).toBe(true);
    };
 
    this.dateTimeLocalFieldShouldNotBeVisible = function () {
-      expect(this.dateTimeLocalField.isDisplayed()).toBeFalse();
+      expect(this.dateTimeLocalField.isDisplayed()).toBe(false);
    };
 
    this.dateTimeLocalFieldShouldHaveClass = function (className) {
       this.dateTimeLocalField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.dateTimeLocalFieldShouldNotHaveClass = function (className) {
       this.dateTimeLocalField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.monthFieldShouldBeEnabled = function () {
-      expect(this.monthField.isEnabled()).toBeTrue();
+      expect(this.monthField.isEnabled()).toBe(true);
    };
 
    this.monthFieldShouldNotBeEnabled = function () {
-      expect(this.monthField.isEnabled()).toBeFalse();
+      expect(this.monthField.isEnabled()).toBe(false);
    };
 
    this.monthFieldShouldBeVisible = function () {
-      expect(this.monthField.isDisplayed()).toBeTrue();
+      expect(this.monthField.isDisplayed()).toBe(true);
    };
 
    this.monthFieldShouldNotBeVisible = function () {
-      expect(this.monthField.isDisplayed()).toBeFalse();
+      expect(this.monthField.isDisplayed()).toBe(false);
    };
 
    this.monthFieldShouldHaveClass = function (className) {
       this.monthField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.monthFieldShouldNotHaveClass = function (className) {
       this.monthField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
@@ -208,58 +208,58 @@ var PageObject = function () {
    };
 
    this.timeFieldShouldBeEnabled = function () {
-      expect(this.timeField.isEnabled()).toBeTrue();
+      expect(this.timeField.isEnabled()).toBe(true);
    };
 
    this.timeFieldShouldNotBeEnabled = function () {
-      expect(this.timeField.isEnabled()).toBeFalse();
+      expect(this.timeField.isEnabled()).toBe(false);
    };
 
    this.timeFieldShouldBeVisible = function () {
-      expect(this.timeField.isDisplayed()).toBeTrue();
+      expect(this.timeField.isDisplayed()).toBe(true);
    };
 
    this.timeFieldShouldNotBeVisible = function () {
-      expect(this.timeField.isDisplayed()).toBeFalse();
+      expect(this.timeField.isDisplayed()).toBe(false);
    };
 
    this.timeFieldShouldHaveClass = function (className) {
       this.timeField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.timeFieldShouldNotHaveClass = function (className) {
       this.timeField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 
    this.weekFieldShouldBeEnabled = function () {
-      expect(this.weekField.isEnabled()).toBeTrue();
+      expect(this.weekField.isEnabled()).toBe(true);
    };
 
    this.weekFieldShouldNotBeEnabled = function () {
-      expect(this.weekField.isEnabled()).toBeFalse();
+      expect(this.weekField.isEnabled()).toBe(false);
    };
 
    this.weekFieldShouldBeVisible = function () {
-      expect(this.weekField.isDisplayed()).toBeTrue();
+      expect(this.weekField.isDisplayed()).toBe(true);
    };
 
    this.weekFieldShouldNotBeVisible = function () {
-      expect(this.weekField.isDisplayed()).toBeFalse();
+      expect(this.weekField.isDisplayed()).toBe(false);
    };
 
    this.weekFieldShouldHaveClass = function (className) {
       this.weekField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
       });
    };
 
    this.weekFieldShouldNotHaveClass = function (className) {
       this.weekField.getAttribute('class').then(function (classes) {
-         expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
       });
    };
 

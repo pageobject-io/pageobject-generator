@@ -1,12 +1,14 @@
-var ngClickPage = require('../../../../target/test-classes/ngClickPageObject.js');
+var NgClickPage = require('../../test/fixtures/ngClickPageObject.po');
 
 describe('ngclick', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/ngclick.html');
+    browser.get('http://localhost:3000/ngclick.html');
   });
 
   it('should generate functional ng-click methods', function () {
+    var ngClickPage = new NgClickPage();
+
     ngClickPage.idDivShouldBeVisible();
     ngClickPage.clickIdDiv();
     ngClickPage.idDivShouldNotBeVisible();

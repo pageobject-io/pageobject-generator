@@ -1,12 +1,14 @@
-var page = require('../../../../target/test-classes/ng2ComponentPageObject.js');
+var Page = require('../../test/fixtures/ng2ComponentPageObject.po');
 
 describe('angular 2', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/angular2.html');
+    browser.get('http://localhost:3000/angular2.html');
   });
 
   it('should generate functional angular 2 methods', function () {
+    var page = new Page();
+
     browser.useAllAngular2AppRoots();
 
     page.totalCountLabelShouldHaveText('You have 1 parts on your list.')

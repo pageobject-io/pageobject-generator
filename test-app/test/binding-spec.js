@@ -1,12 +1,14 @@
-var bindingPage = require('../../../../target/test-classes/bindingPageObject.js');
+var BindingPage = require('../../test/fixtures/bindingPageObject.po');
 
 describe('bindings', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/binding.html');
+    browser.get('http://localhost:3000/binding.html');
   });
 
   it('should generate functional binding methods', function () {
+    var bindingPage = new BindingPage();
+
     bindingPage.nameLinkShouldHaveText('a');
 
     bindingPage.idLiShouldHaveText('Not just b')
