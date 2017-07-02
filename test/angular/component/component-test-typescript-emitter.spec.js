@@ -164,9 +164,9 @@ export class TestComponentPage extends ComponentPageBase {
   describe('click by value action', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitClickByValueAction(simpleElement(true))).to.equal(`public clickColorByValue(value): void  {
-      if (this.color.value === value) {
-         this.color.click();
-      }
+   if (this.color.value === value) {
+      this.color.click();
+   }
 }
 `);
     });
@@ -307,17 +307,22 @@ public colorByIndexShouldNotBeSelected(rowIndex1, index): void  {
   describe('selected by value assertion', () => {
     it('should emit for simple element', () => {
        expect(emitter.emitSelectedByValueAssertion(simpleElement(true))).to.equal(`public colorByValueShouldBeSelected(value): void  {
-   if (this.color.selected) {
-       expect(this.color.value).toEqual(value);
-   }
-   throw new Error('Element is not selected');
+   this.color.forEach((elem) => {
+       if (elem.selected) {
+          expect(elem.value).toEqual(value);
+          return;
+      }
+       fail('Element is not selected');
+   });
 }
 
 public colorByValueShouldNotBeSelected(value): void  {
-   if (this.color.selected) {
-       expect(this.color.value).not.toEqual(value);
-   }
-   throw new Error('Element is not selected');
+   this.color.forEach((elem) => {
+       if (elem.selected) {
+          expect(elem.value).not.toEqual(value);
+          return;
+      }
+   });
 }
 `);
     });
@@ -329,7 +334,7 @@ public colorByValueShouldNotBeSelected(value): void  {
           expect(elem.value).toEqual(value);
           return;
       }
-       throw new Error('Could not find selected elements.');
+       fail('Element is not selected');
    });
 }
 
@@ -339,7 +344,6 @@ public colorByValueShouldNotBeSelected(rowIndex1, value): void  {
           expect(elem.value).not.toEqual(value);
           return;
       }
-       throw new Error('Could not find selected elements.');
    });
 }
 `);
@@ -413,7 +417,7 @@ public colorByIndexShouldNotBeVisible(rowIndex1, index): void  {
   describe('date mutator action', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitDateMutatorAction(simpleElement())).to.equal(`public setColor(value): void  {
-   this.color.value = '';
+   this.color.value = value;
    this.color.dispatchEvent(new Event('input'));
 }
 `);
@@ -421,7 +425,7 @@ public colorByIndexShouldNotBeVisible(rowIndex1, index): void  {
 
     it('should emit for nested element', () => {
       expect(emitter.emitDateMutatorAction(nestedElement())).to.equal(`public setColor(rowIndex1, value): void  {
-   this.items[rowIndex1].querySelector('.color').value = '';
+   this.items[rowIndex1].querySelector('.color').value = value;
    this.items[rowIndex1].querySelector('.color').dispatchEvent(new Event('input'));
 }
 `);
