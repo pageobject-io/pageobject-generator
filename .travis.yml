@@ -7,14 +7,8 @@ env:
 addons:
   sauce_connect: true
 before_script:
-  - cd src/test/test-app
   - npm install
-  - npm run lite &
 script:
-  - jdk_switcher use oraclejdk8
-  - cd ../../..
-  - mvn test
-  - cd src/test/test-app
-  - npm run e2e
+  - npm run test
 after_success:
   - bash <(curl -s https://codecov.io/bash)

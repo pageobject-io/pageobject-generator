@@ -1,0 +1,43 @@
+import {Component, Input, ViewChild, Output, EventEmitter} from '@angular/core';
+import {ModalDirective} from 'ngx-bootstrap';
+
+@Component({
+    selector: 'test-modal',
+    template: `
+            <div bsModal 
+                 #modal="bs-modal" class="modal fade"
+                 tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hide()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">{{ title }}</h4>
+                      </div>
+                      <div class="modal-body">
+                        {{ object.text }}
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="show()">Yes</button>
+                        <button type="button" class="btn" (click)="hide()">No</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        `
+})
+export class TestModalComponent{
+    
+    @Input() private object: any;
+    @Output() private confirmed: EventEmitter<any> = new EventEmitter<any>();
+    @ViewChild('test') modal: ModalDirective;
+
+    public show(): void {
+        this.modal.show();
+    }
+
+    public hide(): void {
+        this.modal.hide();
+    }
+}
