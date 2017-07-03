@@ -223,10 +223,9 @@ describe('ComponentTestLocatorGenerator', () => {
     expect(locator).to.be.null;
   });
 
-  it('should return null if it cannot find a locator for middle part', () => {
-    // generate once to use up the locator for elements
+  it('should generate locator for nested element in repeater that is also present higher up in the DOM', () => {
     let document1 = getDocument(
-      '<div *ngFor="element of elements"><div class="a"></div></div>');
+      '<div *ngFor="element of elements" class="b"><div class="a"></div></div>');
 
     let divs = select('div', document1);
     let div1 = divs[0];
@@ -236,6 +235,7 @@ describe('ComponentTestLocatorGenerator', () => {
 
     let section = page.addSection(div1);
     section.addTypes(NG_FOR);
+    section.name = 'elements';
 
     let element = section.addElement(div2);
 
@@ -243,7 +243,7 @@ describe('ComponentTestLocatorGenerator', () => {
     let locator = generator.generate(element);
 
     let document2 = getDocument(
-      '<div *ngFor="item of items"><div *ngFor="element of elements"><div class="a"></div></div></div>');
+      '<div *ngFor="item of items"><div *ngFor="element of elements" class="b"><div class="a"></div></div></div>');
 
     divs = select('div', document2);
     div1 = divs[0];
@@ -254,18 +254,21 @@ describe('ComponentTestLocatorGenerator', () => {
 
     let section1 = page.addSection(div1);
     section1.addTypes(NG_FOR);
+    section1.name = 'items';
 
     let section2 = section1.addSection(div2);
     section2.addTypes(NG_FOR);
+    section2.name = 'elements';
 
     element = section2.addElement(div3);
 
     locator = generator.generate(element);
 
-    expect(locator).to.be.null;
+    expect(locator.selector).to.equal('this.items[rowIndex1].querySelectorAll(\'div.b\')[rowIndex2].querySelector(\'div.a\')');
+    expect(locator.strategy).to.be.an.instanceof(NativeCssLocatorStrategy);
   });
 
-  it('should return null if it cannot find a locator for last part', () => {
+  it('should generate locator for nested element that is also present higher up in the DOM', () => {
     let document = getDocument('<div class="a"></div><div *ngFor="item of items"><div class="a"></div></div>');
 
     let divs = select('div', document);
@@ -279,6 +282,7 @@ describe('ComponentTestLocatorGenerator', () => {
 
     let section = page.addSection(div2);
     section.addTypes(NG_FOR);
+    section.name = 'items';
 
     let innerElement = section.addElement(div3);
 
@@ -286,7 +290,8 @@ describe('ComponentTestLocatorGenerator', () => {
     let locator = generator.generate(outerElement);
     locator = generator.generate(innerElement);
 
-    expect(locator).to.be.null;
+    expect(locator.selector).to.equal('this.items[rowIndex1].querySelector(\'div.a\')');
+    expect(locator.strategy).to.be.an.instanceof(NativeCssLocatorStrategy);
   });
 
   function getDocument(source) {
