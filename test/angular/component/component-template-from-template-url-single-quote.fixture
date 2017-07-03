@@ -1,0 +1,22 @@
+import {Component, Input, ViewChild, Output, EventEmitter} from '@angular/core';
+import {ModalDirective} from 'ngx-bootstrap';
+
+@Component({
+    selector: 'test-modal',
+    templateUrl: './single-template.html'
+})
+export class TestModalComponent
+{
+    
+    @Input() private object: any;
+    @Output() private confirmed: EventEmitter<any> = new EventEmitter<any>();
+    @ViewChild('test') modal: ModalDirective;
+
+    public show(): void {
+        this.modal.show();
+    }
+
+    public hide(): void {
+        this.modal.hide();
+    }
+}
