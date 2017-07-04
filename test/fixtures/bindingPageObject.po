@@ -7,6 +7,7 @@ var PageObject = function () {
    this.ngBindHtmlP = element(by.exactBinding('ngBindHtmlP'));
    this.ngBindP = element(by.exactBinding('ngBindP'));
    this.ngBindTemplateP = element(by.exactBinding('ngBindTemplateP'));
+   this.pipedExpression = element(by.exactBinding('\'pipedExpression\' | translate'));
    this.singleExpression3 = element(by.exactBinding('singleExpression3'));
    this.singleExpression4 = element(by.exactBinding('singleExpression4'));
 
@@ -160,6 +161,22 @@ var PageObject = function () {
 
    this.ngBindTemplatePShouldHaveText = function (value) {
       expect(this.ngBindTemplateP.getText()).toBe(value);
+   };
+
+   this.pipedExpressionShouldHaveClass = function (className) {
+      this.pipedExpression.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.pipedExpressionShouldNotHaveClass = function (className) {
+      this.pipedExpression.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.pipedExpressionShouldHaveText = function (value) {
+      expect(this.pipedExpression.getText()).toBe(value);
    };
 
    this.singleExpression3ShouldHaveClass = function (className) {
