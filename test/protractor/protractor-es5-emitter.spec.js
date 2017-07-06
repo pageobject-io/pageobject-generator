@@ -191,22 +191,22 @@ module.exports = PageObject;
   describe('enabled assertion', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitEnabledAssertion(simpleElement())).to.equal(`this.colorShouldBeEnabled = function () {
-   expect(this.color.isEnabled()).toBeTrue();
+   expect(this.color.isEnabled()).toBe(true);
 };
 
 this.colorShouldNotBeEnabled = function () {
-   expect(this.color.isEnabled()).toBeFalse();
+   expect(this.color.isEnabled()).toBe(false);
 };
 `);
     });
 
     it('should emit for nested element', () => {
       expect(emitter.emitEnabledAssertion(nestedElement())).to.equal(`this.colorShouldBeEnabled = function (rowIndex1) {
-   expect(this.items.get(rowIndex1).element(by.model('color')).isEnabled()).toBeTrue();
+   expect(this.items.get(rowIndex1).element(by.model('color')).isEnabled()).toBe(true);
 };
 
 this.colorShouldNotBeEnabled = function (rowIndex1) {
-   expect(this.items.get(rowIndex1).element(by.model('color')).isEnabled()).toBeFalse();
+   expect(this.items.get(rowIndex1).element(by.model('color')).isEnabled()).toBe(false);
 };
 `);
     });
@@ -215,22 +215,22 @@ this.colorShouldNotBeEnabled = function (rowIndex1) {
   describe('enabled by index assertion', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitEnabledByIndexAssertion(simpleElement(true))).to.equal(`this.colorByIndexShouldBeEnabled = function (index) {
-   expect(this.color.get(index).isEnabled()).toBeTrue();
+   expect(this.color.get(index).isEnabled()).toBe(true);
 };
 
 this.colorByIndexShouldNotBeEnabled = function (index) {
-   expect(this.color.get(index).isEnabled()).toBeFalse();
+   expect(this.color.get(index).isEnabled()).toBe(false);
 };
 `);
     });
 
     it('should emit for nested element', () => {
       expect(emitter.emitEnabledByIndexAssertion(nestedElement(true))).to.equal(`this.colorByIndexShouldBeEnabled = function (rowIndex1, index) {
-   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isEnabled()).toBeTrue();
+   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isEnabled()).toBe(true);
 };
 
 this.colorByIndexShouldNotBeEnabled = function (rowIndex1, index) {
-   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isEnabled()).toBeFalse();
+   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isEnabled()).toBe(false);
 };
 `);
     });
@@ -240,13 +240,13 @@ this.colorByIndexShouldNotBeEnabled = function (rowIndex1, index) {
     it('should emit for simple element', () => {
       expect(emitter.emitHasClassAssertion(simpleElement())).to.equal(`this.colorShouldHaveClass = function (className) {
    this.color.getAttribute('class').then(function (classes) {
-      expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
    });
 };
 
 this.colorShouldNotHaveClass = function (className) {
    this.color.getAttribute('class').then(function (classes) {
-      expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      expect(classes.split(' ').indexOf(className) === -1).toBe(true);
    });
 };
 `);
@@ -255,13 +255,13 @@ this.colorShouldNotHaveClass = function (className) {
     it('should emit for nested element', () => {
       expect(emitter.emitHasClassAssertion(nestedElement())).to.equal(`this.colorShouldHaveClass = function (rowIndex1, className) {
    this.items.get(rowIndex1).element(by.model('color')).getAttribute('class').then(function (classes) {
-      expect(classes.split(' ').indexOf(className) !== -1).toBeTrue();
+      expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
    });
 };
 
 this.colorShouldNotHaveClass = function (rowIndex1, className) {
    this.items.get(rowIndex1).element(by.model('color')).getAttribute('class').then(function (classes) {
-      expect(classes.split(' ').indexOf(className) === -1).toBeTrue();
+      expect(classes.split(' ').indexOf(className) === -1).toBe(true);
    });
 };
 `);
@@ -271,22 +271,22 @@ this.colorShouldNotHaveClass = function (rowIndex1, className) {
   describe('selected assertion', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitSelectedAssertion(simpleElement())).to.equal(`this.colorShouldBeSelected = function () {
-   expect(this.color.isSelected()).toBeTrue();
+   expect(this.color.isSelected()).toBe(true);
 };
 
 this.colorShouldNotBeSelected = function () {
-   expect(this.color.isSelected()).toBeFalse();
+   expect(this.color.isSelected()).toBe(false);
 };
 `);
     });
 
     it('should emit for nested element', () => {
       expect(emitter.emitSelectedAssertion(nestedElement())).to.equal(`this.colorShouldBeSelected = function (rowIndex1) {
-   expect(this.items.get(rowIndex1).element(by.model('color')).isSelected()).toBeTrue();
+   expect(this.items.get(rowIndex1).element(by.model('color')).isSelected()).toBe(true);
 };
 
 this.colorShouldNotBeSelected = function (rowIndex1) {
-   expect(this.items.get(rowIndex1).element(by.model('color')).isSelected()).toBeFalse();
+   expect(this.items.get(rowIndex1).element(by.model('color')).isSelected()).toBe(false);
 };
 `);
     });
@@ -295,22 +295,22 @@ this.colorShouldNotBeSelected = function (rowIndex1) {
   describe('selected by index assertion', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitSelectedByIndexAssertion(simpleElement(true))).to.equal(`this.colorByIndexShouldBeSelected = function (index) {
-   expect(this.color.get(index).isSelected()).toBeTrue();
+   expect(this.color.get(index).isSelected()).toBe(true);
 };
 
 this.colorByIndexShouldNotBeSelected = function (index) {
-   expect(this.color.get(index).isSelected()).toBeFalse();
+   expect(this.color.get(index).isSelected()).toBe(false);
 };
 `);
     });
 
     it('should emit for nested element', () => {
       expect(emitter.emitSelectedByIndexAssertion(nestedElement(true))).to.equal(`this.colorByIndexShouldBeSelected = function (rowIndex1, index) {
-   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isSelected()).toBeTrue();
+   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isSelected()).toBe(true);
 };
 
 this.colorByIndexShouldNotBeSelected = function (rowIndex1, index) {
-   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isSelected()).toBeFalse();
+   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isSelected()).toBe(false);
 };
 `);
     });
@@ -379,22 +379,22 @@ this.colorByValueShouldNotBeSelected = function (rowIndex1, value) {
   describe('visibility assertion', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitVisibilityAssertion(simpleElement())).to.equal(`this.colorShouldBeVisible = function () {
-   expect(this.color.isDisplayed()).toBeTrue();
+   expect(this.color.isDisplayed()).toBe(true);
 };
 
 this.colorShouldNotBeVisible = function () {
-   expect(this.color.isDisplayed()).toBeFalse();
+   expect(this.color.isDisplayed()).toBe(false);
 };
 `);
     });
 
     it('should emit for nested element', () => {
       expect(emitter.emitVisibilityAssertion(nestedElement())).to.equal(`this.colorShouldBeVisible = function (rowIndex1) {
-   expect(this.items.get(rowIndex1).element(by.model('color')).isDisplayed()).toBeTrue();
+   expect(this.items.get(rowIndex1).element(by.model('color')).isDisplayed()).toBe(true);
 };
 
 this.colorShouldNotBeVisible = function (rowIndex1) {
-   expect(this.items.get(rowIndex1).element(by.model('color')).isDisplayed()).toBeFalse();
+   expect(this.items.get(rowIndex1).element(by.model('color')).isDisplayed()).toBe(false);
 };
 `);
     });
@@ -403,22 +403,22 @@ this.colorShouldNotBeVisible = function (rowIndex1) {
   describe('visibility by index assertion', () => {
     it('should emit for simple element', () => {
       expect(emitter.emitVisibilityByIndexAssertion(simpleElement(true))).to.equal(`this.colorByIndexShouldBeVisible = function (index) {
-   expect(this.color.get(index).isDisplayed()).toBeTrue();
+   expect(this.color.get(index).isDisplayed()).toBe(true);
 };
 
 this.colorByIndexShouldNotBeVisible = function (index) {
-   expect(this.color.get(index).isDisplayed()).toBeFalse();
+   expect(this.color.get(index).isDisplayed()).toBe(false);
 };
 `);
     });
 
     it('should emit for nested element', () => {
       expect(emitter.emitVisibilityByIndexAssertion(nestedElement(true))).to.equal(`this.colorByIndexShouldBeVisible = function (rowIndex1, index) {
-   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isDisplayed()).toBeTrue();
+   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isDisplayed()).toBe(true);
 };
 
 this.colorByIndexShouldNotBeVisible = function (rowIndex1, index) {
-   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isDisplayed()).toBeFalse();
+   expect(this.items.get(rowIndex1).all(by.model('color')).get(index).isDisplayed()).toBe(false);
 };
 `);
     });
@@ -464,7 +464,7 @@ this.colorByIndexShouldNotBeVisible = function (rowIndex1, index) {
       var options = this.color.all(by.cssContainingText('option', expectedOptions[i]));
    
       options.each(function (option) {
-         expect(option.isSelected()).toBeTrue();
+         expect(option.isSelected()).toBe(true);
       });
    
       expect(options.count()).toBeGreaterThan(0);
@@ -479,7 +479,7 @@ this.colorByPartialTextShouldNotBeSelected = function () {
    
    for (i = 0; i < expectedOptions.length; i++) {
       this.color.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-         expect(option.isSelected()).toBeFalse();
+         expect(option.isSelected()).toBe(false);
       });
    }
 };
@@ -497,7 +497,7 @@ this.colorByPartialTextShouldNotBeSelected = function () {
       var options = this.items.get(rowIndex1).element(by.model('color')).all(by.cssContainingText('option', expectedOptions[i]));
    
       options.each(function (option) {
-         expect(option.isSelected()).toBeTrue();
+         expect(option.isSelected()).toBe(true);
       });
    
       expect(options.count()).toBeGreaterThan(0);
@@ -512,7 +512,7 @@ this.colorByPartialTextShouldNotBeSelected = function (rowIndex1) {
    
    for (i = 0; i < expectedOptions.length; i++) {
       this.items.get(rowIndex1).element(by.model('color')).all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
-         expect(option.isSelected()).toBeFalse();
+         expect(option.isSelected()).toBe(false);
       });
    }
 };
@@ -532,7 +532,7 @@ this.colorByPartialTextShouldNotBeSelected = function (rowIndex1) {
       var options = this.color.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
    
       options.each(function (option) {
-         expect(option.isSelected()).toBeTrue();
+         expect(option.isSelected()).toBe(true);
       });
    
       expect(options.count()).toBeGreaterThan(0);
@@ -547,7 +547,7 @@ this.colorByTextShouldNotBeSelected = function () {
    
    for (i = 0; i < expectedOptions.length; i++) {
       this.color.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-         expect(option.isSelected()).toBeFalse();
+         expect(option.isSelected()).toBe(false);
       });
    }
 };
@@ -565,7 +565,7 @@ this.colorByTextShouldNotBeSelected = function () {
       var options = this.items.get(rowIndex1).element(by.model('color')).all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
    
       options.each(function (option) {
-         expect(option.isSelected()).toBeTrue();
+         expect(option.isSelected()).toBe(true);
       });
    
       expect(options.count()).toBeGreaterThan(0);
@@ -580,7 +580,7 @@ this.colorByTextShouldNotBeSelected = function (rowIndex1) {
    
    for (i = 0; i < expectedOptions.length; i++) {
       this.items.get(rowIndex1).element(by.model('color')).all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
-         expect(option.isSelected()).toBeFalse();
+         expect(option.isSelected()).toBe(false);
       });
    }
 };
@@ -600,7 +600,7 @@ this.colorByTextShouldNotBeSelected = function (rowIndex1) {
       var options = this.color.all(by.css('option[value="' + expectedOptions[i] + '"]'));
    
       options.each(function (option) {
-         expect(option.isSelected()).toBeTrue();
+         expect(option.isSelected()).toBe(true);
       });
    
       expect(options.count()).toBeGreaterThan(0);
@@ -615,7 +615,7 @@ this.colorByValueShouldNotBeSelected = function () {
    
    for (i = 0; i < expectedOptions.length; i++) {
       this.color.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-         expect(option.isSelected()).toBeFalse();
+         expect(option.isSelected()).toBe(false);
       });
    }
 };
@@ -633,7 +633,7 @@ this.colorByValueShouldNotBeSelected = function () {
       var options = this.items.get(rowIndex1).element(by.model('color')).all(by.css('option[value="' + expectedOptions[i] + '"]'));
    
       options.each(function (option) {
-         expect(option.isSelected()).toBeTrue();
+         expect(option.isSelected()).toBe(true);
       });
    
       expect(options.count()).toBeGreaterThan(0);
@@ -648,7 +648,7 @@ this.colorByValueShouldNotBeSelected = function (rowIndex1) {
    
    for (i = 0; i < expectedOptions.length; i++) {
       this.items.get(rowIndex1).element(by.model('color')).all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
-         expect(option.isSelected()).toBeFalse();
+         expect(option.isSelected()).toBe(false);
       });
    }
 };

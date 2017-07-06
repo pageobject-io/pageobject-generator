@@ -1,0 +1,268 @@
+var PageObject = function () {
+
+   this.dateField = element(by.name('dateField'));
+   this.dateTimeField = element(by.name('dateTimeField'));
+   this.dateTimeLocalField = element(by.name('dateTimeLocalField'));
+   this.monthField = element(by.name('monthField'));
+   this.timeField = element(by.name('timeField'));
+   this.weekField = element(by.name('weekField'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.setDateField = function (value) {
+      // https://github.com/angular/protractor/issues/562
+      var element = this.dateField;
+      element.getAttribute('value').then(function (text) {
+         var backspaceSeries = Array(text.length + 1).join(protractor.Key.BACK_SPACE);
+         element.sendKeys(backspaceSeries);
+         element.sendKeys(value);
+      });
+   };
+
+   this.setDateTimeField = function (value) {
+      // https://github.com/angular/protractor/issues/562
+      var element = this.dateTimeField;
+      element.getAttribute('value').then(function (text) {
+         var backspaceSeries = Array(text.length + 1).join(protractor.Key.BACK_SPACE);
+         element.sendKeys(backspaceSeries);
+         element.sendKeys(value);
+      });
+   };
+
+   this.setDateTimeLocalField = function (value) {
+      // https://github.com/angular/protractor/issues/562
+      var element = this.dateTimeLocalField;
+      element.getAttribute('value').then(function (text) {
+         var backspaceSeries = Array(text.length + 1).join(protractor.Key.BACK_SPACE);
+         element.sendKeys(backspaceSeries);
+         element.sendKeys(value);
+      });
+   };
+
+   this.setMonthField = function (value) {
+      // https://github.com/angular/protractor/issues/562
+      var element = this.monthField;
+      element.getAttribute('value').then(function (text) {
+         var backspaceSeries = Array(text.length + 1).join(protractor.Key.BACK_SPACE);
+         element.sendKeys(backspaceSeries);
+         element.sendKeys(value);
+      });
+   };
+
+   this.setTimeField = function (value) {
+      // https://github.com/angular/protractor/issues/562
+      var element = this.timeField;
+      element.getAttribute('value').then(function (text) {
+         var backspaceSeries = Array(text.length + 1).join(protractor.Key.BACK_SPACE);
+         element.sendKeys(backspaceSeries);
+         element.sendKeys(value);
+      });
+   };
+
+   this.setWeekField = function (value) {
+      // https://github.com/angular/protractor/issues/562
+      var element = this.weekField;
+      element.getAttribute('value').then(function (text) {
+         var backspaceSeries = Array(text.length + 1).join(protractor.Key.BACK_SPACE);
+         element.sendKeys(backspaceSeries);
+         element.sendKeys(value);
+      });
+   };
+
+   this.dateFieldShouldBeEnabled = function () {
+      expect(this.dateField.isEnabled()).toBe(true);
+   };
+
+   this.dateFieldShouldNotBeEnabled = function () {
+      expect(this.dateField.isEnabled()).toBe(false);
+   };
+
+   this.dateFieldShouldBeVisible = function () {
+      expect(this.dateField.isDisplayed()).toBe(true);
+   };
+
+   this.dateFieldShouldNotBeVisible = function () {
+      expect(this.dateField.isDisplayed()).toBe(false);
+   };
+
+   this.dateFieldShouldHaveClass = function (className) {
+      this.dateField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.dateFieldShouldNotHaveClass = function (className) {
+      this.dateField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.dateTimeFieldShouldBeEnabled = function () {
+      expect(this.dateTimeField.isEnabled()).toBe(true);
+   };
+
+   this.dateTimeFieldShouldNotBeEnabled = function () {
+      expect(this.dateTimeField.isEnabled()).toBe(false);
+   };
+
+   this.dateTimeFieldShouldBeVisible = function () {
+      expect(this.dateTimeField.isDisplayed()).toBe(true);
+   };
+
+   this.dateTimeFieldShouldNotBeVisible = function () {
+      expect(this.dateTimeField.isDisplayed()).toBe(false);
+   };
+
+   this.dateTimeFieldShouldHaveClass = function (className) {
+      this.dateTimeField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.dateTimeFieldShouldNotHaveClass = function (className) {
+      this.dateTimeField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.dateTimeLocalFieldShouldBeEnabled = function () {
+      expect(this.dateTimeLocalField.isEnabled()).toBe(true);
+   };
+
+   this.dateTimeLocalFieldShouldNotBeEnabled = function () {
+      expect(this.dateTimeLocalField.isEnabled()).toBe(false);
+   };
+
+   this.dateTimeLocalFieldShouldBeVisible = function () {
+      expect(this.dateTimeLocalField.isDisplayed()).toBe(true);
+   };
+
+   this.dateTimeLocalFieldShouldNotBeVisible = function () {
+      expect(this.dateTimeLocalField.isDisplayed()).toBe(false);
+   };
+
+   this.dateTimeLocalFieldShouldHaveClass = function (className) {
+      this.dateTimeLocalField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.dateTimeLocalFieldShouldNotHaveClass = function (className) {
+      this.dateTimeLocalField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.monthFieldShouldBeEnabled = function () {
+      expect(this.monthField.isEnabled()).toBe(true);
+   };
+
+   this.monthFieldShouldNotBeEnabled = function () {
+      expect(this.monthField.isEnabled()).toBe(false);
+   };
+
+   this.monthFieldShouldBeVisible = function () {
+      expect(this.monthField.isDisplayed()).toBe(true);
+   };
+
+   this.monthFieldShouldNotBeVisible = function () {
+      expect(this.monthField.isDisplayed()).toBe(false);
+   };
+
+   this.monthFieldShouldHaveClass = function (className) {
+      this.monthField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.monthFieldShouldNotHaveClass = function (className) {
+      this.monthField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.shouldHaveDateField = function (value) {
+      expect(this.dateField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveDateTimeField = function (value) {
+      expect(this.dateTimeField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveDateTimeLocalField = function (value) {
+      expect(this.dateTimeLocalField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveMonthField = function (value) {
+      expect(this.monthField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveTimeField = function (value) {
+      expect(this.timeField.getAttribute('value')).toEqual(value);
+   };
+
+   this.shouldHaveWeekField = function (value) {
+      expect(this.weekField.getAttribute('value')).toEqual(value);
+   };
+
+   this.timeFieldShouldBeEnabled = function () {
+      expect(this.timeField.isEnabled()).toBe(true);
+   };
+
+   this.timeFieldShouldNotBeEnabled = function () {
+      expect(this.timeField.isEnabled()).toBe(false);
+   };
+
+   this.timeFieldShouldBeVisible = function () {
+      expect(this.timeField.isDisplayed()).toBe(true);
+   };
+
+   this.timeFieldShouldNotBeVisible = function () {
+      expect(this.timeField.isDisplayed()).toBe(false);
+   };
+
+   this.timeFieldShouldHaveClass = function (className) {
+      this.timeField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.timeFieldShouldNotHaveClass = function (className) {
+      this.timeField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.weekFieldShouldBeEnabled = function () {
+      expect(this.weekField.isEnabled()).toBe(true);
+   };
+
+   this.weekFieldShouldNotBeEnabled = function () {
+      expect(this.weekField.isEnabled()).toBe(false);
+   };
+
+   this.weekFieldShouldBeVisible = function () {
+      expect(this.weekField.isDisplayed()).toBe(true);
+   };
+
+   this.weekFieldShouldNotBeVisible = function () {
+      expect(this.weekField.isDisplayed()).toBe(false);
+   };
+
+   this.weekFieldShouldHaveClass = function (className) {
+      this.weekField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.weekFieldShouldNotHaveClass = function (className) {
+      this.weekField.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+};
+
+module.exports = PageObject;

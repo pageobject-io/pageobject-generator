@@ -1,12 +1,14 @@
-var buttonPage = require('../../../../target/test-classes/buttonPageObject.js');
+var ButtonPage = require('../../test/fixtures/buttonPageObject.po');
 
 describe('buttons', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/button.html');
+    browser.get('http://localhost:3000/button.html');
   });
 
   it('should generate functional button methods', function () {
+    var buttonPage = new ButtonPage();
+
     buttonPage.idButtonShouldBeVisible();
     buttonPage.clickIdButton();
     buttonPage.idButtonShouldNotBeVisible();

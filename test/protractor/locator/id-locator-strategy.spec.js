@@ -9,6 +9,6 @@ describe('IdLocatorStrategy', () => {
 
   it('should extract locator', () => {
     expect(locator('<button id="a">text</button>', source)).to.equal('by.id(\'a\')');
-    expect(locator('<button id="a{{$index}}">text</button>', source)).to.equal('by.id(\'a{{$index}}\')');
+    expect(locator('<button id="a{{$index}}">text</button>', source, 1)).to.equal('by.id(`a${rowIndex1}`)');
   });
 });

@@ -24,7 +24,7 @@ describe('NgRepeatEndProcessor', () => {
     let fragment = parse5.parseFragment('<p ng-repeat-end></p>',
                                         {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-    let context = new GeneratorContext(fragment);
+    let context = new GeneratorContext(fragment, '');
     context.domElement = select('p', fragment)[0];
 
     processor.process(context);

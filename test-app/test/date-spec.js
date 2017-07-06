@@ -1,12 +1,14 @@
-var datePage = require('../../../../target/test-classes/datePageObject.js');
+var DatePage = require('../../test/fixtures/datePageObject.po');
 
 describe('date fields', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/date.html');
+    browser.get('http://localhost:3000/date.html');
   });
 
   it('should generate functional date field methods', function () {
+    var datePage = new DatePage();
+
     datePage.shouldHaveDateField('');
     datePage.setDateField('05/05/2015');
     datePage.shouldHaveDateField('2015-05-05');

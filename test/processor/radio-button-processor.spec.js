@@ -35,7 +35,7 @@ describe('RadioButtonProcessor', () => {
                                           '<input type="radio" name="color" value="blue"/>',
                                           {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-      let context = new GeneratorContext(fragment);
+      let context = new GeneratorContext(fragment, '');
       context.domElement = select('input', fragment)[0];
 
       processor.process(context);
@@ -59,13 +59,13 @@ describe('RadioButtonProcessor', () => {
                                           '<input type="radio" name="color" value="blue"/>',
                                           {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-      let context = new GeneratorContext(fragment);
+      let context = new GeneratorContext(fragment, '');
       context.domElement = select('input', fragment)[1];
       processor.process(context);
 
       expect(context.page.elements.length).to.equal(0);
 
-      context = new GeneratorContext(fragment);
+      context = new GeneratorContext(fragment, '');
       context.domElement = select('input', fragment)[2];
       processor.process(context);
 
@@ -78,7 +78,7 @@ describe('RadioButtonProcessor', () => {
                                           '<input type="radio" ng-model="color" value="blue"/>',
                                           {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-      let context = new GeneratorContext(fragment);
+      let context = new GeneratorContext(fragment, '');
       context.domElement = select('input', fragment)[0];
 
       processor.process(context);
@@ -104,7 +104,7 @@ describe('RadioButtonProcessor', () => {
                                           '<input type="radio" ng-model="size" value="M"/>',
                                           {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-      let context = new GeneratorContext(fragment);
+      let context = new GeneratorContext(fragment, '');
       context.domElement = select('input', fragment)[0];
       processor.process(context);
 
@@ -145,7 +145,7 @@ describe('RadioButtonProcessor', () => {
                                           '</div>',
                                           {treeAdapter: parse5.treeAdapters.htmlparser2});
 
-      let context = new GeneratorContext(fragment);
+      let context = new GeneratorContext(fragment, '');
       context.domElement = select('div', fragment)[0];
 
       let section = context.addPageSection();

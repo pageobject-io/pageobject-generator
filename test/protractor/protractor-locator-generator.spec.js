@@ -365,8 +365,7 @@ describe('ProtractorLocatorGenerator', () => {
     expect(locator).to.be.null;
   });
 
-  it('should return null if it cannot find a locator for middle part', () => {
-    // generate once to use up the locator for elements
+  it('should generate locator for nested element in repeater that is also present higher up in the DOM', () => {
     let document1 = getDocument(
       '<div ng-repeat="element in elements"><div class="a"></div></div>');
 
@@ -378,6 +377,7 @@ describe('ProtractorLocatorGenerator', () => {
 
     let section = page.addSection(div1);
     section.addTypes(NG_REPEAT);
+    section.name = 'elements';  
 
     let element = section.addElement(div2);
 
@@ -396,18 +396,21 @@ describe('ProtractorLocatorGenerator', () => {
 
     let section1 = page.addSection(div1);
     section1.addTypes(NG_REPEAT);
+    section1.name = 'items';
 
     let section2 = section1.addSection(div2);
     section2.addTypes(NG_REPEAT);
+    section2.name = 'elements';
 
     element = section2.addElement(div3);
 
     locator = generator.generate(element);
 
-    expect(locator).to.be.null;
+    expect(locator.selector).to.equal('this.items.get(rowIndex1).element(by.exactRepeater(\'element in elements\').row(rowIndex2)).element(by.css(\'div.a\'))');
+    expect(locator.strategy).to.be.an.instanceof(CssLocatorStrategy);
   });
 
-  it('should return null if it cannot find a locator for last part', () => {
+  it('should generate locator for nested element that is also present higher up in the DOM', () => {
     let document = getDocument('<div class="a"></div><div ng-repeat="item in items"><div class="a"></div></div>');
 
     let divs = select('div', document);
@@ -421,6 +424,7 @@ describe('ProtractorLocatorGenerator', () => {
 
     let section = page.addSection(div2);
     section.addTypes(NG_REPEAT);
+    section.name = 'items';
 
     let innerElement = section.addElement(div3);
 
@@ -428,7 +432,8 @@ describe('ProtractorLocatorGenerator', () => {
     let locator = generator.generate(outerElement);
     locator = generator.generate(innerElement);
 
-    expect(locator).to.be.null;
+    expect(locator.selector).to.equal('this.items.get(rowIndex1).element(by.css(\'div.a\'))');
+    expect(locator.strategy).to.be.an.instanceof(CssLocatorStrategy);
   });
 
   function getDocument(source) {

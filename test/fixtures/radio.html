@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script language="JavaScript">
+      var app = angular.module('testApp', []);
+
+      app.controller('MainController', function ($scope) {
+        $scope.items = [1, 2, 3];
+        $scope.otherItems = [1, 2, 3];
+        $scope.elements = [1, 2, 3];
+
+        $scope.selected = {};
+
+        $scope.selected2 = [
+          {},
+          {}
+        ]
+
+        $scope.nested = {
+          repeaterRadioField: []
+        };
+
+        $scope.nested2 = [
+          {repeaterRadioField2: []},
+          {repeaterRadioField2: []},
+          {repeaterRadioField2: []}
+        ]
+      });
+    </script>
+</head>
+<body ng-controller="MainController">
+
+<div>
+
+    <div>
+        Group 1
+        <input type="radio" ng-model="color" value="red"/>
+        <input type="radio" ng-model="color" value="blue"/>
+        <input type="radio" ng-model="color" value="yellow"/>
+        <input type="radio" ng-model="color" value="orange" disabled="disabled"/>
+
+        Group 2
+        <input type="radio" name="width" value="10cm"/>
+        <input type="radio" name="width" value="20cm"/>
+        <input type="radio" name="width" value="30cm" style="visibility: hidden"/>
+    </div>
+
+    <div x-ng-repeat="item in items">
+        Nested {{item}}: <input type="radio" ng-model="selected.item" ng-value="item"/>
+
+        <div ng_repeat="element in elements">
+            Nested repeater {{element}}: <input type="radio" data-ng-model="nested.repeaterRadioField[$parent.$index]"
+                                                ng-value="element"/>
+
+            Nested repeater true {{element}}: <input type="radio"
+                                                     ng-model="nested2[$parent.$index].repeaterRadioField2[$index]"
+                                                     ng-value="true"/>
+            Nested repeater false {{element}}: <input type="radio"
+                                                      ng-model="nested2[$parent.$index].repeaterRadioField2[$index]"
+                                                      ng-value="false"/>
+        </div>
+    </div>
+
+    <div data-ng-repeat="item in otherItems">
+        Nested true {{item}}: <input type="radio" ng-model="selected2[$index].item" ng-value="true"/>
+        Nested false {{item}}: <input type="radio" ng-model="selected2[$index].item" ng-value="false"/>
+    </div>
+</div>
+
+</body>
+</html>

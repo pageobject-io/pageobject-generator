@@ -9,6 +9,6 @@ describe('NgModelLocatorStrategy', () => {
 
   it('should extract locator', () => {
     expect(locator('<input ng-model="a"/>', source)).to.equal('by.model(\'a\')');
-    expect(locator('<input x-ng-model="a{{$index}}"/>', source)).to.equal('by.model(\'a{{$index}}\')');
+    expect(locator('<input x-ng-model="a{{$index}}"/>', source, 1)).to.equal('by.model(`a${rowIndex1}`)');
   });
 });

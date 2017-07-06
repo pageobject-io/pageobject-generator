@@ -1,12 +1,14 @@
-var linkPage = require('../../../../target/test-classes/linkPageObject.js');
+var LinkPage = require('../../test/fixtures/linkPageObject.po');
 
 describe('links', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/resources/link.html');
+    browser.get('http://localhost:3000/link.html');
   });
 
   it('should generate functional link methods', function () {
+    var linkPage = new LinkPage();
+
     linkPage.idLinkShouldBeVisible();
     linkPage.clickIdLink();
     linkPage.idLinkShouldNotBeVisible();

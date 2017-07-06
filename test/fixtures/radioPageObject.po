@@ -1,0 +1,483 @@
+var PageObject = function () {
+
+   this.color = element.all(by.model('color'));
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.otherItems = element.all(by.exactRepeater('item in otherItems'));
+   this.selectedItem = element.all(by.model('selected.item'));
+   this.width = element.all(by.name('width'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.clickColorByIndex = function (index) {
+      this.color.get(index).click();
+   };
+
+   this.clickColorByValue = function (value) {
+      this.color.filter(function (elem) {
+         return elem.getAttribute('value').then(function (attribute) {
+            return attribute === value;
+         });
+      }).then(function (filteredElements) {
+         filteredElements[0].click();
+      });
+   };
+
+   this.clickNested2RepeaterRadioField2ByIndex = function (rowIndex1, rowIndex2, index) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).get(index).click();
+   };
+
+   this.clickNested2RepeaterRadioField2ByValue = function (rowIndex1, rowIndex2, value) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).filter(function (elem) {
+         return elem.getAttribute('value').then(function (attribute) {
+            return attribute === value;
+         });
+      }).then(function (filteredElements) {
+         filteredElements[0].click();
+      });
+   };
+
+   this.clickNestedRepeaterRadioFieldByIndex = function (rowIndex1, index) {
+      this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).get(index).click();
+   };
+
+   this.clickNestedRepeaterRadioFieldByValue = function (rowIndex1, value) {
+      this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).filter(function (elem) {
+         return elem.getAttribute('value').then(function (attribute) {
+            return attribute === value;
+         });
+      }).then(function (filteredElements) {
+         filteredElements[0].click();
+      });
+   };
+
+   this.clickSelected2ItemByIndex = function (rowIndex1, index) {
+      this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).get(index).click();
+   };
+
+   this.clickSelected2ItemByValue = function (rowIndex1, value) {
+      this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).filter(function (elem) {
+         return elem.getAttribute('value').then(function (attribute) {
+            return attribute === value;
+         });
+      }).then(function (filteredElements) {
+         filteredElements[0].click();
+      });
+   };
+
+   this.clickSelectedItemByIndex = function (index) {
+      this.selectedItem.get(index).click();
+   };
+
+   this.clickSelectedItemByValue = function (value) {
+      this.selectedItem.filter(function (elem) {
+         return elem.getAttribute('value').then(function (attribute) {
+            return attribute === value;
+         });
+      }).then(function (filteredElements) {
+         filteredElements[0].click();
+      });
+   };
+
+   this.clickWidthByIndex = function (index) {
+      this.width.get(index).click();
+   };
+
+   this.clickWidthByValue = function (value) {
+      this.width.filter(function (elem) {
+         return elem.getAttribute('value').then(function (attribute) {
+            return attribute === value;
+         });
+      }).then(function (filteredElements) {
+         filteredElements[0].click();
+      });
+   };
+
+   this.colorByIndexShouldBeEnabled = function (index) {
+      expect(this.color.get(index).isEnabled()).toBe(true);
+   };
+
+   this.colorByIndexShouldNotBeEnabled = function (index) {
+      expect(this.color.get(index).isEnabled()).toBe(false);
+   };
+
+   this.colorByIndexShouldBeSelected = function (index) {
+      expect(this.color.get(index).isSelected()).toBe(true);
+   };
+
+   this.colorByIndexShouldNotBeSelected = function (index) {
+      expect(this.color.get(index).isSelected()).toBe(false);
+   };
+
+   this.colorByIndexShouldBeVisible = function (index) {
+      expect(this.color.get(index).isDisplayed()).toBe(true);
+   };
+
+   this.colorByIndexShouldNotBeVisible = function (index) {
+      expect(this.color.get(index).isDisplayed()).toBe(false);
+   };
+
+   this.colorByValueShouldBeSelected = function (value) {
+      this.color.filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         expect(filteredElements[0].getAttribute('value')).toEqual(value);
+      });
+   };
+
+   this.colorByValueShouldNotBeSelected = function (value) {
+      this.color.filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         if (filteredElements.length > 0) {
+            expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
+         }
+      });
+   };
+
+   this.colorShouldHaveClass = function (className) {
+      this.color.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.colorShouldNotHaveClass = function (className) {
+      this.color.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).count()).toBe(count);
+   };
+
+   this.elementsShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.elementsShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.elementsShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getText()).toBe(value);
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.itemsShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.itemsShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.itemsShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.nested2RepeaterRadioField2ByIndexShouldBeEnabled = function (rowIndex1, rowIndex2, index) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).get(index).isEnabled()).toBe(true);
+   };
+
+   this.nested2RepeaterRadioField2ByIndexShouldNotBeEnabled = function (rowIndex1, rowIndex2, index) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).get(index).isEnabled()).toBe(false);
+   };
+
+   this.nested2RepeaterRadioField2ByIndexShouldBeSelected = function (rowIndex1, rowIndex2, index) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).get(index).isSelected()).toBe(true);
+   };
+
+   this.nested2RepeaterRadioField2ByIndexShouldNotBeSelected = function (rowIndex1, rowIndex2, index) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).get(index).isSelected()).toBe(false);
+   };
+
+   this.nested2RepeaterRadioField2ByIndexShouldBeVisible = function (rowIndex1, rowIndex2, index) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).get(index).isDisplayed()).toBe(true);
+   };
+
+   this.nested2RepeaterRadioField2ByIndexShouldNotBeVisible = function (rowIndex1, rowIndex2, index) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).get(index).isDisplayed()).toBe(false);
+   };
+
+   this.nested2RepeaterRadioField2ByValueShouldBeSelected = function (rowIndex1, rowIndex2, value) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         expect(filteredElements[0].getAttribute('value')).toEqual(value);
+      });
+   };
+
+   this.nested2RepeaterRadioField2ByValueShouldNotBeSelected = function (rowIndex1, rowIndex2, value) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         if (filteredElements.length > 0) {
+            expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
+         }
+      });
+   };
+
+   this.nested2RepeaterRadioField2ShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.nested2RepeaterRadioField2ShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).all(by.model('nested2[$parent.$index].repeaterRadioField2[$index]')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.nestedRepeaterRadioFieldByIndexShouldBeEnabled = function (rowIndex1, index) {
+      expect(this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).get(index).isEnabled()).toBe(true);
+   };
+
+   this.nestedRepeaterRadioFieldByIndexShouldNotBeEnabled = function (rowIndex1, index) {
+      expect(this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).get(index).isEnabled()).toBe(false);
+   };
+
+   this.nestedRepeaterRadioFieldByIndexShouldBeSelected = function (rowIndex1, index) {
+      expect(this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).get(index).isSelected()).toBe(true);
+   };
+
+   this.nestedRepeaterRadioFieldByIndexShouldNotBeSelected = function (rowIndex1, index) {
+      expect(this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).get(index).isSelected()).toBe(false);
+   };
+
+   this.nestedRepeaterRadioFieldByIndexShouldBeVisible = function (rowIndex1, index) {
+      expect(this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).get(index).isDisplayed()).toBe(true);
+   };
+
+   this.nestedRepeaterRadioFieldByIndexShouldNotBeVisible = function (rowIndex1, index) {
+      expect(this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).get(index).isDisplayed()).toBe(false);
+   };
+
+   this.nestedRepeaterRadioFieldByValueShouldBeSelected = function (rowIndex1, value) {
+      this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         expect(filteredElements[0].getAttribute('value')).toEqual(value);
+      });
+   };
+
+   this.nestedRepeaterRadioFieldByValueShouldNotBeSelected = function (rowIndex1, value) {
+      this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         if (filteredElements.length > 0) {
+            expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
+         }
+      });
+   };
+
+   this.nestedRepeaterRadioFieldShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.nestedRepeaterRadioFieldShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).all(by.model('nested.repeaterRadioField[$parent.$index]')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.otherItemsCountShouldBe = function (count) {
+      expect(this.otherItems.count()).toBe(count);
+   };
+
+   this.otherItemsShouldHaveClass = function (rowIndex1, className) {
+      this.otherItems.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.otherItemsShouldNotHaveClass = function (rowIndex1, className) {
+      this.otherItems.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.otherItemsShouldHaveText = function (rowIndex1, value) {
+      expect(this.otherItems.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.selected2ItemByIndexShouldBeEnabled = function (rowIndex1, index) {
+      expect(this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).get(index).isEnabled()).toBe(true);
+   };
+
+   this.selected2ItemByIndexShouldNotBeEnabled = function (rowIndex1, index) {
+      expect(this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).get(index).isEnabled()).toBe(false);
+   };
+
+   this.selected2ItemByIndexShouldBeSelected = function (rowIndex1, index) {
+      expect(this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).get(index).isSelected()).toBe(true);
+   };
+
+   this.selected2ItemByIndexShouldNotBeSelected = function (rowIndex1, index) {
+      expect(this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).get(index).isSelected()).toBe(false);
+   };
+
+   this.selected2ItemByIndexShouldBeVisible = function (rowIndex1, index) {
+      expect(this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).get(index).isDisplayed()).toBe(true);
+   };
+
+   this.selected2ItemByIndexShouldNotBeVisible = function (rowIndex1, index) {
+      expect(this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).get(index).isDisplayed()).toBe(false);
+   };
+
+   this.selected2ItemByValueShouldBeSelected = function (rowIndex1, value) {
+      this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         expect(filteredElements[0].getAttribute('value')).toEqual(value);
+      });
+   };
+
+   this.selected2ItemByValueShouldNotBeSelected = function (rowIndex1, value) {
+      this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         if (filteredElements.length > 0) {
+            expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
+         }
+      });
+   };
+
+   this.selected2ItemShouldHaveClass = function (rowIndex1, className) {
+      this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.selected2ItemShouldNotHaveClass = function (rowIndex1, className) {
+      this.otherItems.get(rowIndex1).all(by.model('selected2[$index].item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.selectedItemByIndexShouldBeEnabled = function (index) {
+      expect(this.selectedItem.get(index).isEnabled()).toBe(true);
+   };
+
+   this.selectedItemByIndexShouldNotBeEnabled = function (index) {
+      expect(this.selectedItem.get(index).isEnabled()).toBe(false);
+   };
+
+   this.selectedItemByIndexShouldBeSelected = function (index) {
+      expect(this.selectedItem.get(index).isSelected()).toBe(true);
+   };
+
+   this.selectedItemByIndexShouldNotBeSelected = function (index) {
+      expect(this.selectedItem.get(index).isSelected()).toBe(false);
+   };
+
+   this.selectedItemByIndexShouldBeVisible = function (index) {
+      expect(this.selectedItem.get(index).isDisplayed()).toBe(true);
+   };
+
+   this.selectedItemByIndexShouldNotBeVisible = function (index) {
+      expect(this.selectedItem.get(index).isDisplayed()).toBe(false);
+   };
+
+   this.selectedItemByValueShouldBeSelected = function (value) {
+      this.selectedItem.filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         expect(filteredElements[0].getAttribute('value')).toEqual(value);
+      });
+   };
+
+   this.selectedItemByValueShouldNotBeSelected = function (value) {
+      this.selectedItem.filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         if (filteredElements.length > 0) {
+            expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
+         }
+      });
+   };
+
+   this.selectedItemShouldHaveClass = function (className) {
+      this.selectedItem.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.selectedItemShouldNotHaveClass = function (className) {
+      this.selectedItem.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.widthByIndexShouldBeEnabled = function (index) {
+      expect(this.width.get(index).isEnabled()).toBe(true);
+   };
+
+   this.widthByIndexShouldNotBeEnabled = function (index) {
+      expect(this.width.get(index).isEnabled()).toBe(false);
+   };
+
+   this.widthByIndexShouldBeSelected = function (index) {
+      expect(this.width.get(index).isSelected()).toBe(true);
+   };
+
+   this.widthByIndexShouldNotBeSelected = function (index) {
+      expect(this.width.get(index).isSelected()).toBe(false);
+   };
+
+   this.widthByIndexShouldBeVisible = function (index) {
+      expect(this.width.get(index).isDisplayed()).toBe(true);
+   };
+
+   this.widthByIndexShouldNotBeVisible = function (index) {
+      expect(this.width.get(index).isDisplayed()).toBe(false);
+   };
+
+   this.widthByValueShouldBeSelected = function (value) {
+      this.width.filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         expect(filteredElements[0].getAttribute('value')).toEqual(value);
+      });
+   };
+
+   this.widthByValueShouldNotBeSelected = function (value) {
+      this.width.filter(function (elem) {
+         return elem.isSelected();
+      }).then(function (filteredElements) {
+         if (filteredElements.length > 0) {
+            expect(filteredElements[0].getAttribute('value')).not.toEqual(value);
+         }
+      });
+   };
+
+   this.widthShouldHaveClass = function (className) {
+      this.width.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.widthShouldNotHaveClass = function (className) {
+      this.width.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+};
+
+module.exports = PageObject;
