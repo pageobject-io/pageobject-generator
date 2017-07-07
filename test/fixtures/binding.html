@@ -18,7 +18,14 @@
         $scope.ngBindTemplateP = 'g';
         $scope.multiExpression = 'h';
         $scope.multiExpression2 = 'i';
+        $scope.pipedExpression = 'j';
         $scope.model = [];
+      });
+
+      app.filter('translate', function() {
+        return function(input) {
+          return input;
+        }
       });
     </script>
 </head>
