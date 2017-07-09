@@ -7,9 +7,6 @@ env:
 addons:
   sauce_connect: true
 install:
-  - npm install -g istanbul
-  - npm install -g codecov
   - npm install
 script:
-  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
-  - codecov
+  - npm run codecov
