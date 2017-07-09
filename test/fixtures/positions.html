@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div class="form-group" data-ng-class="{ 'has-error' : isInvalid('name') }">
+    <label for="name" class="col-sm-3 control-label">{{'collectionName' | translate}}</label>
+
+    <div class="col-sm-9">
+        <input type="text" class="form-control" id="name" name="name" data-ng-model="collection.name"
+               placeholder="{{'collectionNamePlaceholder' | translate}}" required>
+        <span data-ng-show="isInvalid('name')" class="help-block">{{'collectionNameError' | translate}}</span>
+    </div>
+
+    <div class="col-sm-3">
+        Red
+        <input type="radio" ng-model="color" value="red"/>
+        Blue
+        <input type="radio" ng-model="color" value="blue"/>
+        Yellow
+        <input type="radio" ng-model="color" value="yellow"/>
+        Orange
+        <input type="radio" ng-model="color" value="orange" disabled="disabled"/>
+    </div>
+
+    <select name="repeatSelect" id="repeatSelect" ng-model="data.model">
+        <option value="1">{{value1}}</option>
+        <option value="2">{{value2}}<option value="3">{{value3}}
+        <option value="4">{{value4}}
+    </select>
+</div>
+
+<form>
+    <div class="form-group">
+        <div class="ckbox ckbox-success">
+            <input type="checkbox" id="autoCleanupEnabled" name="autoCleanupEnabled" data-ng-model="settings.autoCleanupEnabled"/>
+            <label for="autoCleanupEnabled">{{'pnr.settings.autoCleanupEnabled' | translate}}</label>
+        </div>
+    </div>
+</form>
+
+<form ng-submit="todoList.addTodo()">
+    <input type="text" ng-model="todoList.todoText" size="30"
+           placeholder="add new todo here">
+    <input class="btn-primary" type="submit" value="add">
+</form>
+
+<div data-ng-repeat="item in items">
+    <a href>test</a>
+    <a data-ng-repeat="element in elements" href>test2</a>
+    <a href data-ng-click="ok=true"></a>
+</div>
+
+<table id="parts-table" class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Purchase date</th>
+        <th class="text-center">Price (EUR)</th>
+        <th class="text-center" style="width: 100px">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="part-row" data-ng-repeat="part in parts">
+        <td class="vert-align text-center">{{part.purchaseDate}}</td>
+        <td class="vert-align text-center">{{part.price}}</td>
+        <td class="text-center">
+            <button title="Edit part" class="btn btn-default btn-sm" ng-click="editPart(part)"><i
+                    class="fa fa-edit"></i></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
