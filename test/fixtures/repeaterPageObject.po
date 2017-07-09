@@ -1,0 +1,234 @@
+var PageObject = function () {
+
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.items2Link = element.all(by.exactRepeater('item in items2'));
+   this.library = element.all(by.exactRepeater('book in library'));
+   this.sharedItemsLink = element.all(by.exactRepeater('item in sharedItems'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.clickElementLink = function (rowIndex1, rowIndex2) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in nestedItems').row(rowIndex2)).element(by.exactBinding('element')).click();
+   };
+
+   this.clickItemLink = function (rowIndex1) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).click();
+   };
+
+   this.clickItems2Link = function (rowIndex1) {
+      this.items2Link.get(rowIndex1).click();
+   };
+
+   this.clickLibrary = function (rowIndex1) {
+      this.library.get(rowIndex1).click();
+   };
+
+   this.clickRepeaterLink = function (rowIndex1) {
+      this.library.get(rowIndex1).element(by.name(`repeaterLink${rowIndex1}`)).click();
+   };
+
+   this.clickSharedItemsLink = function (rowIndex1) {
+      this.sharedItemsLink.get(rowIndex1).click();
+   };
+
+   this.bookBlurbShouldHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.exactBinding('book.blurb')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.bookBlurbShouldNotHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.exactBinding('book.blurb')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.bookBlurbShouldHaveText = function (rowIndex1, value) {
+      expect(this.library.get(rowIndex1).element(by.exactBinding('book.blurb')).getText()).toBe(value);
+   };
+
+   this.bookNameShouldHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.exactBinding('book.name')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.bookNameShouldNotHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.exactBinding('book.name')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.bookNameShouldHaveText = function (rowIndex1, value) {
+      expect(this.library.get(rowIndex1).element(by.exactBinding('book.name')).getText()).toBe(value);
+   };
+
+   this.elementLinkShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in nestedItems').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBe(true);
+   };
+
+   this.elementLinkShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in nestedItems').row(rowIndex2)).element(by.exactBinding('element')).isDisplayed()).toBe(false);
+   };
+
+   this.elementLinkShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in nestedItems').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.elementLinkShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in nestedItems').row(rowIndex2)).element(by.exactBinding('element')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.elementLinkShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in nestedItems').row(rowIndex2)).element(by.exactBinding('element')).getText()).toBe(value);
+   };
+
+   this.indexShouldHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.exactBinding('$index')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.indexShouldNotHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.exactBinding('$index')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.indexShouldHaveText = function (rowIndex1, value) {
+      expect(this.library.get(rowIndex1).element(by.exactBinding('$index')).getText()).toBe(value);
+   };
+
+   this.itemLinkShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBe(true);
+   };
+
+   this.itemLinkShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).isDisplayed()).toBe(false);
+   };
+
+   this.itemLinkShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.itemLinkShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.exactBinding('item')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.itemLinkShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).element(by.exactBinding('item')).getText()).toBe(value);
+   };
+
+   this.items2LinkCountShouldBe = function (count) {
+      expect(this.items2Link.count()).toBe(count);
+   };
+
+   this.items2LinkShouldBeVisible = function (rowIndex1) {
+      expect(this.items2Link.get(rowIndex1).isDisplayed()).toBe(true);
+   };
+
+   this.items2LinkShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items2Link.get(rowIndex1).isDisplayed()).toBe(false);
+   };
+
+   this.items2LinkShouldHaveClass = function (rowIndex1, className) {
+      this.items2Link.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.items2LinkShouldNotHaveClass = function (rowIndex1, className) {
+      this.items2Link.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.libraryCountShouldBe = function (count) {
+      expect(this.library.count()).toBe(count);
+   };
+
+   this.libraryShouldBeVisible = function (rowIndex1) {
+      expect(this.library.get(rowIndex1).isDisplayed()).toBe(true);
+   };
+
+   this.libraryShouldNotBeVisible = function (rowIndex1) {
+      expect(this.library.get(rowIndex1).isDisplayed()).toBe(false);
+   };
+
+   this.libraryShouldHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.libraryShouldNotHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.nestedItemsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in nestedItems')).count()).toBe(count);
+   };
+
+   this.repeaterLinkShouldBeVisible = function (rowIndex1) {
+      expect(this.library.get(rowIndex1).element(by.name(`repeaterLink${rowIndex1}`)).isDisplayed()).toBe(true);
+   };
+
+   this.repeaterLinkShouldNotBeVisible = function (rowIndex1) {
+      expect(this.library.get(rowIndex1).element(by.name(`repeaterLink${rowIndex1}`)).isDisplayed()).toBe(false);
+   };
+
+   this.repeaterLinkShouldHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.name(`repeaterLink${rowIndex1}`)).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.repeaterLinkShouldNotHaveClass = function (rowIndex1, className) {
+      this.library.get(rowIndex1).element(by.name(`repeaterLink${rowIndex1}`)).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.sharedItemsLinkCountShouldBe = function (count) {
+      expect(this.sharedItemsLink.count()).toBe(count);
+   };
+
+   this.sharedItemsLinkShouldBeVisible = function (rowIndex1) {
+      expect(this.sharedItemsLink.get(rowIndex1).isDisplayed()).toBe(true);
+   };
+
+   this.sharedItemsLinkShouldNotBeVisible = function (rowIndex1) {
+      expect(this.sharedItemsLink.get(rowIndex1).isDisplayed()).toBe(false);
+   };
+
+   this.sharedItemsLinkShouldHaveClass = function (rowIndex1, className) {
+      this.sharedItemsLink.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.sharedItemsLinkShouldNotHaveClass = function (rowIndex1, className) {
+      this.sharedItemsLink.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+};
+
+module.exports = PageObject;

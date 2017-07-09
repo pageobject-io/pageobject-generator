@@ -1,0 +1,1008 @@
+var PageObject = function () {
+
+   this.data1AvailableOptions = element.all(by.exactRepeater('option in data1.availableOptions'));
+   this.dataAvailableOptions = element.all(by.exactRepeater('option in data.availableOptions'));
+   this.items = element.all(by.exactRepeater('item in items'));
+   this.multipleUnitType = element(by.model('multipleUnitType'));
+   this.ngOptionsSelect = element(by.id('ngOptionsSelect'));
+   this.ngValueSelect = element(by.model('data1.model'));
+   this.repeatSelect = element(by.id('repeatSelect'));
+   this.unitType = element(by.model('unitType'));
+
+   this.get = function () {
+      browser.get('');
+   };
+
+   this.selectMultipleUnitTypeByPartialText = function (text) {
+      this.multipleUnitType.all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectMultipleUnitTypeByText = function (text) {
+      this.multipleUnitType.all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectMultipleUnitTypeByValue = function (value) {
+      this.multipleUnitType.all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.selectNestedRepeaterUnitTypeByPartialText = function (rowIndex1, rowIndex2, text) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectNestedRepeaterUnitTypeByText = function (rowIndex1, rowIndex2, text) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectNestedRepeaterUnitTypeByValue = function (rowIndex1, rowIndex2, value) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.selectNgOptionsSelectByPartialText = function (text) {
+      this.ngOptionsSelect.all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectNgOptionsSelectByText = function (text) {
+      this.ngOptionsSelect.all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectNgOptionsSelectByValue = function (value) {
+      this.ngOptionsSelect.all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.selectNgValueSelectByPartialText = function (text) {
+      this.ngValueSelect.all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectNgValueSelectByText = function (text) {
+      this.ngValueSelect.all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectNgValueSelectByValue = function (value) {
+      this.ngValueSelect.all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.selectRepeatSelectByPartialText = function (text) {
+      this.repeatSelect.all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectRepeatSelectByText = function (text) {
+      this.repeatSelect.all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectRepeatSelectByValue = function (value) {
+      this.repeatSelect.all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.selectRepeaterUnitTypeByPartialText = function (rowIndex1, text) {
+      this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectRepeaterUnitTypeByText = function (rowIndex1, text) {
+      this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectRepeaterUnitTypeByValue = function (rowIndex1, value) {
+      this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.selectUnitTypeByPartialText = function (text) {
+      this.unitType.all(by.cssContainingText('option', text)).click();
+   };
+
+   this.selectUnitTypeByText = function (text) {
+      this.unitType.all(by.xpath('option[.="' + text + '"]')).click();
+   };
+
+   this.selectUnitTypeByValue = function (value) {
+      this.unitType.all(by.css('option[value="' + value + '"]')).click();
+   };
+
+   this.data1AvailableOptionsCountShouldBe = function (count) {
+      expect(this.data1AvailableOptions.count()).toBe(count);
+   };
+
+   this.data1AvailableOptionsShouldHaveClass = function (rowIndex1, className) {
+      this.data1AvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.data1AvailableOptionsShouldNotHaveClass = function (rowIndex1, className) {
+      this.data1AvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.data1AvailableOptionsShouldHaveText = function (rowIndex1, value) {
+      expect(this.data1AvailableOptions.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.dataAvailableOptionsCountShouldBe = function (count) {
+      expect(this.dataAvailableOptions.count()).toBe(count);
+   };
+
+   this.dataAvailableOptionsShouldHaveClass = function (rowIndex1, className) {
+      this.dataAvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.dataAvailableOptionsShouldNotHaveClass = function (rowIndex1, className) {
+      this.dataAvailableOptions.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.dataAvailableOptionsShouldHaveText = function (rowIndex1, value) {
+      expect(this.dataAvailableOptions.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.elementsCountShouldBe = function (rowIndex1, count) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).count()).toBe(count);
+   };
+
+   this.elementsShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.elementsShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.elementsShouldHaveText = function (rowIndex1, rowIndex2, value) {
+      expect(this.items.get(rowIndex1).all(by.exactRepeater('element in elements')).get(rowIndex2).getText()).toBe(value);
+   };
+
+   this.itemsCountShouldBe = function (count) {
+      expect(this.items.count()).toBe(count);
+   };
+
+   this.itemsShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.itemsShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.itemsShouldHaveText = function (rowIndex1, value) {
+      expect(this.items.get(rowIndex1).getText()).toBe(value);
+   };
+
+   this.multipleUnitTypeByPartialTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.multipleUnitType.all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.multipleUnitTypeByPartialTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.multipleUnitType.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.multipleUnitTypeByTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.multipleUnitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.multipleUnitTypeByTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.multipleUnitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.multipleUnitTypeByValueShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.multipleUnitType.all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.multipleUnitTypeByValueShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.multipleUnitType.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.multipleUnitTypeShouldBeEnabled = function () {
+      expect(this.multipleUnitType.isEnabled()).toBe(true);
+   };
+
+   this.multipleUnitTypeShouldNotBeEnabled = function () {
+      expect(this.multipleUnitType.isEnabled()).toBe(false);
+   };
+
+   this.multipleUnitTypeShouldBeVisible = function () {
+      expect(this.multipleUnitType.isDisplayed()).toBe(true);
+   };
+
+   this.multipleUnitTypeShouldNotBeVisible = function () {
+      expect(this.multipleUnitType.isDisplayed()).toBe(false);
+   };
+
+   this.multipleUnitTypeShouldHaveClass = function (className) {
+      this.multipleUnitType.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.multipleUnitTypeShouldNotHaveClass = function (className) {
+      this.multipleUnitType.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.nestedRepeaterUnitTypeByPartialTextShouldBeSelected = function (rowIndex1, rowIndex2) {
+      var expectedOptions = [];
+      for (var i = 2; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected = function (rowIndex1, rowIndex2) {
+      var expectedOptions = [];
+      for (var i = 2; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.nestedRepeaterUnitTypeByTextShouldBeSelected = function (rowIndex1, rowIndex2) {
+      var expectedOptions = [];
+      for (var i = 2; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.nestedRepeaterUnitTypeByTextShouldNotBeSelected = function (rowIndex1, rowIndex2) {
+      var expectedOptions = [];
+      for (var i = 2; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.nestedRepeaterUnitTypeByValueShouldBeSelected = function (rowIndex1, rowIndex2) {
+      var expectedOptions = [];
+      for (var i = 2; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.nestedRepeaterUnitTypeByValueShouldNotBeSelected = function (rowIndex1, rowIndex2) {
+      var expectedOptions = [];
+      for (var i = 2; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.nestedRepeaterUnitTypeShouldBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isEnabled()).toBe(true);
+   };
+
+   this.nestedRepeaterUnitTypeShouldNotBeEnabled = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isEnabled()).toBe(false);
+   };
+
+   this.nestedRepeaterUnitTypeShouldBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isDisplayed()).toBe(true);
+   };
+
+   this.nestedRepeaterUnitTypeShouldNotBeVisible = function (rowIndex1, rowIndex2) {
+      expect(this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).isDisplayed()).toBe(false);
+   };
+
+   this.nestedRepeaterUnitTypeShouldHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.nestedRepeaterUnitTypeShouldNotHaveClass = function (rowIndex1, rowIndex2, className) {
+      this.items.get(rowIndex1).element(by.exactRepeater('element in elements').row(rowIndex2)).element(by.model('nestedRepeaterUnitType')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.ngOptionsSelectByPartialTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngOptionsSelect.all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngOptionsSelectByPartialTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngOptionsSelect.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.ngOptionsSelectByTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngOptionsSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngOptionsSelectByTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngOptionsSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.ngOptionsSelectByValueShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngOptionsSelect.all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngOptionsSelectByValueShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngOptionsSelect.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.ngOptionsSelectShouldBeEnabled = function () {
+      expect(this.ngOptionsSelect.isEnabled()).toBe(true);
+   };
+
+   this.ngOptionsSelectShouldNotBeEnabled = function () {
+      expect(this.ngOptionsSelect.isEnabled()).toBe(false);
+   };
+
+   this.ngOptionsSelectShouldBeVisible = function () {
+      expect(this.ngOptionsSelect.isDisplayed()).toBe(true);
+   };
+
+   this.ngOptionsSelectShouldNotBeVisible = function () {
+      expect(this.ngOptionsSelect.isDisplayed()).toBe(false);
+   };
+
+   this.ngOptionsSelectShouldHaveClass = function (className) {
+      this.ngOptionsSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.ngOptionsSelectShouldNotHaveClass = function (className) {
+      this.ngOptionsSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.ngValueSelectByPartialTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngValueSelect.all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngValueSelectByPartialTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngValueSelect.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.ngValueSelectByTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngValueSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngValueSelectByTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngValueSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.ngValueSelectByValueShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.ngValueSelect.all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.ngValueSelectByValueShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.ngValueSelect.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.ngValueSelectShouldBeEnabled = function () {
+      expect(this.ngValueSelect.isEnabled()).toBe(true);
+   };
+
+   this.ngValueSelectShouldNotBeEnabled = function () {
+      expect(this.ngValueSelect.isEnabled()).toBe(false);
+   };
+
+   this.ngValueSelectShouldBeVisible = function () {
+      expect(this.ngValueSelect.isDisplayed()).toBe(true);
+   };
+
+   this.ngValueSelectShouldNotBeVisible = function () {
+      expect(this.ngValueSelect.isDisplayed()).toBe(false);
+   };
+
+   this.ngValueSelectShouldHaveClass = function (className) {
+      this.ngValueSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.ngValueSelectShouldNotHaveClass = function (className) {
+      this.ngValueSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.repeatSelectByPartialTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.repeatSelect.all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.repeatSelectByPartialTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.repeatSelect.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.repeatSelectByTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.repeatSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.repeatSelectByTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.repeatSelect.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.repeatSelectByValueShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.repeatSelect.all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.repeatSelectByValueShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.repeatSelect.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.repeatSelectShouldBeEnabled = function () {
+      expect(this.repeatSelect.isEnabled()).toBe(true);
+   };
+
+   this.repeatSelectShouldNotBeEnabled = function () {
+      expect(this.repeatSelect.isEnabled()).toBe(false);
+   };
+
+   this.repeatSelectShouldBeVisible = function () {
+      expect(this.repeatSelect.isDisplayed()).toBe(true);
+   };
+
+   this.repeatSelectShouldNotBeVisible = function () {
+      expect(this.repeatSelect.isDisplayed()).toBe(false);
+   };
+
+   this.repeatSelectShouldHaveClass = function (className) {
+      this.repeatSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.repeatSelectShouldNotHaveClass = function (className) {
+      this.repeatSelect.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.repeaterUnitTypeByPartialTextShouldBeSelected = function (rowIndex1) {
+      var expectedOptions = [];
+      for (var i = 1; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.repeaterUnitTypeByPartialTextShouldNotBeSelected = function (rowIndex1) {
+      var expectedOptions = [];
+      for (var i = 1; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.repeaterUnitTypeByTextShouldBeSelected = function (rowIndex1) {
+      var expectedOptions = [];
+      for (var i = 1; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.repeaterUnitTypeByTextShouldNotBeSelected = function (rowIndex1) {
+      var expectedOptions = [];
+      for (var i = 1; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.repeaterUnitTypeByValueShouldBeSelected = function (rowIndex1) {
+      var expectedOptions = [];
+      for (var i = 1; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.repeaterUnitTypeByValueShouldNotBeSelected = function (rowIndex1) {
+      var expectedOptions = [];
+      for (var i = 1; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.items.get(rowIndex1).element(by.model('repeaterUnitType')).all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.repeaterUnitTypeShouldBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isEnabled()).toBe(true);
+   };
+
+   this.repeaterUnitTypeShouldNotBeEnabled = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isEnabled()).toBe(false);
+   };
+
+   this.repeaterUnitTypeShouldBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isDisplayed()).toBe(true);
+   };
+
+   this.repeaterUnitTypeShouldNotBeVisible = function (rowIndex1) {
+      expect(this.items.get(rowIndex1).element(by.model('repeaterUnitType')).isDisplayed()).toBe(false);
+   };
+
+   this.repeaterUnitTypeShouldHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.model('repeaterUnitType')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.repeaterUnitTypeShouldNotHaveClass = function (rowIndex1, className) {
+      this.items.get(rowIndex1).element(by.model('repeaterUnitType')).getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+   this.unitTypeByPartialTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.unitType.all(by.cssContainingText('option', expectedOptions[i]));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.unitTypeByPartialTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.unitType.all(by.cssContainingText('option', expectedOptions[i])).each(function (option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.unitTypeByTextShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.unitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.unitTypeByTextShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.unitType.all(by.xpath('option[.="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.unitTypeByValueShouldBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         var options = this.unitType.all(by.css('option[value="' + expectedOptions[i] + '"]'));
+
+         options.each(function (option) {
+            expect(option.isSelected()).toBe(true);
+         });
+
+         expect(options.count()).toBeGreaterThan(0);
+      }
+   };
+
+   this.unitTypeByValueShouldNotBeSelected = function () {
+      var expectedOptions = [];
+      for (var i = 0; i < arguments.length; i++) {
+         expectedOptions = expectedOptions.concat(arguments[i]);
+      }
+
+      for (i = 0; i < expectedOptions.length; i++) {
+         this.unitType.all(by.css('option[value="' + expectedOptions[i] + '"]')).each(function(option) {
+            expect(option.isSelected()).toBe(false);
+         });
+      }
+   };
+
+   this.unitTypeShouldBeEnabled = function () {
+      expect(this.unitType.isEnabled()).toBe(true);
+   };
+
+   this.unitTypeShouldNotBeEnabled = function () {
+      expect(this.unitType.isEnabled()).toBe(false);
+   };
+
+   this.unitTypeShouldBeVisible = function () {
+      expect(this.unitType.isDisplayed()).toBe(true);
+   };
+
+   this.unitTypeShouldNotBeVisible = function () {
+      expect(this.unitType.isDisplayed()).toBe(false);
+   };
+
+   this.unitTypeShouldHaveClass = function (className) {
+      this.unitType.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) !== -1).toBe(true);
+      });
+   };
+
+   this.unitTypeShouldNotHaveClass = function (className) {
+      this.unitType.getAttribute('class').then(function (classes) {
+         expect(classes.split(' ').indexOf(className) === -1).toBe(true);
+      });
+   };
+
+};
+
+module.exports = PageObject;
