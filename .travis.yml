@@ -7,10 +7,10 @@ env:
 addons:
   sauce_connect: true
 before_script:
-  - cd src/test/test-app
+  - cd test-app
   - npm install
   - npm run lite &
 script:
   - npm run codecov
-  - cd src/test/test-app
+  - cd test-app
   - npm run e2e
