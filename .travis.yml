@@ -6,11 +6,14 @@ env:
   - secure: hV1hZPQCEq3Wg5v2U6LPuuisrjqQbS1FlmZp49YsIOXmV1PSs8jpxUVqqmJoV3WbeuFKBNpn7YVXmHtbVMNMdroxLnd0YqlcIn2fXwzOSLCyw+eLq3+VjGS3EA7ETkrPoygGYOsBjqT+q2ZKQ9G+NNpdpcXX05jjhvzMN6t22DYMPB124AmSVJ4kmt7OxKYPhbm2k0LgVQr/YFuIvEjThG7Gf7OfXg1iXR7Iy2nv0Imxr0mpXXBHX4qSUfe5jQ7cTLzR3+wwKwL5rqfcdyLPl3sc4n9WnJrqToc7Q6qLSQMuDRc/1dxBziGFdilcWjoPjUqM+N3OrZey6Isc1pyA53bjogvLBhm5VPauSqLI4Il4GEeex67mM262MMXa4xobKCbSfcHu2VWMj+9xQXo5DOwmzWFryWeVhgOoEY5ENykD7HNfA1/jQNhNxXVtv+ojppf4OoeRe2MhGATgs7LN4UxjFs4eI8Te+qm+yEA9nU5sA69giMu//z9PCHmp5ybG5O8vWW+00QQjedyeWF9LIb1az2CavA6YHlhVwPpH4IQK18Sac0CTXUOSfnUaMW/rxKHuLuLW2kKl+oOc4rLhcAjvTdauje7CpRXERGSFJBb3ihT4nU+BRNVcecYbT5WxsOvVJgL1KlQsDiTBWAI8pvnCaDyAWSZCyvuP04uoLs0=
 addons:
   sauce_connect: true
+install:
+  - npm install
 before_script:
   - cd test-app
   - npm install
   - npm run lite &
 script:
+  - cd ../
   - npm run codecov
   - cd test-app
   - npm run e2e
