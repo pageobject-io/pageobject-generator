@@ -1,14 +1,14 @@
 var SelectPage = require('../../test/fixtures/selectPageObject.po');
 
-describe('select fields', function () {
+fdescribe('select fields', function () {
+  var selectPage;
 
   beforeEach(function () {
     browser.get('http://localhost:3000/select.html');
+    selectPage = new SelectPage();
   });
 
-  it('should generate functional select field methods', function () {
-    var selectPage = new SelectPage();
-
+  it('simple select', function () {
     selectPage.unitTypeShouldBeVisible();
     selectPage.unitTypeShouldBeEnabled();
     selectPage.unitTypeByPartialTextShouldNotBeSelected('Miner');
@@ -59,7 +59,9 @@ describe('select fields', function () {
     selectPage.unitTypeByPartialTextShouldNotBeSelected('Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
     selectPage.unitTypeByTextShouldNotBeSelected('Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
     selectPage.unitTypeByValueShouldNotBeSelected('1', '2', '3', '4', '5');
+  });
 
+  it('multi select', function () {
     selectPage.multipleUnitTypeShouldBeVisible();
     selectPage.multipleUnitTypeShouldBeEnabled();
     selectPage.multipleUnitTypeByPartialTextShouldNotBeSelected('Miner');
@@ -125,7 +127,9 @@ describe('select fields', function () {
     selectPage.multipleUnitTypeByValueShouldNotBeSelected('3');
     selectPage.multipleUnitTypeByValueShouldNotBeSelected('1', '2', '3', '4', '5');
     selectPage.multipleUnitTypeByValueShouldNotBeSelected(['1', '2', '3', '4', '5']);
+  });
 
+  it('repeat select', function () {
     selectPage.repeatSelectShouldBeVisible();
     selectPage.repeatSelectShouldBeEnabled();
     selectPage.repeatSelectByPartialTextShouldNotBeSelected('Opt');
@@ -165,7 +169,9 @@ describe('select fields', function () {
     selectPage.repeatSelectByTextShouldNotBeSelected('Option A', 'Option B');
     selectPage.repeatSelectByValueShouldBeSelected('3');
     selectPage.repeatSelectByValueShouldNotBeSelected('1', '2');
+  });
 
+  it('ngValue select', function () {
     selectPage.ngValueSelectShouldBeVisible();
     selectPage.ngValueSelectShouldBeEnabled();
     selectPage.ngValueSelectByPartialTextShouldNotBeSelected('string');
@@ -214,7 +220,9 @@ describe('select fields', function () {
     selectPage.ngValueSelectByTextShouldNotBeSelected('boolean', 'object', 'array');
     selectPage.ngValueSelectByValueShouldBeSelected('myString', '1');
     selectPage.ngValueSelectByValueShouldNotBeSelected('true');
+  });
 
+  it('ngOptions select', function () {
     selectPage.ngOptionsSelectShouldBeVisible();
     selectPage.ngOptionsSelectShouldBeEnabled();
     selectPage.ngOptionsSelectByPartialTextShouldNotBeSelected('Option A', 'Option B');
@@ -254,7 +262,9 @@ describe('select fields', function () {
     selectPage.ngOptionsSelectByTextShouldNotBeSelected('Option A', 'Option B');
     selectPage.ngOptionsSelectByValueShouldBeSelected('3');
     selectPage.ngOptionsSelectByValueShouldNotBeSelected('1', '2');
+  });
 
+  it('repeated simple select', function () {
     selectPage.repeaterUnitTypeShouldBeVisible(0);
     selectPage.repeaterUnitTypeShouldBeVisible(1);
     selectPage.repeaterUnitTypeShouldBeEnabled(0);
@@ -323,7 +333,9 @@ describe('select fields', function () {
     selectPage.repeaterUnitTypeByPartialTextShouldNotBeSelected(1, 'Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
     selectPage.repeaterUnitTypeByTextShouldNotBeSelected(1, 'Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
     selectPage.repeaterUnitTypeByValueShouldNotBeSelected(1, '1', '2', '3', '4', '5');
+  });
 
+  it('nested repeater simple select', function () {
     selectPage.nestedRepeaterUnitTypeShouldBeVisible(0, 0);
     selectPage.nestedRepeaterUnitTypeShouldBeVisible(1, 1);
     selectPage.nestedRepeaterUnitTypeShouldBeEnabled(0, 0);
@@ -332,14 +344,30 @@ describe('select fields', function () {
     selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(0, 0, 'Puffer');
     selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(0, 0, 'Snipey');
     selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(0, 0, 'er');
-    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(0, 0, 'Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
-    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(0, 0, ['Miner', 'er', 'Snipey', 'Max', 'Firebot']);
+    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(0,
+                                                                      0,
+                                                                      'Miner',
+                                                                      'Puffer',
+                                                                      'Snipey',
+                                                                      'Max',
+                                                                      'Firebot');
+    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(0,
+                                                                      0,
+                                                                      ['Miner', 'er', 'Snipey', 'Max', 'Firebot']);
     selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1, 1, 'Miner');
     selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1, 1, 'Puffer');
     selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1, 1, 'Snipey');
     selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1, 1, 'er');
-    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1, 1, 'Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
-    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1, 1, ['Miner', 'er', 'Snipey', 'Max', 'Firebot']);
+    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1,
+                                                                      1,
+                                                                      'Miner',
+                                                                      'Puffer',
+                                                                      'Snipey',
+                                                                      'Max',
+                                                                      'Firebot');
+    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1,
+                                                                      1,
+                                                                      ['Miner', 'er', 'Snipey', 'Max', 'Firebot']);
     selectPage.nestedRepeaterUnitTypeByTextShouldNotBeSelected(0, 0, 'Miner');
     selectPage.nestedRepeaterUnitTypeByTextShouldNotBeSelected(0, 0, 'Puffer');
     selectPage.nestedRepeaterUnitTypeByTextShouldNotBeSelected(0, 0, 'Snipey');
@@ -389,7 +417,13 @@ describe('select fields', function () {
     selectPage.nestedRepeaterUnitTypeByValueShouldNotBeSelected(0, 0, '1', '2', '4', '5');
 
     selectPage.selectNestedRepeaterUnitTypeByValue(1, 1, '');
-    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1, 1, 'Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
+    selectPage.nestedRepeaterUnitTypeByPartialTextShouldNotBeSelected(1,
+                                                                      1,
+                                                                      'Miner',
+                                                                      'Puffer',
+                                                                      'Snipey',
+                                                                      'Max',
+                                                                      'Firebot');
     selectPage.nestedRepeaterUnitTypeByTextShouldNotBeSelected(1, 1, 'Miner', 'Puffer', 'Snipey', 'Max', 'Firebot');
     selectPage.nestedRepeaterUnitTypeByValueShouldNotBeSelected(1, 1, '1', '2', '3', '4', '5');
   });
