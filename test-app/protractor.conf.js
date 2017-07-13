@@ -15,18 +15,18 @@ if (process.env.TRAVIS) {
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     'build': process.env.TRAVIS_BUILD_NUMBER,
     'version': 'latest',
-    'shardTestFiles': true,
-    'maxInstances:': 5,
-  },
-    {
-      'name': 'pageobject firefox 47',
-      'browserName': 'firefox',
-      'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-      'build': process.env.TRAVIS_BUILD_NUMBER,
-      'version': '47',
-      'shardTestFiles': true,
-      'maxInstances': 5,
-    }];
+    // 'shardTestFiles': true,
+    'maxInstances:': 1}];
+  // },
+  //   {
+  //     'name': 'pageobject firefox 47',
+  //     'browserName': 'firefox',
+  //     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+  //     'build': process.env.TRAVIS_BUILD_NUMBER,
+  //     'version': '47',
+  //     'shardTestFiles': true,
+  //     'maxInstances': 5,
+  //   }];
 }
 
 

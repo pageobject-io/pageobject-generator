@@ -1,6 +1,6 @@
 var DatePage = require('../../test/fixtures/datePageObject.po');
 
-describe('date fields', function () {
+fdescribe('date fields', function () {
 
   beforeEach(function () {
     browser.get('http://localhost:3000/date.html');
@@ -9,53 +9,69 @@ describe('date fields', function () {
   it('should generate functional date field methods', function () {
     var datePage = new DatePage();
 
-    datePage.shouldHaveDateField('');
-    datePage.setDateField('05/05/2015');
-    datePage.shouldHaveDateField('2015-05-05');
+    datePage.dateField.getAttribute('type').then(function (type) {
+      var dateFieldExpected = '2015-05-05';
+      var timeFieldExpected = '01:05';
+      var dateTimeFieldInput = '03/03/2015' + protractor.Key.TAB + '01:10AM';
+      var dateTimeLocalFieldExpected = '2015-03-03T01:10';
 
-    datePage.setDateField('');
-    datePage.shouldHaveDateField('');
-    datePage.dateFieldShouldBeVisible();
-    datePage.dateFieldShouldBeEnabled();
+      if (type === 'text') {
+        // we are running in Firefox
+        dateFieldExpected = '05/05/2015';
+        timeFieldExpected = '01:05AM';
+        dateTimeFieldInput = '03/03/2015 01:10AM';
+        dateTimeLocalFieldExpected = '03/03/2015 01:10AM';
+      }
 
-    datePage.shouldHaveTimeField('');
-    datePage.setTimeField('01:05AM');
-    datePage.shouldHaveTimeField('01:05');
-    datePage.setTimeField('');
-    datePage.shouldHaveTimeField('');
-    datePage.timeFieldShouldBeVisible();
-    datePage.timeFieldShouldBeEnabled();
+      datePage.shouldHaveDateField('');
+      datePage.setDateField('05/05/2015');
+      datePage.shouldHaveDateField(dateFieldExpected);
 
-    datePage.shouldHaveDateTimeLocalField('');
-    datePage.setDateTimeLocalField('03/03/2015' + protractor.Key.TAB + '01:10AM');
-    datePage.shouldHaveDateTimeLocalField('2015-03-03T01:10');
-    datePage.setDateTimeLocalField('');
-    datePage.shouldHaveDateTimeLocalField('');
-    datePage.dateTimeLocalFieldShouldBeVisible();
-    datePage.dateTimeLocalFieldShouldBeEnabled();
+      datePage.setDateField('');
+      datePage.shouldHaveDateField('');
+      datePage.dateFieldShouldBeVisible();
+      datePage.dateFieldShouldBeEnabled();
 
-    datePage.shouldHaveDateTimeField('');
-    datePage.setDateTimeField('2015-03-12T23:59');
-    datePage.shouldHaveDateTimeField('2015-03-12T23:59');
-    datePage.setDateTimeField('');
-    datePage.shouldHaveDateTimeField('');
-    datePage.dateTimeFieldShouldBeVisible();
-    datePage.dateTimeFieldShouldBeEnabled();
+      datePage.shouldHaveTimeField('');
+      datePage.setTimeField('01:05AM');
+      datePage.shouldHaveTimeField(timeFieldExpected);
+      datePage.setTimeField('');
+      datePage.shouldHaveTimeField('');
+      datePage.timeFieldShouldBeVisible();
+      datePage.timeFieldShouldBeEnabled();
 
-    datePage.shouldHaveMonthField('');
-    datePage.setMonthField('January' + protractor.Key.TAB + '2015');
-    datePage.shouldHaveMonthField('2015-01');
-    datePage.setMonthField('');
-    datePage.shouldHaveMonthField('');
-    datePage.monthFieldShouldBeVisible();
-    datePage.monthFieldShouldBeEnabled();
+      datePage.shouldHaveDateTimeLocalField('');
+      datePage.setDateTimeLocalField(dateTimeFieldInput);
+      datePage.shouldHaveDateTimeLocalField(dateTimeLocalFieldExpected);
+      datePage.setDateTimeLocalField('');
+      datePage.shouldHaveDateTimeLocalField('');
+      datePage.dateTimeLocalFieldShouldBeVisible();
+      datePage.dateTimeLocalFieldShouldBeEnabled();
 
-    datePage.shouldHaveWeekField('');
-    datePage.setWeekField('122015');
-    datePage.shouldHaveWeekField('2015-W12');
-    datePage.setWeekField('');
-    datePage.shouldHaveWeekField('');
-    datePage.weekFieldShouldBeVisible();
-    datePage.weekFieldShouldBeEnabled();
+      datePage.shouldHaveDateTimeField('');
+      datePage.setDateTimeField('2015-03-12T23:59');
+      datePage.shouldHaveDateTimeField('2015-03-12T23:59');
+      datePage.setDateTimeField('');
+      datePage.shouldHaveDateTimeField('');
+      datePage.dateTimeFieldShouldBeVisible();
+      datePage.dateTimeFieldShouldBeEnabled();
+
+      datePage.shouldHaveMonthField('');
+      datePage.setMonthField('January' + protractor.Key.TAB + '2015');
+      datePage.shouldHaveMonthField('2015-01');
+      datePage.setMonthField('');
+      datePage.shouldHaveMonthField('');
+      datePage.monthFieldShouldBeVisible();
+      datePage.monthFieldShouldBeEnabled();
+
+      datePage.shouldHaveWeekField('');
+      datePage.setWeekField('122015');
+      datePage.shouldHaveWeekField('2015-W12');
+      datePage.setWeekField('');
+      datePage.shouldHaveWeekField('');
+      datePage.weekFieldShouldBeVisible();
+      datePage.weekFieldShouldBeEnabled();
+    });
+
   });
 });

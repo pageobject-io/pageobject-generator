@@ -1,6 +1,6 @@
 var SelectPage = require('../../test/fixtures/selectPageObject.po');
 
-fdescribe('select fields', function () {
+describe('select fields', function () {
   var selectPage;
 
   beforeEach(function () {
