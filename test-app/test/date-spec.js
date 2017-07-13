@@ -1,6 +1,6 @@
 var DatePage = require('../../test/fixtures/datePageObject.po');
 
-fdescribe('date fields', function () {
+describe('date fields', function () {
 
   beforeEach(function () {
     browser.get('http://localhost:3000/date.html');
