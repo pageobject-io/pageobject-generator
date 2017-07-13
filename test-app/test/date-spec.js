@@ -14,6 +14,9 @@ fdescribe('date fields', function () {
       var timeFieldExpected = '01:05';
       var dateTimeFieldInput = '03/03/2015' + protractor.Key.TAB + '01:10AM';
       var dateTimeLocalFieldExpected = '2015-03-03T01:10';
+      var monthFieldInput = 'January' + protractor.Key.TAB + '2015';
+      var monthFieldExpected = '2015-01';
+      var weekFieldExpected = '2015-W12';
 
       if (type === 'text') {
         // we are running in Firefox
@@ -21,6 +24,9 @@ fdescribe('date fields', function () {
         timeFieldExpected = '01:05AM';
         dateTimeFieldInput = '03/03/2015 01:10AM';
         dateTimeLocalFieldExpected = '03/03/2015 01:10AM';
+        monthFieldInput = 'January 2015';
+        monthFieldExpected = 'January 2015';
+        weekFieldExpected = '122015';
       }
 
       datePage.shouldHaveDateField('');
@@ -57,8 +63,8 @@ fdescribe('date fields', function () {
       datePage.dateTimeFieldShouldBeEnabled();
 
       datePage.shouldHaveMonthField('');
-      datePage.setMonthField('January' + protractor.Key.TAB + '2015');
-      datePage.shouldHaveMonthField('2015-01');
+      datePage.setMonthField(monthFieldInput);
+      datePage.shouldHaveMonthField(monthFieldExpected);
       datePage.setMonthField('');
       datePage.shouldHaveMonthField('');
       datePage.monthFieldShouldBeVisible();
@@ -66,7 +72,7 @@ fdescribe('date fields', function () {
 
       datePage.shouldHaveWeekField('');
       datePage.setWeekField('122015');
-      datePage.shouldHaveWeekField('2015-W12');
+      datePage.shouldHaveWeekField(weekFieldExpected);
       datePage.setWeekField('');
       datePage.shouldHaveWeekField('');
       datePage.weekFieldShouldBeVisible();
