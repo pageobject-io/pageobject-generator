@@ -15,8 +15,8 @@ if (process.env.TRAVIS) {
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     'build': process.env.TRAVIS_BUILD_NUMBER,
     'version': 'latest',
-    // 'shardTestFiles': true,
-    // 'maxInstances:': 2
+    'shardTestFiles': true,
+    'maxInstances:': 2
   },
     {
       'name': 'pageobject firefox 47',
@@ -24,23 +24,23 @@ if (process.env.TRAVIS) {
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       'build': process.env.TRAVIS_BUILD_NUMBER,
       'version': '47',
-      // 'shardTestFiles': true,
-      // 'maxInstances': 2
+      'shardTestFiles': true,
+      'maxInstances': 2
     },{
       'name': 'pageobject internet explorer',
       'browserName': 'internet explorer',
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       'build': process.env.TRAVIS_BUILD_NUMBER,
-      // 'shardTestFiles': true,
-      // 'maxInstances': 2
+      'shardTestFiles': true,
+      'maxInstances': 2
     },
     {
       'name': 'pageobject safari',
       'browserName': 'safari',
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
       'build': process.env.TRAVIS_BUILD_NUMBER,
-      // 'shardTestFiles': true,
-      // 'maxInstances': 2
+      'shardTestFiles': true,
+      'maxInstances': 2
     }];
 }
 
